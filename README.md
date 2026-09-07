@@ -14,3 +14,9 @@ Justificativa da escolha: Escolhemos o Bar do peixe primeiramente por ter contat
 Evidências da Organização: Av. Celso Garcia, 5292 - Tatuapé, São Paulo - SP, 03064-000, https://www.instagram.com/bardopeixeofficial?igsh=NTg1aDUwaGE2OXNz&utm_source=qr.
 
 # Processos de negócios
+Atendimento;
+Recebimento de pedidos;
+Controle de estoque;
+Compra com fornecedor/recebimento de mercadoria;
+Cobrança do pedido;
+
