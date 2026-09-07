@@ -1,2 +1,3 @@
 # Banco de dados Bar do Peixe-agilidade e controle de estoque
-Criação do Projeto Universitário para Desenvolvimento, Analise de Requisitos e modelagem para Banco de Dados para o Bar do Peixe, esse projeto tem como foco ajudar o comercio a automatizar e inserir banco de dados, para agilidade de atendimento e controle de estoque.
+Criação de um projeto universitário para desenvolvimento, análise de requisitos e modelagem de banco de dados para o Bar do Peixe. O projeto tem como foco auxiliar o comércio na automatização de processos e na implementação de um banco de dados, proporcionando maior agilidade no atendimento e melhor controle de estoque.
+
