@@ -24,6 +24,7 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - *Compra com fornecedor/recebimento de mercadoria;*
 - *Cobrança do pedido;*
 
+
 ## 3. Requisitos do Sistema
 
 ### 3.1 Requisitos Funcionais
@@ -233,5 +234,6 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - `QT_ESTOQUE_MINIMO` em PRODUTO viabiliza o alerta de reposição citado como necessidade.
 - `ID_LOCAL` em PRODUTO garante que cada item esteja vinculado a um dos locais físicos de armazenamento (ex.: um dos 3 freezers), refletindo o espaço reduzido citado pelo estabelecimento.
 - `ITEM_COMPRA` evita duplicar o mesmo item em várias compras dentro do registro de COMPRA, mantendo o histórico de preço unitário por aquisição.
-- Não foi modelada uma entidade CLIENTE, já que o atendimento é por comanda avulsa (balcão/mesa), sem cadastro de cliente identificado.
+- Não foi modelada uma entidade CLIENTE, já que o atendimento é por comanda avulsa (balcão/mesa), sem cadastro de cliente identificado 
 ---
+
