@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dicionário de Dados — Bar do Peixe</title>
+<style>
+  :root {
+    --cor-primaria: #1f3d2b;
+    --cor-secundaria: #f4ede1;
+    --cor-borda: #d9cdb8;
+    --cor-destaque: #a6521f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    background: #fffdf9;
+    color: #2a2a2a;
+    line-height: 1.5;
+  }
+  h1 {
+    color: var(--cor-primaria);
+    border-bottom: 3px solid var(--cor-destaque);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  .subtitulo {
+    color: #6b6b6b;
+    margin-top: 0;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+  }
+  .aviso {
+    background: var(--cor-secundaria);
+    border-left: 4px solid var(--cor-destaque);
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    font-size: 0.9rem;
+  }
+  h2.entidade {
+    color: #fff;
+    background: var(--cor-primaria);
+    padding: 8px 14px;
+    border-radius: 6px 6px 0 0;
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+  }
+  .notacao {
+    background: #f7f2ea;
+    border: 1px solid var(--cor-borda);
+    border-top: none;
+    padding: 10px 14px;
+    font-family: "Consolas", monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+  }
+  th, td {
+    border: 1px solid var(--cor-borda);
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+  th {
+    background: var(--cor-secundaria);
+    color: var(--cor-primaria);
+  }
+  tr:nth-child(even) td { background: #fbf8f3; }
+  code {
+    background: #f0e9dc;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+  .rodape {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--cor-borda);
+    font-size: 0.85rem;
+    color: #6b6b6b;
+  }
+  .indice {
+    background: #f7f2ea;
+    border: 1px solid var(--cor-borda);
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    border-radius: 6px;
+  }
+  .indice a { color: var(--cor-destaque); text-decoration: none; }
+  .indice a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>Dicionário de Dados — Bar do Peixe</h1>
+<p class="subtitulo"</p>
+
+<div class="aviso">
+  Os exemplos de valores apresentados neste documento são <strong>fictícios</strong>, criados apenas para ilustrar o formato dos campos. Nenhum dado real de clientes, fornecedores ou funcionários do estabelecimento foi utilizado.
+</div>
+
+<div class="indice">
+  <strong>Entidades neste dicionário:</strong>
+  <a href="#produto">PRODUTO</a> ·
+  <a href="#estoque_local">ESTOQUE_LOCAL</a> ·
+  <a href="#fornecedor">FORNECEDOR</a> ·
+  <a href="#compra">COMPRA</a> ·
+  <a href="#item_compra">ITEM_COMPRA</a> ·
+  <a href="#funcionario">FUNCIONARIO</a> ·
+  <a href="#pedido">PEDIDO</a> ·
+  <a href="#item_pedido">ITEM_PEDIDO</a>
+</div>
+
+<h2 id="produto" class="entidade">PRODUTO</h2>
+<div class="notacao">PRODUTO = @ID_PRODUTO + NM_PRODUTO + TP_CATEGORIA + ID_LOCAL + QT_ESTOQUE_ATUAL + QT_ESTOQUE_MINIMO + IN_PERECIVEL</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_PRODUTO</code></td><td>Identificador único do produto (integer, PK)</td><td>Obrigatório, não nulo</td></tr>
+<tr><td><code>NM_PRODUTO</code></td><td>Nome do produto (ex.: "Cerveja Lata 350ml", "Sobrecoxa")</td><td>Obrigatório</td></tr>
+<tr><td><code>TP_CATEGORIA</code></td><td>Categoria do produto: bebida ou alimento</td><td>Obrigatório; usado para separar fluxo de cozinha e de bebidas</td></tr>
+<tr><td><code>ID_LOCAL</code></td><td>Local de armazenamento do produto (FK para ESTOQUE_LOCAL)</td><td>Obrigatório; sustenta o relacionamento PRODUTO–ESTOQUE_LOCAL</td></tr>
+<tr><td><code>QT_ESTOQUE_ATUAL</code></td><td>Quantidade disponível em estoque</td><td>Obrigatório; não pode ser negativo</td></tr>
+<tr><td><code>QT_ESTOQUE_MINIMO</code></td><td>Quantidade mínima antes de disparar alerta de reposição</td><td>Definido conforme histórico de consumo (ex.: 10 dias de bebida)</td></tr>
+<tr><td><code>IN_PERECIVEL</code></td><td>Indica se o item é perecível (carnes, arroz) ou não (bebida)</td><td>Booleano; itens perecíveis têm reposição mais frequente</td></tr>
+</table>
+
+<h2 id="estoque_local" class="entidade">ESTOQUE_LOCAL</h2>
+<div class="notacao">ESTOQUE_LOCAL = @ID_LOCAL + NM_LOCAL + TP_LOCAL</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_LOCAL</code></td><td>Identificador do local físico de armazenamento</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>NM_LOCAL</code></td><td>Nome/identificação do local (ex.: "Freezer 1", "Estoque seco")</td><td>Obrigatório</td></tr>
+<tr><td><code>TP_LOCAL</code></td><td>Tipo de armazenamento (freezer, estoque geral)</td><td>Obrigatório</td></tr>
+</table>
+
+<h2 id="fornecedor" class="entidade">FORNECEDOR</h2>
+<div class="notacao">FORNECEDOR = @ID_FORNECEDOR + NM_FORNECEDOR + NR_CNPJ_FORNECEDOR</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_FORNECEDOR</code></td><td>Identificador único do fornecedor</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>NM_FORNECEDOR</code></td><td>Nome/razão social do fornecedor</td><td>Obrigatório</td></tr>
+<tr><td><code>NR_CNPJ_FORNECEDOR</code></td><td>CNPJ do fornecedor</td><td>Obrigatório para vínculo fiscal da compra</td></tr>
+</table>
+
+<h2 id="compra" class="entidade">COMPRA</h2>
+<div class="notacao">COMPRA = @ID_COMPRA + DT_COMPRA + ID_FORNECEDOR + NR_NOTA_FISCAL + VL_TOTAL_COMPRA</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_COMPRA</code></td><td>Identificador único da compra</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>DT_COMPRA</code></td><td>Data da compra</td><td>Obrigatório</td></tr>
+<tr><td><code>ID_FORNECEDOR</code></td><td>Referência ao fornecedor (FK)</td><td>Obrigatório</td></tr>
+<tr><td><code>NR_NOTA_FISCAL</code></td><td>Número da nota fiscal vinculada ao CNPJ do Bar do Peixe</td><td>Obrigatório; toda compra deve ter nota registrada</td></tr>
+<tr><td><code>VL_TOTAL_COMPRA</code></td><td>Valor total da compra</td><td>Obrigatório, numérico positivo</td></tr>
+</table>
+
+<h2 id="item_compra" class="entidade">ITEM_COMPRA</h2>
+<div class="notacao">ITEM_COMPRA = @ID_ITEM_COMPRA + ID_COMPRA + ID_PRODUTO + QT_ITEM_COMPRA + VL_UNITARIO</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_ITEM_COMPRA</code></td><td>Identificador único do item dentro da compra</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>ID_COMPRA</code></td><td>Referência à compra (FK)</td><td>Obrigatório</td></tr>
+<tr><td><code>ID_PRODUTO</code></td><td>Referência ao produto adquirido (FK)</td><td>Obrigatório; o produto tem seu QT_ESTOQUE_ATUAL incrementado</td></tr>
+<tr><td><code>QT_ITEM_COMPRA</code></td><td>Quantidade adquirida do produto nessa compra</td><td>Obrigatório, maior que zero</td></tr>
+<tr><td><code>VL_UNITARIO</code></td><td>Valor unitário pago pelo produto nessa compra</td><td>Obrigatório, numérico positivo</td></tr>
+</table>
+
+<h2 id="funcionario" class="entidade">FUNCIONARIO</h2>
+<div class="notacao">FUNCIONARIO = @ID_FUNCIONARIO + NM_FUNCIONARIO + TP_FUNCAO + TP_TURNO</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_FUNCIONARIO</code></td><td>Identificador único do funcionário</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>NM_FUNCIONARIO</code></td><td>Nome do funcionário</td><td>Obrigatório</td></tr>
+<tr><td><code>TP_FUNCAO</code></td><td>Função exercida (cozinheiro, ajudante, atendente etc.)</td><td>Obrigatório</td></tr>
+<tr><td><code>TP_TURNO</code></td><td>Turno de trabalho (dia/noite)</td><td>Obrigatório</td></tr>
+</table>
+
+<h2 id="pedido" class="entidade">PEDIDO</h2>
+<div class="notacao">PEDIDO = @ID_PEDIDO + DT_HORA_PEDIDO + TP_SETOR + ID_FUNCIONARIO + IN_FINALIZADO</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_PEDIDO</code></td><td>Identificador único do pedido</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>DT_HORA_PEDIDO</code></td><td>Data e hora do pedido</td><td>Obrigatório</td></tr>
+<tr><td><code>TP_SETOR</code></td><td>Setor de destino do pedido (bebida ou cozinha)</td><td>Obrigatório; define o fluxo de atendimento</td></tr>
+<tr><td><code>ID_FUNCIONARIO</code></td><td>Funcionário responsável pelo registro do pedido (FK)</td><td>Obrigatório</td></tr>
+<tr><td><code>IN_FINALIZADO</code></td><td>Indica se o pedido já foi entregue/fechado</td><td>Booleano</td></tr>
+<tr><td><code>IN_FORA_HORARIO</code></td><td>Indica se o pedido foi registrado fora do horário padrão de funcionamento, identificando uma eventual exceção operacional.</td><td>Booleano</td></tr>
+</table>
+
+<h2 id="item_pedido" class="entidade">ITEM_PEDIDO</h2>
+<div class="notacao">ITEM_PEDIDO = @ID_ITEM_PEDIDO + ID_PEDIDO + ID_PRODUTO + QT_ITEM</div>
+<table>
+<tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
+<tr><td><code>ID_ITEM_PEDIDO</code></td><td>Identificador único do item dentro do pedido</td><td>Obrigatório, PK</td></tr>
+<tr><td><code>ID_PEDIDO</code></td><td>Referência ao pedido (FK)</td><td>Obrigatório</td></tr>
+<tr><td><code>ID_PRODUTO</code></td><td>Referência ao produto pedido (FK)</td><td>Obrigatório; produto deve existir em estoque</td></tr>
+<tr><td><code>QT_ITEM</code></td><td>Quantidade solicitada do produto</td><td>Obrigatório, maior que zero</td></tr>
+</table>
+
+<div class="rodape">
+  Convenções de notação: <code>@</code> identificador (PK) · <code>+</code> composição obrigatória · <code>( )</code> opcional · <code>[ | ]</code> escolha exclusiva · <code>{ }</code> iteração.<br>
+  Prefixos utilizados: ID_ (identificador), NM_ (nome), DT_ (data), TP_ (tipo), QT_ (quantidade), IN_ (indicador booleano), NR_ (número/registro), VL_ (valor).
+</div>
+
+</body>
+</html>
