@@ -131,6 +131,8 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | TP_SETOR | Setor de destino do pedido (bebida ou cozinha) | Obrigatório; define o fluxo de atendimento |
 | ID_FUNCIONARIO | Funcionário responsável pelo registro do pedido (FK) | Obrigatório |
 | IN_FINALIZADO | Indica se o pedido já foi entregue/fechado | Booleano |
+| IN_FORA_HORARIO | Indica se o pedido foi registrado fora do horário padrão de funcionamento, identificando uma eventual exceção operacional. | Booleano |
+
 
 **ITEM_PEDIDO**
 
