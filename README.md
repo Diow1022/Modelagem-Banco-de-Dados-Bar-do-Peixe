@@ -239,3 +239,27 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - Não foi modelada uma entidade CLIENTE, já que o atendimento é por comanda avulsa (balcão/mesa), sem cadastro de cliente identificado 
 ---
 
+## 7. Diagrama Entidade-Relacionamento (DER)
+
+- Anexado em imagem 
+
+---
+
+## 8. Justificativa Técnica
+
+*Explique e defenda as decisões de abstração e modelagem tomadas: por que essas entidades, esses atributos, esses relacionamentos e essas cardinalidades — e não outras alternativas possíveis?*
+
+---
+
+## 9. Uso de Inteligência Artificial
+
+| **Ferramenta e etapa** |Claude - foi usado nesta entrega para organização e sugestões de ideias, criação do corpo deste README com base no esqueleto de entrega anexado no Blackboard, criação do dicionário de dados em HTML, do fluxograma e do DER anexado (baseado nas informações fornecidas e revisões do conteúdo), e principalmente tirando dúvidas, explicando processos e respondendo se considerava coerente incluir ou excluir tal informação. |
+| **Motivação** | Foi recorrido ao uso desta ferramenta devido à falta de conhecimento na matéria, adquirindo assim uma base sólida para começar. |
+| **Prompt(s) utilizados** | "preciso fazer um dicionário de banco de dados, e quero que você me explique como, e por onde, com base nos arquivos anexados." / "vou te passar aqui algumas informações sobre o bar do peixe, que é o estabelecimento que escolhemos, para você me ajudar a fazer com base nesse esqueleto do README (anexei todas as informações que coletamos na visita ao bar)" / "revise o dicionário e as informações contidas nele para evitar erros e após isso gere esse arquivo .html por favor" / "em relação ao corpo do README, na seção 4 de regras de negócio, percebi que você não entendeu muito bem o conceito, então irei reforçar o que está sendo pedido nessa parte abaixo: ( escrevi as requisições do professor), com base nisso revise esse modelo já editado abaixo e remova o que for incoerente e adicione o necessário: (anexei um modelo que editei retirando algumas informações desnecessárias para mais uma revisão." |
+| **Resposta recebida** | Em resumo, a IA me forneceu um esqueleto de como ficaria aproximadamente o dicionário de dados (ainda sem as informações da instituição). Após isso, enviei as informações do estabelecimento para formar um corpo de texto mais específico e ela o fez. Também me respondeu tirando algumas dúvidas técnicas, como o que significavam as siglas PK e FK, o que era viável incluir na modelagem ou não, fez revisões e descartou informações irrelevantes ou que foram mal interpretadas por ela. |
+| **Fontes consultadas e verificadas** | Não foram citadas fontes. |
+| **Trechos rejeitados ou corrigidos** | Houve falha da ferramenta de IA nas seções 4 e 6. Na seção 4, ela misturou requisitos não funcionais e contexto/justificativa de negócio com as regras de negócio. Por exemplo: "O maior item de despesa do estabelecimento é a mercadoria..." — isso não é uma regra nem uma restrição, é um fato/contexto do negócio. Não impõe condição nenhuma nem limita o modelo — é justificativa, não regra, e foi removido. E, na seção 6, foi esquecida a parte: Atributos e classificações (quais atributos pertencem a cada entidade). Foi incluído e revisado. |
+| **Justificativa da escolha final** | Pois algumas respostas e sugestões estavam superficiais ou exageradas demais, por vezes sugerindo dados incoerentes e desnecessários para uma seção do trabalho específica, nos levando a editar e adicionar informações mais relevantes. |
+| **Reflexão crítica** | Em alguns momentos, foi percebido pelo grupo que havia dados desnecessários ou irrelevantes para a nossa modelagem, como a inclusão de uma linha (IN_PERECIVEL) na tabela de dicionário de dados da parte de PRODUTOS, para que os produtos perecíveis fossem registrados separadamente no sistema para um controle de estoque mais detalhado. O que, sendo analisado pelo grupo, foi visto que isso não era uma funcionalidade relevante, tendo em vista que esse não é o principal problema do estabelecimento, e sim um controle de estoque geral, sendo os produtos perecíveis ou não. |
+
+---
