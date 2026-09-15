@@ -13,16 +13,16 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - **Contexto e porte:** *Com fins lucrativos; operação de pequeno porte; ao todo são 10 pessoas envolvidas, contando com funcionários, gerente e dono/patrão; Atendimento, cozinhar, gerenciamento de estoque, organização das mesas, limpeza.*
 - **Problemas e necessidades identificados:** *Falta de agilidade nos processos, controle de estoque, excesso de uso de papel. Falta de recursos tecnológicos.*
 - **Justificativa da escolha:** *Escolhemos o Bar do peixe primeiramente por ter contato mais acessível com o dono e também pelo porte da empresa que se encaixa com as exigências do professor(nem muito pequena ou grande) e como a empresa não possui nenhum banco de dados se torna uma boa oportunidade de trabalho para nós.*
-- **Evidências da Organização:** *Av. Celso Garcia, 5292 - Tatuapé, São Paulo - SP, 03064-000, https://www.instagram.com/bardopeixeofficial?igsh=NTg1aDUwaGE2OXNz&utm_source=qr.*
+- **Evidências da Organização:** telefone:(11) 2098-3262 *Av. Celso Garcia, 5292 - Tatuapé, São Paulo - SP, 03064-000, https://www.instagram.com/bardopeixeofficial?igsh=NTg1aDUwaGE2OXNz&utm_source=qr.*
 
 ---
 
 ### 2. Processos de negócios
-- *Atendimento;*
-- *Recebimento de pedidos;*
-- *Controle de estoque;*
-- *Compra com fornecedor/recebimento de mercadoria;*
-- *Cobrança do pedido;*
+- *Atendimento; Processo de atendimento realizado pelos colaboradores, no qual ele atende o cliente com o objetivo de fazê-lo/ajudar a realizar um pedido. E também contribuem com a organização das mesas e entrega dos pedidos aos clientes.
+- *Recebimento de pedidos: É o processo realizado após o cliente realizar o pedido, atualmente, o pedido é anotado em papel e passado ao cozinheiro, imediatament, que irá preparar o pedido e devolvê-lo ao atendente, que leverá o pedido pronto ao cliente que estará aguardando.
+- *Controle de insumos:* O processo que é realizado para controlar os insumos é feito a "olho", de forma manual, assim que é percebido que determinada mercadoria está acabando é solicitado reposição.
+- *Compra com fornecedor/recebimento de mercadoria: A compra com o fornecedor é feita através do celular com contato direto com o fornecedor, algumas mercadorias são adquiridas de forma avulsa, através de supermercados, padarias e etc. Ao chegar a mercadoria no bar ela é recebida e conferida pelo dono.
+- *Cobrança do pedido: A cobrança do pedido é feita após o consumo cliente, os pedidos são todos anotados em somente uma "comanda" ou repassados de boca também, o que contribui para que alguns clientes passem despercebido sem efetuar o pagamento dos produtos que consumiu.
 
 
 ## 3. Requisitos do Sistema
