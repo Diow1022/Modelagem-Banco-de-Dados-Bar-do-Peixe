@@ -247,7 +247,17 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 ## 8. Justificativa Técnica
 
-*Explique e defenda as decisões de abstração e modelagem tomadas: por que essas entidades, esses atributos, esses relacionamentos e essas cardinalidades — e não outras alternativas possíveis?*
+## 8. Justificativa Técnica
+
+O modelo foi desenhado em torno de dois pontos centrais observados: a **separação entre fluxo de bebida e cozinha** e a **necessidade de controle de insumos com rastreabilidade de compras**.
+ 
+**Por que essas entidades e não outras.** PRODUTO e ESTOQUE_LOCAL foram separadas porque o bar já organiza fisicamente os itens por local de guarda (freezers, estoque seco), o que exige consulta estruturada e não apenas um texto livre. FORNECEDOR e COMPRA ficaram independentes porque um fornecedor faz várias compras ao longo do tempo, e juntá-los geraria repetição de dados cadastrais. Não incluímos CLIENTE porque o atendimento é por comanda avulsa, sem cadastro identificado — modelar isso seria uma suposição.
+ 
+**Por que as entidades associativas ITEM_COMPRA e ITEM_PEDIDO.** Como uma compra pode reabastecer vários produtos (e vice-versa) — o mesmo vale para pedidos —, os relacionamentos N:N precisaram virar entidades próprias, para guardar dados específicos da transação (quantidade, valor unitário) que não caberiam nem em COMPRA/PEDIDO nem em PRODUTO isoladamente.
+ 
+**Por que os atributos categóricos e booleanos escolhidos.** `TP_SETOR` existe porque separar bebida de cozinha é uma regra explícita do bar (RF03), resolvida a nível de dado para evitar erro de roteamento. `QT_ESTOQUE_MINIMO` só existe para viabilizar o alerta de reposição (RF06). `IN_FORA_HORARIO` registra exceções ao horário de funcionamento sem bloquear o pedido, já que isso é regra de aplicação e não de integridade do dado.
+ 
+**Por que as cardinalidades adotadas.** As relações 1:N (FUNCIONARIO–PEDIDO, FORNECEDOR–COMPRA) seguem direto da observação de campo: um pedido tem um único responsável, uma compra é feita com um único fornecedor por vez. A relação N:1 entre PRODUTO e ESTOQUE_LOCAL reflete que cada produto tem um local fixo de guarda, coerente com o espaço físico reduzido do bar.
 
 ---
 
