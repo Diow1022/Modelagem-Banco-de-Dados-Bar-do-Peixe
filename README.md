@@ -247,8 +247,6 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 ## 8. Justificativa Técnica
 
-## 8. Justificativa Técnica
-
 O modelo foi desenhado em torno de dois pontos centrais observados: a **separação entre fluxo de bebida e cozinha** e a **necessidade de controle de insumos com rastreabilidade de compras**.
  
 **Por que essas entidades e não outras.** PRODUTO e ESTOQUE_LOCAL foram separadas porque o bar já organiza fisicamente os itens por local de guarda (freezers, estoque seco), o que exige consulta estruturada e não apenas um texto livre. FORNECEDOR e COMPRA ficaram independentes porque um fornecedor faz várias compras ao longo do tempo, e juntá-los geraria repetição de dados cadastrais. Não incluímos CLIENTE porque o atendimento é por comanda avulsa, sem cadastro identificado — modelar isso seria uma suposição.
