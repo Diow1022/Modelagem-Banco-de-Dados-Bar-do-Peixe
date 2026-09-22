@@ -266,4 +266,26 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Reflexão crítica** - Em alguns momentos, foi percebido pelo grupo que havia dados desnecessários ou irrelevantes para a nossa modelagem, como a inclusão de uma linha (IN_PERECIVEL) na tabela de dicionário de dados da parte de PRODUTOS, para que os produtos perecíveis fossem registrados separadamente no sistema para um controle de estoque mais detalhado. O que, sendo analisado pelo grupo, foi visto que isso não era uma funcionalidade relevante, tendo em vista que esse não é o principal problema do estabelecimento, e sim um controle de estoque geral, sendo os produtos perecíveis ou não.
 
+
+**Outra utilização**
+
+
+**Ferramenta e etapa** - Claude (Anthropic), versão Sonnet5 — utilizado para apoio na seção "Justificativa Técnica" do README, a partir das informações já levantadas sobre as entidades, atributos e relacionamentos do modelo (Bar do Peixe)
+
+**Motivação** - O grupo definiu as entidades, atributos, relacionamentos e cardinalidades do DER, mas teve dificuldade em estruturar por escrito a justificativa técnica de forma clara.
+
+**Prompt(s) utilizados** - "Me ajude a fazer o item 8 justificativa técnica, enviei o esqueleto para você ter referencia e o meu arquivo readme onde tem as informações necessarias para você, quero que me devolva um texto respondendo";/"Agora faça um resumo de cada coisa, mantenha o mesmo esquema que você fez".
+
+**Resposta recebida** - A IA gerou um texto estruturado em tópicos ("Por que essas entidades e não outras", "Por que esses atributos", "Por que esses relacionamentos e cardinalidades"), justificando cada decisão de modelagem com base nas informações fornecidas no README.
+
+**Fontes consultadas e verificadas** - Não foram citadas fontes.
+
+**Trechos rejeitados ou corrigidos** - Foi solicitado a troca do termo "estoque" por "controle de insumos" em todo o texto, para manter a coerência com o restante do README. Também foi solicitado um resumo do texto original (que estava mais longo).
+
+**Justificativa da escolha final** - O grupo manteve a estrutura em tópicos por facilitar a leitura, foi decidido prosseguir com a versão resumida para deixar mais objetiva e alinhada, adaptando terminologia e removendo trechos julgados dispensáveis.
+
+**Reflexão crítica** - O conteúdo gerado dependeu das informações que foram disponibilizadas. Também foi necessária uma revisão para garantir a coerência e definir o nível de detalhe ao trabalho, tendo em vista que a IA tende a gerar textos mais extensos do que o necessário.
+
+
+
 ---
