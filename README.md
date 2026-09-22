@@ -250,7 +250,7 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 ## 9. Uso de Inteligência Artificial
 
-**Ferramenta e etapa** - Claude, foi usado nesta entrega para organização e sugestões de ideias, criação do corpo deste README com base no esqueleto de entrega anexado no Blackboard, criação do dicionário de dados em HTML, do fluxograma e do DER anexado (baseado nas informações fornecidas e revisões do conteúdo), e principalmente tirando dúvidas, explicando processos e respondendo se considerava coerente incluir ou excluir tal informação.
+**Ferramenta e etapa** - Claude(Anthropic), versão Sonnet5 -  foi usado nesta entrega para organização e sugestões de ideias, criação do corpo deste README com base no esqueleto de entrega anexado no Blackboard, criação do dicionário de dados em HTML, do fluxograma e do DER anexado (baseado nas informações fornecidas e revisões do conteúdo), e principalmente tirando dúvidas, explicando processos e respondendo se considerava coerente incluir ou excluir tal informação.
 
 **Motivação** - Foi recorrido ao uso desta ferramenta devido à falta de conhecimento na matéria, adquirindo assim uma base sólida para começar.
 
