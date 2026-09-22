@@ -282,7 +282,7 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Trechos rejeitados ou corrigidos** - Foi solicitado a troca do termo "estoque" por "controle de insumos" em todo o texto, para manter a coerência com o restante do README. Também foi solicitado um resumo do texto original (que estava mais longo).
 
-**Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura, e também prosseguir com a versão resumida para deixar mais objetiva e alinhada, adaptando e removendo trechos julgados dispensáveis.
+**Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura e prosseguir com a versão resumida, tornando o conteúdo mais objetivo e alinhado, além de adaptar e remover trechos considerados dispensáveis.
 
 **Reflexão crítica** - O conteúdo gerado dependeu das informações que foram disponibilizadas. Também foi necessária uma revisão para garantir a coerência e definir o nível de detalhe ao trabalho, tendo em vista que a IA tende a gerar textos mais extensos do que o necessário.
 
