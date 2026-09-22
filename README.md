@@ -197,9 +197,24 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | Entidade | Relaciona-se com | Cardinalidade |
 |---|---|---|
 
-| FUNCIONARIO | PEDIDO | 1:N — um funcionário registra vários pedidos |
-| PRODUTO | ESTOQUE_LOCAL | N:1 — cada produto fica armazenado em um local (ex.: um dos 3 freezers) |
-| FORNECEDOR | COMPRA | 1:N — um fornecedor realiza várias compras ao longo do tempo |
+|FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|
+   - FORNECEDOR: (0,n)
+   - COMPRA_FORNECEDOR: (1,1)
+|COMPRA_FORNECEDOR — CONTÉM — PRODUTOS|
+   - COMPRA_FORNECEDOR: (1,n)
+   - PRODUTOS: (0,n)
+|ESTOQUE_LOCAL — ARMAZENADOS — PRODUTOS|
+   - ESTOQUE_LOCAL: (0,n)
+   - PRODUTOS: (0,n)
+|FUNCIONARIO — FAZ — PEDIDO|
+   - FUNCIONARIO: (0,n)
+   - PEDIDO: (1,1)
+|PEDIDO — INCLUI — PRODUTOS|
+   - PEDIDO: (1,n)
+   - PRODUTOS: (0,n)
+|PEDIDO — GERA — PAGAMENTO|
+   - PEDIDO: (1,1)
+   - PAGAMENTO: (1,1)
 
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
