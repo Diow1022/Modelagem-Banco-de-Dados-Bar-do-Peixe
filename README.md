@@ -82,6 +82,8 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | ID_LOCAL | Identificador do local físico de armazenamento | Obrigatório, PK |
 | QT_LOCAL | Identificador de Quantidade Produto Estoque | Obrigatório |
 | TP_LOCAL | Tipo de armazenamento (freezer, estoque geral) | Obrigatório |
+| ID_PRODUTO | Referência a PRODUTOS (FK)| Obrigatório |
+
  
 
 **FORNECEDOR**
@@ -99,15 +101,15 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | ID_COMPRA | Identificador único da compra | Obrigatório, PK |
 | DATA_COMPRA | Data da compra | Obrigatório |
 | ID_FORNECEDOR | Referência ao fornecedor (FK) | Obrigatório |
-| NR_NOTA_FISCAL | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
-| VL_TOTAL_COMPRA | Valor total da compra | Obrigatório, numérico positivo |
+| NF_NOTA_FISCAL | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
+| TOTAL_COMPRA | Valor total da compra | Obrigatório, numérico positivo |
 
 **FUNCIONARIO**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_FUNCIONARIO | Identificador único do funcionário | Obrigatório, PK |
-| NM_FUNCIONARIO | Nome do funcionário | Obrigatório |
+| NOME_FUNCIONARIO | Nome do Civil e Social | Obrigatório |
 | TP_FUNCAO | Função exercida (cozinheiro, ajudante, atendente etc.) | Obrigatório |
 | TP_TURNO | Turno de trabalho (dia/noite) | Obrigatório |
 
@@ -119,8 +121,7 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | DT_HORA_PEDIDO | Data e hora do pedido | Obrigatório |
 | TP_SETOR | Setor de destino do pedido (bebida ou cozinha) | Obrigatório; define o fluxo de atendimento |
 | ID_FUNCIONARIO | Funcionário responsável pelo registro do pedido (FK) | Obrigatório |
-| IN_FINALIZADO | Indica se o pedido já foi entregue/fechado | Booleano |
-| IN_FORA_HORARIO | Indica se o pedido foi registrado fora do horário padrão de funcionamento, identificando uma eventual exceção operacional. | Booleano |
+
 
 **PAGAMENTO**
 
@@ -129,7 +130,7 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | ID_PAGAMENTO | Identificador único do pagamento | Obrigatório, PK |
 | ID_PEDIDO | Referência ao pedido pago (FK) | Obrigatório |
 | DT_HORA_PAGAMENTO | Data e hora em que o pagamento foi registrado | Obrigatório |
-| VL_PAGO | Valor pago referente ao pedido | Obrigatório, numérico positivo |
+| VALOR_PAGO | Valor pago referente ao pedido | Obrigatório, numérico positivo |
 | TP_FORMA_PAGAMENTO | Forma de pagamento utilizada (dinheiro, cartão ou PIX) | Obrigatório |
 | IN_CONFIRMADO | Indica se o pagamento foi confirmado | Booleano; um pedido só é considerado fechado quando há pagamento confirmado vinculado a ele |
 
@@ -139,12 +140,13 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 **Entidades reconhecidas e justificativa:**
 
-- **PRODUTO** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de estoque solicitado pelo estabelecimento.
+- **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de estoque solicitado pelo estabelecimento.
 - **ESTOQUE_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o estoque geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
-- **COMPRA** — representa cada operação de reposição de estoque, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
+- **COMPRA_FORNECEDOR** — representa cada operação de reposição de estoque, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
 - **PEDIDO** — representa a solicitação do cliente no balcão/mesa; é o elemento central do fluxo "salão → cozinha/bebidas" que o estabelecimento quer digitalizar.
+- **PAGAMENTO** representa o pagamento feito pelo cliente e elementos que comprovam essa transação como, (DATA, TIPO de PAGAMENTO, VALOR PAGO e etc).
 
 **Atributos e classificações:**
 
@@ -152,26 +154,26 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 | Entidade | Atributo | Classificação |
 |---|---|---|
-| PRODUTO | ID_PRODUTO | Chave primária |
-| PRODUTO | NM_PRODUTO | Descritivo (texto) |
-| PRODUTO | TP_CATEGORIA | Categórico |
-| PRODUTO | ID_LOCAL | Chave estrangeira |
-| PRODUTO | QT_ESTOQUE_ATUAL | Numérico |
-| PRODUTO | QT_ESTOQUE_MINIMO | Numérico |
+| PRODUTOS | ID_PRODUTO | Chave primária |
+| PRODUTOS | NM_PRODUTO | Descritivo (texto) |
+| PRODUTOS | TP_CATEGORIA | Categórico |
+| PRODUTOS | ID_LOCAL | Chave estrangeira |
+| PRODUTOS | QT_ESTOQUE_ATUAL | Numérico |
+| PRODUTOS | QT_ESTOQUE_MINIMO | Numérico |
 
 | ESTOQUE_LOCAL | ID_LOCAL | Chave primária |
 | ESTOQUE_LOCAL | NM_LOCAL | Descritivo (texto) |
 | ESTOQUE_LOCAL | TP_LOCAL | Categórico |
 
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
-| FORNECEDOR | NM_FORNECEDOR | Descritivo (texto) |
-| FORNECEDOR | NR_CNPJ_FORNECEDOR | Identificador externo |
+| FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
+| FORNECEDOR | CNPJ_FORNECEDOR | Identificador externo |
 
-| COMPRA | ID_COMPRA | Chave primária |
-| COMPRA | DT_COMPRA | Temporal (data) |
-| COMPRA | ID_FORNECEDOR | Chave estrangeira |
-| COMPRA | NR_NOTA_FISCAL | Identificador externo |
-| COMPRA | VL_TOTAL_COMPRA | Numérico (monetário) |
+| COMPRA_FORNECEDOR | ID_COMPRA | Chave primária |
+| COMPRA_FORNECEDOR | DATA_COMPRA | Temporal (data) |
+| COMPRA_FORNECEDOR | ID_FORNECEDOR | Chave estrangeira |
+| COMPRA_FORNECEDOR | NF_NOTA_FISCAL | Identificador externo |
+| COMPRA_FORNECEDOR | TOTAL_COMPRA | Numérico (monetário) |
 
 | FUNCIONARIO | ID_FUNCIONARIO | Chave primária |
 | FUNCIONARIO | NM_FUNCIONARIO | Descritivo (texto) |
@@ -182,12 +184,11 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | PEDIDO | DT_HORA_PEDIDO | Temporal (data/hora) |
 | PEDIDO | TP_SETOR | Categórico |
 | PEDIDO | ID_FUNCIONARIO | Chave estrangeira |
-| PEDIDO | IN_FINALIZADO | Booleano |
 
 | PAGAMENTO | ID_PAGAMENTO | Chave primária |
 | PAGAMENTO | ID_PEDIDO | Chave estrangeira |
 | PAGAMENTO | DT_HORA_PAGAMENTO | Temporal (data/hora) |
-| PAGAMENTO | VL_PAGO | Numérico (monetário) |
+| PAGAMENTO | VALOR_PAGO | Numérico (monetário) |
 | PAGAMENTO | TP_FORMA_PAGAMENTO | Categórico |
 | PAGAMENTO | IN_CONFIRMADO | Booleano |
 
@@ -204,8 +205,7 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 **Restrições e políticas organizacionais aplicadas ao modelo:**
 
 - Separação de `TP_SETOR` em PEDIDO garante, a nível de dado, a divisão entre fluxo de bebidas e cozinha exigida pelo estabelecimento.
-- `NR_NOTA_FISCAL` obrigatório em COMPRA reflete a exigência fiscal (nota lançada no CNPJ) já praticada pelo bar.
-- `QT_ESTOQUE_MINIMO` em PRODUTO viabiliza o alerta de reposição citado como necessidade.
+- `NF_NOTA_FISCAL` obrigatório em COMPRA reflete a exigência fiscal (nota lançada no CNPJ) já praticada pelo bar.
 - `ID_LOCAL` em PRODUTO garante que cada item esteja vinculado a um dos locais físicos de armazenamento (ex.: um dos 3 freezers), refletindo o espaço reduzido citado pelo estabelecimento.
 - Não foi modelada uma entidade CLIENTE, já que o atendimento é por comanda avulsa (balcão/mesa), sem cadastro de cliente identificado 
 ---
