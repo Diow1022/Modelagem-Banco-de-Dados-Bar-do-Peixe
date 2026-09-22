@@ -197,27 +197,27 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | Entidade | Relaciona-se com | Cardinalidade |
 |---|---|---|
 
-|FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|
+**|FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|**
 **FORNECEDOR: (0,n)**
 **COMPRA_FORNECEDOR: (1,1)**
 
-|COMPRA_FORNECEDOR — CONTÉM — PRODUTOS|
+**|COMPRA_FORNECEDOR — CONTÉM — PRODUTOS|**
 **COMPRA_FORNECEDOR: (1,n)**
 **PRODUTOS: (0,n)**
 
-|ESTOQUE_LOCAL — ARMAZENADOS — PRODUTOS|
+**|ESTOQUE_LOCAL — ARMAZENADOS — PRODUTOS|**
 **ESTOQUE_LOCAL: (0,n)**
 **PRODUTOS: (0,n)**
 
-|FUNCIONARIO — FAZ — PEDIDO|
+**|FUNCIONARIO — FAZ — PEDIDO|**
 **FUNCIONARIO: (0,n)**
 **PEDIDO: (1,1)**
 
-|PEDIDO — INCLUI — PRODUTOS|
+**|PEDIDO — INCLUI — PRODUTOS|**
 **PEDIDO: (1,n)**
 **PRODUTOS: (0,n)**
 
-|PEDIDO — GERA — PAGAMENTO|
+**|PEDIDO — GERA — PAGAMENTO|**
 **PEDIDO: (1,1)**
 **PAGAMENTO: (1,1)**
 
