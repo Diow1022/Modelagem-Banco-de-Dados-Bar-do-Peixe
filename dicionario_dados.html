@@ -113,7 +113,7 @@
   <a href="#produto">PRODUTOS</a> ·
   <a href="#estoque_local">ESTOQUE_LOCAL</a> ·
   <a href="#fornecedor">FORNECEDOR</a> ·
-  <a href="#compra">COMPRA</a> ·
+  <a href="#compra">COMPRA_FORNECEDOR</a> ·
   <a href="#funcionario">FUNCIONARIO</a> ·
   <a href="#pedido">PEDIDO</a> ·
   <a href="#pagamento">PAGAMENTO</a> ·
@@ -187,9 +187,9 @@
 <tr><th>Atributo</th><th>Descrição</th><th>Regra de negócio associada</th></tr>
 <tr><td><code>ID_PAGAMENTO</code></td><td>Identificador único do pedido</td><td>Obrigatório, PK</td></tr>
 <tr><td><code>DT_HORA_PAGAMENTO</code></td><td>Data e hora do pedido</td><td>Obrigatório</td></tr>
-<tr><td><code>TP_FORMA_PAGAMENTO</code></td><td>Tipo de pagamento realizado (debito, dinheiro, credito ou pix)</td><td>Obrigatório; define o fluxo de atendimento</td></tr>
+<tr><td><code>TP_FORMA_PAGAMENTO</code></td><td>Tipo de pagamento realizado (debito, dinheiro, credito ou pix)</td><td>Obrigatório</td></tr>
 <tr><td><code>IN_CONFIRMADO</code></td><td>Confirmação do pagamento finalizado</td><td>Obrigatório</td></tr>
-<tr><td><code>@ID_PEDIDO(FK)</code></td><td>Referiacia a entidade PEDIDO</td><td>Obrigatório</td></tr>
+<tr><td><code>@ID_PEDIDO(FK)</code></td><td>Referencia a entidade PEDIDO</td><td>Obrigatório (FK)</td></tr>
 <tr><td><code>VALOR_PAGO</code></td><td>Valor do pagamento realizado pelo cliente</td><td>Obrigatório</td></tr>
 
 </table>
