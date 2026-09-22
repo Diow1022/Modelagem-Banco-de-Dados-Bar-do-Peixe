@@ -103,16 +103,6 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | NR_NOTA_FISCAL | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
 | VL_TOTAL_COMPRA | Valor total da compra | Obrigatório, numérico positivo |
 
-**ITEM_COMPRA**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_ITEM_COMPRA | Identificador único do item dentro da compra | Obrigatório, PK |
-| ID_COMPRA | Referência à compra (FK) | Obrigatório |
-| ID_PRODUTO | Referência ao produto adquirido (FK) | Obrigatório; o produto tem seu QT_ESTOQUE_ATUAL incrementado |
-| QT_ITEM_COMPRA | Quantidade adquirida do produto nessa compra | Obrigatório, maior que zero |
-| VL_UNITARIO | Valor unitário pago pelo produto nessa compra | Obrigatório, numérico positivo |
-
 **FUNCIONARIO**
 
 | Atributo | Descrição | Regra de negócio associada |
@@ -132,16 +122,6 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | ID_FUNCIONARIO | Funcionário responsável pelo registro do pedido (FK) | Obrigatório |
 | IN_FINALIZADO | Indica se o pedido já foi entregue/fechado | Booleano |
 | IN_FORA_HORARIO | Indica se o pedido foi registrado fora do horário padrão de funcionamento, identificando uma eventual exceção operacional. | Booleano |
-
-
-**ITEM_PEDIDO**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_ITEM_PEDIDO | Identificador único do item dentro do pedido | Obrigatório, PK |
-| ID_PEDIDO | Referência ao pedido (FK) | Obrigatório |
-| ID_PRODUTO | Referência ao produto pedido (FK) | Obrigatório; produto deve existir em estoque |
-| QT_ITEM | Quantidade solicitada do produto | Obrigatório, maior que zero |
 
 **PAGAMENTO**
 
@@ -164,10 +144,8 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - **ESTOQUE_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o estoque geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
 - **COMPRA** — representa cada operação de reposição de estoque, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
-- **ITEM_COMPRA** — entidade associativa entre COMPRA e PRODUTO, pois uma compra pode reabastecer vários produtos e cada produto pode ser comprado várias vezes.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
 - **PEDIDO** — representa a solicitação do cliente no balcão/mesa; é o elemento central do fluxo "salão → cozinha/bebidas" que o estabelecimento quer digitalizar.
-- **ITEM_PEDIDO** — entidade associativa entre PEDIDO e PRODUTO, pois um pedido pode conter vários produtos e cada produto pode aparecer em vários pedidos.
 
 **Atributos e classificações:**
 
@@ -181,35 +159,32 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 | PRODUTO | ID_LOCAL | Chave estrangeira |
 | PRODUTO | QT_ESTOQUE_ATUAL | Numérico |
 | PRODUTO | QT_ESTOQUE_MINIMO | Numérico |
+
 | ESTOQUE_LOCAL | ID_LOCAL | Chave primária |
 | ESTOQUE_LOCAL | NM_LOCAL | Descritivo (texto) |
 | ESTOQUE_LOCAL | TP_LOCAL | Categórico |
+
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
 | FORNECEDOR | NM_FORNECEDOR | Descritivo (texto) |
 | FORNECEDOR | NR_CNPJ_FORNECEDOR | Identificador externo |
+
 | COMPRA | ID_COMPRA | Chave primária |
 | COMPRA | DT_COMPRA | Temporal (data) |
 | COMPRA | ID_FORNECEDOR | Chave estrangeira |
 | COMPRA | NR_NOTA_FISCAL | Identificador externo |
 | COMPRA | VL_TOTAL_COMPRA | Numérico (monetário) |
-| ITEM_COMPRA | ID_ITEM_COMPRA | Chave primária |
-| ITEM_COMPRA | ID_COMPRA | Chave estrangeira |
-| ITEM_COMPRA | ID_PRODUTO | Chave estrangeira |
-| ITEM_COMPRA | QT_ITEM_COMPRA | Numérico |
-| ITEM_COMPRA | VL_UNITARIO | Numérico (monetário) |
+
 | FUNCIONARIO | ID_FUNCIONARIO | Chave primária |
 | FUNCIONARIO | NM_FUNCIONARIO | Descritivo (texto) |
 | FUNCIONARIO | TP_FUNCAO | Categórico |
 | FUNCIONARIO | TP_TURNO | Categórico |
+
 | PEDIDO | ID_PEDIDO | Chave primária |
 | PEDIDO | DT_HORA_PEDIDO | Temporal (data/hora) |
 | PEDIDO | TP_SETOR | Categórico |
 | PEDIDO | ID_FUNCIONARIO | Chave estrangeira |
 | PEDIDO | IN_FINALIZADO | Booleano |
-| ITEM_PEDIDO | ID_ITEM_PEDIDO | Chave primária |
-| ITEM_PEDIDO | ID_PEDIDO | Chave estrangeira |
-| ITEM_PEDIDO | ID_PRODUTO | Chave estrangeira |
-| ITEM_PEDIDO | QT_ITEM | Numérico |
+
 | PAGAMENTO | ID_PAGAMENTO | Chave primária |
 | PAGAMENTO | ID_PEDIDO | Chave estrangeira |
 | PAGAMENTO | DT_HORA_PAGAMENTO | Temporal (data/hora) |
@@ -221,13 +196,11 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 | Entidade | Relaciona-se com | Cardinalidade |
 |---|---|---|
-| PEDIDO | ITEM_PEDIDO | 1:N — um pedido pode ter vários itens |
-| PRODUTO | ITEM_PEDIDO | 1:N — um produto pode aparecer em vários itens de pedido |
+
 | FUNCIONARIO | PEDIDO | 1:N — um funcionário registra vários pedidos |
 | PRODUTO | ESTOQUE_LOCAL | N:1 — cada produto fica armazenado em um local (ex.: um dos 3 freezers) |
 | FORNECEDOR | COMPRA | 1:N — um fornecedor realiza várias compras ao longo do tempo |
-| COMPRA | ITEM_COMPRA | 1:N — uma compra pode conter vários itens |
-| PRODUTO | ITEM_COMPRA | 1:N — um produto pode aparecer em várias compras ao longo do tempo |
+
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
 
@@ -235,7 +208,6 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 - `NR_NOTA_FISCAL` obrigatório em COMPRA reflete a exigência fiscal (nota lançada no CNPJ) já praticada pelo bar.
 - `QT_ESTOQUE_MINIMO` em PRODUTO viabiliza o alerta de reposição citado como necessidade.
 - `ID_LOCAL` em PRODUTO garante que cada item esteja vinculado a um dos locais físicos de armazenamento (ex.: um dos 3 freezers), refletindo o espaço reduzido citado pelo estabelecimento.
-- `ITEM_COMPRA` evita duplicar o mesmo item em várias compras dentro do registro de COMPRA, mantendo o histórico de preço unitário por aquisição.
 - Não foi modelada uma entidade CLIENTE, já que o atendimento é por comanda avulsa (balcão/mesa), sem cadastro de cliente identificado 
 ---
 
