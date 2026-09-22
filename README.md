@@ -198,28 +198,28 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 |---|---|---|
 
 |FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|
-FORNECEDOR: (0,n)
-COMPRA_FORNECEDOR: (1,1)
+**FORNECEDOR: (0,n)**
+**COMPRA_FORNECEDOR: (1,1)**
 
 |COMPRA_FORNECEDOR — CONTÉM — PRODUTOS|
-COMPRA_FORNECEDOR: (1,n)
-PRODUTOS: (0,n)
+**COMPRA_FORNECEDOR: (1,n)**
+**PRODUTOS: (0,n)**
 
 |ESTOQUE_LOCAL — ARMAZENADOS — PRODUTOS|
-ESTOQUE_LOCAL: (0,n)
-PRODUTOS: (0,n)
+**ESTOQUE_LOCAL: (0,n)**
+**PRODUTOS: (0,n)**
 
 |FUNCIONARIO — FAZ — PEDIDO|
-FUNCIONARIO: (0,n)
-PEDIDO: (1,1)
+**FUNCIONARIO: (0,n)**
+**PEDIDO: (1,1)**
 
 |PEDIDO — INCLUI — PRODUTOS|
-PEDIDO: (1,n)
-PRODUTOS: (0,n)
+**PEDIDO: (1,n)**
+**PRODUTOS: (0,n)**
 
 |PEDIDO — GERA — PAGAMENTO|
-PEDIDO: (1,1)
-PAGAMENTO: (1,1)
+**PEDIDO: (1,1)**
+**PAGAMENTO: (1,1)**
 
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
