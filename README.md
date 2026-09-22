@@ -39,8 +39,8 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 ### 3.2 Requisitos Não Funcionais
 
-- **RNF01 (Desempenho):** o sistema deve responder de forma imediata na comunicação entre salão e cozinha, já que a agilidade do atendimento é um problema identificado hoje.
-- **RNF02 (Usabilidade):** a interface deve ser simples e rápida de operar, considerando que a equipe está migrando do papel para um sistema digital pela primeira vez.
+- **RNF01 (Desempenho):** o sistema deve responder de forma rápida na comunicação entre salão e cozinha, já que a agilidade do atendimento é um problema identificado hoje.
+- **RNF02 (Usabilidade):** a interface deve ser simples de operar, considerando que a equipe está migrando do papel para um sistema digital pela primeira vez.
 - **RNF03 (Disponibilidade):** o sistema deve estar disponível todos os dias de funcionamento (segunda a sábado e feriados, das 6h00 às 21h30), sem indisponibilidade nesse intervalo.
 - **RNF04 (Segurança):** o acesso às funcionalidades deve ser diferenciado por perfil (ex.: cozinha, salão, gestão), evitando alterações indevidas em pedidos ou estoque.
 - **RNF05 (Escalabilidade):** o sistema deve suportar o uso simultâneo por múltiplos funcionários (em média 10 funcionários, contando com o dono) sem perda de desempenho.
