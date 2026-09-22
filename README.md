@@ -66,39 +66,38 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 ## 5. Dicionário de Dados Conceitual (Preliminar)
 
 
-**PRODUTO**
+**PRODUTOS**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_PRODUTO | Identificador único do produto (integer, PK) | Obrigatório |
-| NM_PRODUTO | Nome do produto (ex.: "Cerveja Lata 350ml", "Sobrecoxa") | Obrigatório |
-| TP_CATEGORIA | Categoria do produto: bebida ou alimento | Obrigatório; usado para separar fluxo de cozinha e de bebidas |
-| ID_LOCAL | Local de armazenamento do produto (FK para ESTOQUE_LOCAL) | Obrigatório; sustenta o relacionamento PRODUTO–ESTOQUE_LOCAL |
-| QT_ESTOQUE_ATUAL | Quantidade disponível em estoque | Obrigatório; não pode ser negativo |
-| QT_ESTOQUE_MINIMO | Quantidade mínima antes de disparar alerta de reposição | Definido conforme histórico de consumo |
+| TIPO_PRODUTO | Categoria do produto: bebida ou alimento | Obrigatório; usado para separar fluxo de cozinha e de bebidas |
+| QT_PRODUTO | Quantidade disponível em estoque | Obrigatório; não pode ser negativo |
+
 
 **ESTOQUE_LOCAL**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_LOCAL | Identificador do local físico de armazenamento | Obrigatório, PK |
-| NM_LOCAL | Nome/identificação do local (ex.: "Freezer 1", "Estoque seco") | Obrigatório |
+| QT_LOCAL | Identificador de Quantidade Produto Estoque | Obrigatório |
 | TP_LOCAL | Tipo de armazenamento (freezer, estoque geral) | Obrigatório |
+ 
 
 **FORNECEDOR**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_FORNECEDOR | Identificador único do fornecedor | Obrigatório, PK |
-| NM_FORNECEDOR | Nome/razão social do fornecedor | Obrigatório |
-| NR_CNPJ_FORNECEDOR | CNPJ do fornecedor | Obrigatório para vínculo fiscal da compra |
+| NOME_FORNECEDOR | Nome/razão social do fornecedor | Obrigatório |
+| CNPJ_FORNECEDOR | CNPJ do fornecedor | Obrigatório para vínculo fiscal da compra |
 
-**COMPRA**
+**COMPRA_FORNECEDOR**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_COMPRA | Identificador único da compra | Obrigatório, PK |
-| DT_COMPRA | Data da compra | Obrigatório |
+| DATA_COMPRA | Data da compra | Obrigatório |
 | ID_FORNECEDOR | Referência ao fornecedor (FK) | Obrigatório |
 | NR_NOTA_FISCAL | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
 | VL_TOTAL_COMPRA | Valor total da compra | Obrigatório, numérico positivo |
