@@ -1,5 +1,5 @@
-# Banco de dados Bar do Peixe-agilidade e controle de estoque
-Criação de um projeto universitário para desenvolvimento, análise de requisitos e modelagem de banco de dados para o Bar do Peixe. O projeto tem como foco auxiliar o comércio na automatização de processos e na implementação de um banco de dados, proporcionando maior agilidade no atendimento e melhor controle de estoque.
+# Banco de dados Bar do Peixe-agilidade e controle de insumos
+Criação de um projeto universitário para desenvolvimento, análise de requisitos e modelagem de banco de dados para o Bar do Peixe. O projeto tem como foco auxiliar o comércio na automatização de processos e na implementação de um banco de dados, proporcionando maior agilidade no atendimento e melhor controle de insumos.
 
 **Integrantes:**
 Christian Badolato Santos
@@ -15,9 +15,9 @@ RGM - 46929720
 
 ## Introdução: 
 
-**Problema:** O bar tem um problema de agilidade nos processos, pois ele é feito de forma analógica através de papel e caneta. Outro problema é em relação ao controle de estoque para melhor gerenciamento e ganho de tempo.
+**Problema:** O bar tem um problema de agilidade nos processos, pois ele é feito de forma analógica através de papel e caneta. Outro problema é em relação a movimentação de insumos para melhor gerenciamento e ganho de tempo.
 
-**Objetivo:** O projeto pretende melhorar a agilidade dos processos entre os funcionários e organizar o controle de estoque de forma eficiente e ágil.
+**Objetivo:** O projeto pretende melhorar a agilidade dos processos entre os funcionários e organizar o controle de insumos de forma eficiente e ágil.
 
 **Delimitação:** Será incluído um sistema rápido, dinâmico e intuitivo. Não será incluído grandes arquiteturas de sistema e quantidade massiva de informação.
 
@@ -29,9 +29,9 @@ RGM - 46929720
 
 - **Nome e natureza da Organização:** Bar do Peixe, bar/restaurante
   
-- **Contexto e porte:** Com fins lucrativos; operação de pequeno porte; ao todo são 10 pessoas envolvidas, contando com funcionários, gerente e dono/patrão; Atendimento, cozinhar, gerenciamento de estoque, organização das mesas, limpeza.
+- **Contexto e porte:** Com fins lucrativos; operação de pequeno porte; ao todo são 10 pessoas envolvidas, contando com funcionários, gerente e dono/patrão; Atendimento, cozinhar, gerenciamento de insumos, organização das mesas, limpeza.
   
-- **Problemas e necessidades identificados:** Falta de agilidade nos processos, controle de estoque, excesso de uso de papel. Falta de recursos tecnológicos.
+- **Problemas e necessidades identificados:** Falta de agilidade nos processos, controle de insumos, excesso de uso de papel. Falta de recursos tecnológicos.
   
 - **Justificativa da escolha:** Escolhemos o Bar do peixe primeiramente por ter contato mais acessível com o dono e também pelo porte da empresa que se encaixa com as exigências do professor(nem muito pequena ou grande) e como a empresa não possui nenhum banco de dados se torna uma boa oportunidade de trabalho para nós.
   
@@ -60,9 +60,9 @@ RGM - 46929720
 - **RF01** — O sistema deve permitir o registro de pedidos de clientes, substituindo o controle atual em caderno.
 - **RF02** — O sistema deve enviar o pedido registrado diretamente para a tela da cozinha, sem necessidade de comanda física.
 - **RF03** — O sistema deve separar visualmente e operacionalmente os pedidos de **bebidas** dos pedidos de **cozinha/alimentos**.
-- **RF04** — O sistema deve permitir o controle de estoque, com registro de entrada (compras) e saída (consumo/venda) de itens.
+- **RF04** — O sistema deve permitir o controle de insumos, com registro de entrada (compras) e saída (consumo/venda) de itens.
 - **RF05** — O sistema deve permitir o cadastro de funcionários, indicando função (cozinheiro, ajudante, atendente etc.) e turno (dia/noite).
-- **RF06** — O sistema deve alertar quando o estoque de bebidas ou de mistura (carnes, batata, arroz) estiver próximo do nível mínimo de reposição.
+- **RF06** — O sistema deve alertar quando o insumos de bebidas ou de mistura (carnes, batata, arroz) estiver próximo do nível mínimo de reposição.
 - **RF07** — O sistema deve permitir o fechamento de pedidos/contas de clientes.
 
 ### 3.2 Requisitos Não Funcionais
@@ -70,7 +70,7 @@ RGM - 46929720
 - **RNF01 (Desempenho):** o sistema deve responder de forma rápida na comunicação entre salão e cozinha, já que a agilidade do atendimento é um problema identificado hoje.
 - **RNF02 (Usabilidade):** a interface deve ser simples de operar, considerando que a equipe está migrando do papel para um sistema digital pela primeira vez.
 - **RNF03 (Disponibilidade):** o sistema deve estar disponível todos os dias de funcionamento (segunda a sábado e feriados, das 6h00 às 21h30), sem indisponibilidade nesse intervalo.
-- **RNF04 (Segurança):** o acesso às funcionalidades deve ser diferenciado por perfil (ex.: cozinha, salão, gestão), evitando alterações indevidas em pedidos ou estoque.
+- **RNF04 (Segurança):** o acesso às funcionalidades deve ser diferenciado por perfil (ex.: cozinha, salão, gestão), evitando alterações indevidas em pedidos ou insumos.
 - **RNF05 (Escalabilidade):** o sistema deve suportar o uso simultâneo por múltiplos funcionários (em média 10 funcionários, contando com o dono) sem perda de desempenho.
 
 ---
@@ -79,7 +79,7 @@ RGM - 46929720
 
 **Regras operacionais:**
 
-- Um pedido só pode ser considerado atendido/fechado quando o item correspondente estiver disponível no estoque (comida ou bebida).
+- Um pedido só pode ser considerado atendido/fechado quando o item correspondente estiver disponível no insumos (comida ou bebida).
 - Uma compra só pode ser registrada no sistema mediante nota fiscal correspondente, vinculada ao CNPJ do estabelecimento.
 - Um pedido só pode ser preparado pelo setor correspondente (bebida ou cozinha), de acordo com o tipo de item solicitado.
 - Um pedido só é considerado fechado quando há um pagamento confirmado vinculado a ele.
@@ -100,16 +100,16 @@ RGM - 46929720
 |----------|-----------|------------------------------|
 | ID_PRODUTO | Identificador único do produto (integer, PK) | Obrigatório |
 | TIPO_PRODUTO | Categoria do produto: bebida ou alimento | Obrigatório; usado para separar fluxo de cozinha e de bebidas |
-| QT_PRODUTO | Quantidade disponível em estoque | Obrigatório; não pode ser negativo |
+| QT_PRODUTO | Quantidade disponível em insumos | Obrigatório; não pode ser negativo |
 
 
-**ESTOQUE_LOCAL**
+**insumos_LOCAL**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
 | ID_LOCAL | Identificador do local físico de armazenamento | Obrigatório, PK |
-| QT_LOCAL | Identificador de Quantidade Produto Estoque | Obrigatório |
-| TP_LOCAL | Tipo de armazenamento (freezer, estoque geral) | Obrigatório |
+| QT_LOCAL | Identificador de Quantidade Produto insumos | Obrigatório |
+| TP_LOCAL | Tipo de armazenamento (freezer, insumos geral) | Obrigatório |
 | ID_PRODUTO | Referência a PRODUTOS (FK)| Obrigatório |
 
  
@@ -168,10 +168,10 @@ RGM - 46929720
 
 **Entidades reconhecidas e justificativa:**
 
-- **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de estoque solicitado pelo estabelecimento.
-- **ESTOQUE_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o estoque geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
+- **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de insumos solicitado pelo estabelecimento.
+- **insumos_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
-- **COMPRA_FORNECEDOR** — representa cada operação de reposição de estoque, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
+- **COMPRA_FORNECEDOR** — representa cada operação de reposição de insumos, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
 - **PEDIDO** — representa a solicitação do cliente no balcão/mesa; é o elemento central do fluxo "salão → cozinha/bebidas" que o estabelecimento quer digitalizar.
 - **PAGAMENTO** representa o pagamento feito pelo cliente e elementos que comprovam essa transação como, (DATA, TIPO de PAGAMENTO, VALOR PAGO e etc).
@@ -186,12 +186,12 @@ RGM - 46929720
 | PRODUTOS | NM_PRODUTO | Descritivo (texto) |
 | PRODUTOS | TP_CATEGORIA | Categórico |
 | PRODUTOS | ID_LOCAL | Chave estrangeira |
-| PRODUTOS | QT_ESTOQUE_ATUAL | Numérico |
-| PRODUTOS | QT_ESTOQUE_MINIMO | Numérico |
+| PRODUTOS | QT_insumos_ATUAL | Numérico |
+| PRODUTOS | QT_insumos_MINIMO | Numérico |
 
-| ESTOQUE_LOCAL | ID_LOCAL | Chave primária |
-| ESTOQUE_LOCAL | NM_LOCAL | Descritivo (texto) |
-| ESTOQUE_LOCAL | TP_LOCAL | Categórico |
+| INSUMOS_LOCAL | ID_LOCAL | Chave primária |
+| INSUMOS_LOCAL | NM_LOCAL | Descritivo (texto) |
+| INSUMOS_LOCAL | TP_LOCAL | Categórico |
 
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
 | FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
@@ -233,8 +233,8 @@ RGM - 46929720
 **COMPRA_FORNECEDOR: (1,n)**
 **PRODUTOS: (0,n)**
 
-**|ESTOQUE_LOCAL — ARMAZENADOS — PRODUTOS|**
-**ESTOQUE_LOCAL: (0,n)**
+**|insumos_LOCAL — ARMAZENADOS — PRODUTOS|**
+**insumos_LOCAL: (0,n)**
 **PRODUTOS: (0,n)**
 
 **|FUNCIONARIO — FAZ — PEDIDO|**
@@ -268,11 +268,11 @@ RGM - 46929720
 
 A modelagem do Bar do Peixe representa apenas as entidades necessárias para resolver os dois problemas centrais da organização: a falta de agilidade no fluxo salão–cozinha/bebidas e a ausência de controle de insumos.
 
-**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `ESTOQUE_LOCAL` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, estoque geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
+**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `INSUMOS_LOCAL` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, insumos geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
 
 **Por que esses atributos.** Foram mantidos apenas os atributos usados nos processos reais mapeados. O atributo `IN_PERECIVEL` foi descartado por não corresponder a nenhuma regra de negócio observada. Já `NF_NOTA_FISCAL` foi mantido obrigatório por representar uma exigência legal (vínculo fiscal ao CNPJ), não apenas prática interna.
 
-**Por que esses relacionamentos e cardinalidades.** `FUNCIONARIO–PEDIDO (1,1)` garante que todo pedido tenha um responsável identificado. `PEDIDO–PAGAMENTO (1,1):(1,1)` reflete que um pedido só fecha com um pagamento confirmado vinculado a ele, sem parciais. `ESTOQUE_LOCAL–PRODUTOS (0,n):(0,n)` permite que um produto esteja em mais de um local ao mesmo tempo.
+**Por que esses relacionamentos e cardinalidades.** `FUNCIONARIO–PEDIDO (1,1)` garante que todo pedido tenha um responsável identificado. `PEDIDO–PAGAMENTO (1,1):(1,1)` reflete que um pedido só fecha com um pagamento confirmado vinculado a ele, sem parciais. `INSUMOS_LOCAL–PRODUTOS (0,n):(0,n)` permite que um produto esteja em mais de um local ao mesmo tempo.
 
 ---
 
@@ -292,7 +292,7 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Justificativa da escolha final** - Pois algumas respostas e sugestões estavam superficiais ou exageradas demais, por vezes sugerindo dados incoerentes e desnecessários para uma seção do trabalho específica, nos levando a editar e adicionar informações mais relevantes.
 
-**Reflexão crítica** - Em alguns momentos, foi percebido pelo grupo que havia dados desnecessários ou irrelevantes para a nossa modelagem, como a inclusão de uma linha (IN_PERECIVEL) na tabela de dicionário de dados da parte de PRODUTOS, para que os produtos perecíveis fossem registrados separadamente no sistema para um controle de estoque mais detalhado. O que, sendo analisado pelo grupo, foi visto que isso não era uma funcionalidade relevante, tendo em vista que esse não é o principal problema do estabelecimento, e sim um controle de estoque geral, sendo os produtos perecíveis ou não.
+**Reflexão crítica** - Em alguns momentos, foi percebido pelo grupo que havia dados desnecessários ou irrelevantes para a nossa modelagem, como a inclusão de uma linha (IN_PERECIVEL) na tabela de dicionário de dados da parte de PRODUTOS, para que os produtos perecíveis fossem registrados separadamente no sistema para um controle de insumos mais detalhado. O que, sendo analisado pelo grupo, foi visto que isso não era uma funcionalidade relevante, tendo em vista que esse não é o principal problema do estabelecimento, e sim um controle de insumos geral, sendo os produtos perecíveis ou não.
 
 
 **Outra utilização**
@@ -308,7 +308,7 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Fontes consultadas e verificadas** - Não foram citadas fontes.
 
-**Trechos rejeitados ou corrigidos** - Foi solicitado a troca do termo "estoque" por "controle de insumos" em todo o texto, para manter a coerência com o restante do README. Também foi solicitado um resumo do texto original (que estava mais longo).
+**Trechos rejeitados ou corrigidos** - Foi solicitado a troca do termo "insumos" por "controle de insumos" em todo o texto, para manter a coerência com o restante do README. Também foi solicitado um resumo do texto original (que estava mais longo).
 
 **Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura e prosseguir com a versão resumida, tornando o conteúdo mais objetivo e alinhado, além de adaptar e remover trechos considerados dispensáveis.
 
