@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dicionário de Dados — Bar do Peixe</title>
+<style>
+  :root {
+    --cor-primaria: #1f3d2b;
+    --cor-secundaria: #f4ede1;
+    --cor-borda: #d9cdb8;
+    --cor-destaque: #a6521f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    background: #fffdf9;
+    color: #2a2a2a;
+    line-height: 1.5;
+  }
+  h1 {
+    color: var(--cor-primaria);
+    border-bottom: 3px solid var(--cor-destaque);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  h3.convencoes-titulo { color: var(--cor-primaria); margin-top: 0; }
+  .subtitulo { color: #6b6b6b; margin-top: 0; margin-bottom: 28px; font-size: 0.95rem; }
+  .aviso {
+    background: var(--cor-secundaria);
+    border-left: 4px solid var(--cor-destaque);
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+  .alerta {
+    background: #fbeceb;
+    border-left: 4px solid #b03a2e;
+    padding: 12px 16px;
+    margin-bottom: 32px;
+    font-size: 0.9rem;
+  }
+  .convencoes {
+    background: #f7f2ea;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    font-size: 0.9rem;
+  }
+  .convencoes ul { margin: 6px 0 14px; padding-left: 20px; }
+  h2.entidade {
+    color: #fff;
+    background: var(--cor-primaria);
+    padding: 8px 14px;
+    border-radius: 6px 6px 0 0;
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+  }
+  .notacao {
+    background: #f7f2ea;
+    border: 1px solid var(--cor-borda);
+    border-top: none;
+    padding: 10px 14px;
+    font-family: "Consolas", monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  .leitura {
+    font-size: 0.88rem;
+    font-style: italic;
+    color: #4a4a4a;
+    border-left: 3px solid var(--cor-borda);
+    padding: 8px 14px;
+    margin: 0 0 12px;
+    background: #fbf8f3;
+  }
+  .indices { font-size: 0.85rem; color: #5a5a5a; margin: 0 0 8px; padding-left: 2px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  th, td { border: 1px solid var(--cor-borda); padding: 8px 10px; text-align: left; font-size: 0.9rem; vertical-align: top; }
+  th { background: var(--cor-secundaria); color: var(--cor-primaria); }
+  tr:nth-child(even) td { background: #fbf8f3; }
+  code { background: #f0e9dc; padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+  .rodape { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--cor-borda); font-size: 0.85rem; color: #6b6b6b; }
+  .indice { background: #f7f2ea; border: 1px solid var(--cor-borda); padding: 14px 20px; margin-bottom: 32px; border-radius: 6px; }
+  .indice a { color: var(--cor-destaque); text-decoration: none; }
+  .indice a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>Dicionário de Dados — Bar do Peixe</h1>
+<br>
+<div class="aviso">
+  Os exemplos de valores apresentados neste documento são <strong>fictícios</strong>, criados apenas para ilustrar o formato dos campos. Nenhum dado real de clientes, fornecedores ou funcionários do estabelecimento foi utilizado.
+</div>
+
+<div class="indice">
+  <strong>Entidades neste dicionário:</strong>
+  <a href="#fornecedor">FORNECEDOR</a> ·
+  <a href="#compra_fornecedor">COMPRA</a> ·
+  <a href="#produtos">PRODUTOS</a> ·
+  <a href="#movimentacao">CONTROLE INSUMOS</a> ·
+  <a href="#funcionario">FUNCIONARIO</a> ·
+  <a href="#pedido">PEDIDO</a> ·
+  <a href="#pagamento">PAGAMENTO</a>
+</div>
+
+<h2 id="fornecedor" class="entidade">FORNECEDOR</h2>
+<div class="notacao">FORNECEDOR = @ID_FORNECEDOR + NOME_FORNECEDOR + CNPJ_FORNECEDOR</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_FORNECEDOR</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do fornecedor.</td></tr>
+<tr><td><code>NOME_FORNECEDOR</code></td><td>varchar(120)</td><td>Sim</td><td>Nome/razão social do fornecedor.</td></tr>
+<tr><td><code>CNPJ_FORNECEDOR</code></td><td>varchar(18)</td><td>Sim (único)</td><td>CNPJ do fornecedor; obrigatório para vínculo fiscal da compra.</td></tr>
+</table>
+<p class="indices">Índices: PK ID_FORNECEDOR; índice único em CNPJ_FORNECEDOR (evita cadastro de fornecedor duplicado).</p>
+
+<h2 id="compra_fornecedor" class="entidade">COMPRA</h2>
+<div class="notacao">COMPRA = @ID_COMPRA + DATA_COMPRA + NF_NOTA_FISCAL + TOTAL_COMPRA + ID_FORNECEDOR (FK)</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_COMPRA</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador da compra.</td></tr>
+<tr><td><code>DATA_COMPRA</code></td><td>date</td><td>Sim</td><td>Data em que a compra foi realizada.</td></tr>
+<tr><td><code>NF_NOTA_FISCAL</code></td><td>varchar(44)</td><td>Sim</td><td>Número da nota fiscal vinculada ao CNPJ do Bar do Peixe; toda compra deve ter nota registrada.</td></tr>
+<tr><td><code>TOTAL_COMPRA</code></td><td>decimal(10,2)</td><td>Sim</td><td>Valor total da compra.</td></tr>
+<tr><td><code>ID_FORNECEDOR (FK)</code></td><td>integer</td><td>Sim (FK)</td><td>Referência ao fornecedor que realizou a venda.</td></tr>
+</table>
+<p class="indices">Índices: PK ID_COMPRA; índice em ID_FORNECEDOR (histórico de compras por fornecedor); índice em DATA_COMPRA (relatórios por período).</p>
+
+<h2 id="produtos" class="entidade">PRODUTOS</h2>
+<div class="notacao">PRODUTOS = @ID_PRODUTO + TIPO_PRODUTO + QT_PRODUTO</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_PRODUTO</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do produto.</td></tr>
+<tr><td><code>TIPO_PRODUTO</code></td><td>varchar(20)</td><td>Sim</td><td>Categoria do produto (bebida ou alimento); usada para separar o fluxo de cozinha do de bebidas.</td></tr>
+<tr><td><code>QT_PRODUTO</code></td><td>integer</td><td>Sim</td><td>Quantidade do produto disponível/controlada no sistema.</td></tr>
+</table>
+<p class="indices">Índices: PK ID_PRODUTO; índice em TIPO_PRODUTO (separar bebida de cozinha em relatórios e telas).</p>
+
+<h2 id="movimentacao" class="entidade">CONTROLE INSUMOS</h2>
+<div class="notacao">CONTROLE INSUMOS = @ID_LOCAL + TP_LOCAL + ID_PRODUTO (FK) + QT_LOCAL</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_LOCAL</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do registro de controle/armazenamento.</td></tr>
+<tr><td><code>TP_LOCAL</code></td><td>varchar(20)</td><td>Sim</td><td>Local físico de armazenamento (ex.: "Freezer 1", "Estoque geral").</td></tr>
+<tr><td><code>ID_PRODUTO (FK)</code></td><td>integer</td><td>Sim (FK)</td><td>Produto ao qual este controle se refere.</td></tr>
+<tr><td><code>QT_LOCAL</code></td><td>integer</td><td>Sim</td><td>Quantidade do produto naquele local (ex.: Cerveja = 50).</td></tr>
+</table>
+<p class="indices">Índices: PK ID_LOCAL; índice em ID_PRODUTO (consultar onde um produto está armazenado); índice em TP_LOCAL (relatórios por local).</p>
+
+<h2 id="funcionario" class="entidade">FUNCIONARIO</h2>
+<div class="notacao">FUNCIONARIO = @ID_FUNCIONARIO + TP_FUNÇÃO + TP_TURNO + NOME_FUNCIONARIO</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_FUNCIONARIO</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do funcionário.</td></tr>
+<tr><td><code>TP_FUNÇÃO</code></td><td>varchar(30)</td><td>Sim</td><td>Função exercida (cozinheiro, ajudante, atendente etc.).</td></tr>
+<tr><td><code>TP_TURNO</code></td><td>varchar(10)</td><td>Sim</td><td>Turno de trabalho (dia/noite).</td></tr>
+<tr><td><code>NOME_FUNCIONARIO</code></td><td>varchar(120)</td><td>Sim</td><td>Nome do funcionário.</td></tr>
+</table>
+<p class="indices">Índices: PK ID_FUNCIONARIO; índice em TP_TURNO (organização de escalas por turno).</p>
+
+<h2 id="pedido" class="entidade">PEDIDO</h2>
+<div class="notacao">PEDIDO = @ID_PEDIDO + DT_HORA_PEDIDO + ID_FUNCIONARIO (FK) + TP_SETOR</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_PEDIDO</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do pedido.</td></tr>
+<tr><td><code>DT_HORA_PEDIDO</code></td><td>datetime</td><td>Sim</td><td>Data e hora do pedido.</td></tr>
+<tr><td><code>ID_FUNCIONARIO (FK)</code></td><td>integer</td><td>Sim (FK)</td><td>Funcionário responsável pelo registro do pedido.</td></tr>
+<tr><td><code>TP_SETOR</code></td><td>varchar(20)</td><td>Sim</td><td>Setor de destino do pedido (bebida ou cozinha); define o fluxo de atendimento.</td></tr>
+</table>
+<p class="indices">Índices: PK ID_PEDIDO; índice em ID_FUNCIONARIO; índice em DT_HORA_PEDIDO (relatórios diários); índice em TP_SETOR (separar fila de bebida e de cozinha).</p>
+
+<h2 id="pagamento" class="entidade">PAGAMENTO</h2>
+<div class="notacao">PAGAMENTO = @ID_PAGAMENTO + DT_HORA_PAGAMENTO + TP_FORMA_PAGAMENTO + VALOR_PAGO + IN_CONFIRMADO + ID_PEDIDO (FK)</div>
+<table>
+<tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr>
+<tr><td><code>ID_PAGAMENTO</code></td><td>integer</td><td>Sim (PK)</td><td>Identificador do pagamento.</td></tr>
+<tr><td><code>DT_HORA_PAGAMENTO</code></td><td>datetime</td><td>Sim</td><td>Data e hora em que o pagamento foi registrado.</td></tr>
+<tr><td><code>TP_FORMA_PAGAMENTO</code></td><td>varchar(20)</td><td>Sim</td><td>Forma de pagamento utilizada (dinheiro, cartão ou PIX).</td></tr>
+<tr><td><code>VALOR_PAGO</code></td><td>decimal(10,2)</td><td>Sim</td><td>Valor pago naquele pagamento.</td></tr>
+<tr><td><code>IN_CONFIRMADO</code></td><td>boolean</td><td>Sim</td><td>Indica se o pagamento foi confirmado.</td></tr>
+<tr><td><code>ID_PEDIDO (FK)</code></td><td>integer</td><td>Sim (FK)</td><td>Referência ao pedido pago; um pedido pode ter mais de um pagamento vinculado (ex.: conta dividida).</td></tr>
+</table>
+<p class="indices">Índices: PK ID_PAGAMENTO; índice em ID_PEDIDO (localizar todos os pagamentos de um pedido).</p>
+
+</body>
+</html>
