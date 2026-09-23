@@ -312,6 +312,14 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura e prosseguir com a versão resumida, tornando o conteúdo mais objetivo e alinhado, além de adaptar e remover trechos considerados dispensáveis.
 
+##10. Conclusão
+
+O Bar do Peixe ainda funciona tudo no papel, sem nenhum controle de estoque, o que deixa a comunicação entre o salão e a cozinha mais devagar. Depois de visitar o bar e entender como as coisas funcionam lá no dia a dia, organizamos isso tudo pensando em como seria um sistema para guardar as informações de fornecedores, compras, produtos, estoque, funcionários, pedidos e pagamentos. Esse desenho já resolve os principais problemas que o dono comentou, como separar os pedidos de bebida dos de cozinha e garantir que toda compra tenha nota fiscal.
+
+Esse trabalho serve como uma base pronta para quando o sistema for montado de verdade. Para o grupo, o maior aprendizado foi conseguir transformar a rotina meio bagunçada de um negócio real em algo mais organizado, além de entender a diferença entre o que é uma regra do negócio e o que é só uma necessidade do sistema. A gente também aprendeu a usar a IA como apoio, mas sem aceitar tudo de primeira — sempre revisando o que ela sugeria.
+
+Como próximo passo, falta colocar esse banco de dados para funcionar de verdade, criar as telas do sistema, fazer o aviso automático quando o estoque estiver acabando, e testar tudo com o uso real do bar.
+
 **Reflexão crítica** - O conteúdo gerado dependeu das informações que foram disponibilizadas. Também foi necessária uma revisão para garantir a coerência e definir o nível de detalhe ao trabalho, tendo em vista que a IA tende a gerar textos mais extensos do que o necessário.
 
 
