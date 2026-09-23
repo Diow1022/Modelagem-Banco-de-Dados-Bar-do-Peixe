@@ -169,7 +169,7 @@ RGM - 46929720
 **Entidades reconhecidas e justificativa:**
 
 - **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de insumos solicitado pelo estabelecimento.
-- **insumos_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
+- **INSUMOS_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
 - **COMPRA_FORNECEDOR** — representa cada operação de reposição de insumos, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
@@ -186,8 +186,8 @@ RGM - 46929720
 | PRODUTOS | NM_PRODUTO | Descritivo (texto) |
 | PRODUTOS | TP_CATEGORIA | Categórico |
 | PRODUTOS | ID_LOCAL | Chave estrangeira |
-| PRODUTOS | QT_insumos_ATUAL | Numérico |
-| PRODUTOS | QT_insumos_MINIMO | Numérico |
+| PRODUTOS | QT_INSUMOS_ATUAL | Numérico |
+| PRODUTOS | QT_INSUMOS_MINIMO | Numérico |
 
 | INSUMOS_LOCAL | ID_LOCAL | Chave primária |
 | INSUMOS_LOCAL | NM_LOCAL | Descritivo (texto) |
@@ -233,8 +233,8 @@ RGM - 46929720
 **COMPRA_FORNECEDOR: (1,n)**
 **PRODUTOS: (0,n)**
 
-**|insumos_LOCAL — ARMAZENADOS — PRODUTOS|**
-**insumos_LOCAL: (0,n)**
+**|INSUMOS_LOCAL — ARMAZENADOS — PRODUTOS|**
+**INSUMOS_LOCAL: (0,n)**
 **PRODUTOS: (0,n)**
 
 **|FUNCIONARIO — FAZ — PEDIDO|**
