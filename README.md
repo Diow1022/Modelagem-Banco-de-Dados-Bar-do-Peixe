@@ -103,7 +103,7 @@ RGM - 46929720
 | QT_PRODUTO | Quantidade disponível em insumos | Obrigatório; não pode ser negativo |
 
 
-**insumos_LOCAL**
+**CONTROLE_INSUMOS**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -122,7 +122,7 @@ RGM - 46929720
 | NOME_FORNECEDOR | Nome/razão social do fornecedor | Obrigatório |
 | CNPJ_FORNECEDOR | CNPJ do fornecedor | Obrigatório para vínculo fiscal da compra |
 
-**COMPRA**
+**COMPRA_FORNECEDOR**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
@@ -169,7 +169,7 @@ RGM - 46929720
 **Entidades reconhecidas e justificativa:**
 
 - **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de insumos solicitado pelo estabelecimento.
-- **INSUMOS_LOCAL** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
+- **CONTROLE_INSUMOS** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
 - **COMPRA_FORNECEDOR** — representa cada operação de reposição de insumos, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
@@ -189,9 +189,9 @@ RGM - 46929720
 | PRODUTOS | QT_INSUMOS_ATUAL | Numérico |
 | PRODUTOS | QT_INSUMOS_MINIMO | Numérico |
 
-| INSUMOS_LOCAL | ID_LOCAL | Chave primária |
-| INSUMOS_LOCAL | NM_LOCAL | Descritivo (texto) |
-| INSUMOS_LOCAL | TP_LOCAL | Categórico |
+| CONTROLE_INSUMOS | ID_LOCAL | Chave primária |
+| CONTROLE_INSUMOS | NM_LOCAL | Descritivo (texto) |
+| CONTROLE_INSUMOS | TP_LOCAL | Categórico |
 
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
 | FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
@@ -233,8 +233,8 @@ RGM - 46929720
 **COMPRA_FORNECEDOR: (1,n)**
 **PRODUTOS: (0,n)**
 
-**|INSUMOS_LOCAL — ARMAZENADOS — PRODUTOS|**
-**INSUMOS_LOCAL: (0,n)**
+**|CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS|**
+**CONTROLE_INSUMOS: (1,n)**
 **PRODUTOS: (0,n)**
 
 **|FUNCIONARIO — FAZ — PEDIDO|**
@@ -242,12 +242,12 @@ RGM - 46929720
 **PEDIDO: (1,1)**
 
 **|PEDIDO — INCLUI — PRODUTOS|**
-**PEDIDO: (1,n)**
+**PEDIDO: (1,1)**
 **PRODUTOS: (0,n)**
 
 **|PEDIDO — GERA — PAGAMENTO|**
 **PEDIDO: (1,1)**
-**PAGAMENTO: (1,1)**
+**PAGAMENTO: (0,1)**
 
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
