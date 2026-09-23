@@ -171,7 +171,7 @@ RGM - 46929720
 - **PRODUTOS** — representa cada item vendido ou usado (bebida ou insumo de cozinha); é o núcleo do controle de insumos solicitado pelo estabelecimento.
 - **CONTROLE_INSUMOS** — representa onde o produto é fisicamente guardado (ex.: os 3 freezers e o insumos geral); necessário porque o espaço de armazenamento é citado como pequeno e relevante para o controle.
 - **FORNECEDOR** — representa quem vende a mercadoria ao bar; necessário para rastrear compras e notas fiscais.
-- **COMPRA_FORNECEDOR** — representa cada operação de reposição de insumos, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
+- **COMPRA** — representa cada operação de reposição de insumos, vinculando fornecedor, data e nota fiscal — essencial já que a mercadoria é o maior item de despesa do negócio.
 - **FUNCIONARIO** — representa a equipe (cozinheiros, ajudantes, atendentes), necessária para registrar quem lançou cada pedido e organizar turnos.
 - **PEDIDO** — representa a solicitação do cliente no balcão/mesa; é o elemento central do fluxo "salão → cozinha/bebidas" que o estabelecimento quer digitalizar.
 - **PAGAMENTO** representa o pagamento feito pelo cliente e elementos que comprovam essa transação como, (DATA, TIPO de PAGAMENTO, VALOR PAGO e etc).
@@ -197,11 +197,11 @@ RGM - 46929720
 | FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
 | FORNECEDOR | CNPJ_FORNECEDOR | Identificador externo |
 
-| COMPRA_FORNECEDOR | ID_COMPRA | Chave primária |
-| COMPRA_FORNECEDOR | DATA_COMPRA | Temporal (data) |
-| COMPRA_FORNECEDOR | ID_FORNECEDOR | Chave estrangeira |
-| COMPRA_FORNECEDOR | NF_NOTA_FISCAL | Identificador externo |
-| COMPRA_FORNECEDOR | TOTAL_COMPRA | Numérico (monetário) |
+| COMPRA | ID_COMPRA | Chave primária |
+| COMPRA | DATA_COMPRA | Temporal (data) |
+| COMPRA | ID_FORNECEDOR | Chave estrangeira |
+| COMPRA | NF_NOTA_FISCAL | Identificador externo |
+| COMPRA | TOTAL_COMPRA | Numérico (monetário) |
 
 | FUNCIONARIO | ID_FUNCIONARIO | Chave primária |
 | FUNCIONARIO | NM_FUNCIONARIO | Descritivo (texto) |
@@ -227,10 +227,10 @@ RGM - 46929720
 
 **|FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|**
 **FORNECEDOR: (0,n)**
-**COMPRA_FORNECEDOR: (1,1)**
+**COMPRA: (1,1)**
 
-**|COMPRA_FORNECEDOR — CONTÉM — PRODUTOS|**
-**COMPRA_FORNECEDOR: (1,n)**
+**|COMPRA — CONTÉM — PRODUTOS|**
+**COMPRA: (1,n)**
 **PRODUTOS: (0,n)**
 
 **|CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS|**
@@ -268,11 +268,11 @@ RGM - 46929720
 
 A modelagem do Bar do Peixe representa apenas as entidades necessárias para resolver os dois problemas centrais da organização: a falta de agilidade no fluxo salão–cozinha/bebidas e a ausência de controle de insumos.
 
-**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `INSUMOS_LOCAL` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, insumos geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
+**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `CONTROLE_INSUMOS` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, insumos geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
 
 **Por que esses atributos.** Foram mantidos apenas os atributos usados nos processos reais mapeados. O atributo `IN_PERECIVEL` foi descartado por não corresponder a nenhuma regra de negócio observada. Já `NF_NOTA_FISCAL` foi mantido obrigatório por representar uma exigência legal (vínculo fiscal ao CNPJ), não apenas prática interna.
 
-**Por que esses relacionamentos e cardinalidades.** `FUNCIONARIO–PEDIDO (1,1)` garante que todo pedido tenha um responsável identificado. `PEDIDO–PAGAMENTO (1,1):(1,1)` reflete que um pedido só fecha com um pagamento confirmado vinculado a ele, sem parciais. `INSUMOS_LOCAL–PRODUTOS (0,n):(0,n)` permite que um produto esteja em mais de um local ao mesmo tempo.
+**Por que esses relacionamentos e cardinalidades.** `FUNCIONARIO–PEDIDO (1,1)` garante que todo pedido tenha um responsável identificado. `PEDIDO–PAGAMENTO (1,1):(1,1)` reflete que um pedido só fecha com um pagamento confirmado vinculado a ele, sem parciais. `CONTROLE_INSUMOS –PRODUTOS (0,n):(0,n)` permite que um produto esteja em mais de um local ao mesmo tempo.
 
 ---
 
