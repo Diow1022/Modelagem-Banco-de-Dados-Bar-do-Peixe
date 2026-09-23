@@ -122,7 +122,7 @@ RGM - 46929720
 | NOME_FORNECEDOR | Nome/razão social do fornecedor | Obrigatório |
 | CNPJ_FORNECEDOR | CNPJ do fornecedor | Obrigatório para vínculo fiscal da compra |
 
-**COMPRA_FORNECEDOR**
+**COMPRA**
 
 | Atributo | Descrição | Regra de negócio associada |
 |----------|-----------|------------------------------|
