@@ -204,11 +204,11 @@ RGM - 46929720
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
 | FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
 | FORNECEDOR | CNPJ_FORNECEDOR | Identificador externo |
-| COMPRA_FORNECEDOR | ID_COMPRA | Chave primária |
-| COMPRA_FORNECEDOR | DATA_COMPRA | Temporal (data) |
-| COMPRA_FORNECEDOR | ID_FORNECEDOR | Chave estrangeira |
-| COMPRA_FORNECEDOR | NF_NOTA_FISCAL | Identificador externo |
-| COMPRA_FORNECEDOR | TOTAL_COMPRA | Numérico (monetário) |
+| COMPRA | ID_COMPRA | Chave primária |
+| COMPRA | DATA_COMPRA | Temporal (data) |
+| COMPRA | ID_FORNECEDOR | Chave estrangeira |
+| COMPRA| NF_NOTA_FISCAL | Identificador externo |
+| COMPRA | TOTAL_COMPRA | Numérico (monetário) |
 | FUNCIONARIO | ID_FUNCIONARIO | Chave primária |
 | FUNCIONARIO | NM_FUNCIONARIO | Descritivo (texto) |
 | FUNCIONARIO | TP_FUNCAO | Categórico |
