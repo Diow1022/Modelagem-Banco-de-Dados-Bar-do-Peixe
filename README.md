@@ -226,9 +226,6 @@ RGM - 46929720
 
 **Relacionamentos pertinentes:**
 
-| Entidade | Relaciona-se com | Cardinalidade |
-|---|---|---|
-
 | Relacionamento | Entidade | Cardinalidade | Entidade | Cardinalidade |
 |---|---|---|---|---|
 | FORNECEDOR — FORNECE — COMPRA | FORNECEDOR | (0,n) | COMPRA | (1,1) |
