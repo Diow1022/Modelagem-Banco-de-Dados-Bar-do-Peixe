@@ -268,7 +268,7 @@ RGM - 46929720
 
 A modelagem do Bar do Peixe representa apenas as entidades necessárias para resolver os dois problemas centrais da organização: a falta de agilidade no fluxo salão–cozinha/bebidas e a ausência de controle de insumos.
 
-**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `ESTOQUE_LOCAL` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, estoque geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA_FORNECEDOR` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
+**Por que essas entidades e não outras.** `PRODUTOS` foi separado de `ESTOQUE_LOCAL` porque um mesmo produto pode estar distribuído em vários locais físicos (freezers, estoque geral), o que um atributo único não representaria. `FORNECEDOR` foi separado de `COMPRA` para evitar redundância de dados cadastrais a cada nova compra. Não foi modelada uma entidade `CLIENTE`, pois o atendimento é por comanda avulsa, sem identificação do consumidor.
 
 **Por que esses atributos.** Foram mantidos apenas os atributos usados nos processos reais mapeados. O atributo `IN_PERECIVEL` foi descartado por não corresponder a nenhuma regra de negócio observada. Já `NF_NOTA_FISCAL` foi mantido obrigatório por representar uma exigência legal (vínculo fiscal ao CNPJ), não apenas prática interna.
 
