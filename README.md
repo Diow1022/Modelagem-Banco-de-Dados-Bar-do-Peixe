@@ -312,7 +312,7 @@ A modelagem do Bar do Peixe representa apenas as entidades necessárias para res
 
 **Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura e prosseguir com a versão resumida, tornando o conteúdo mais objetivo e alinhado, além de adaptar e remover trechos considerados dispensáveis.
 
-##10. Conclusão
+## 10. Conclusão
 
 O Bar do Peixe ainda funciona tudo no papel, sem nenhum controle de estoque, o que deixa a comunicação entre o salão e a cozinha mais devagar. Depois de visitar o bar e entender como as coisas funcionam lá no dia a dia, organizamos isso tudo pensando em como seria um sistema para guardar as informações de fornecedores, compras, produtos, estoque, funcionários, pedidos e pagamentos. Esse desenho já resolve os principais problemas que o dono comentou, como separar os pedidos de bebida dos de cozinha e garantir que toda compra tenha nota fiscal.
 
