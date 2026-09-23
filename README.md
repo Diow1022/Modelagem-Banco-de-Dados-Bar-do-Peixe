@@ -125,7 +125,7 @@ RGM - 46929720
  
 *Índices: PK ID_FORNECEDOR; índice único em CNPJ_FORNECEDOR (evita cadastro de fornecedor duplicado).*
  
-**COMPRA_FORNECEDOR**
+**COMPRA**
  
 | Atributo | Tipo físico | Descrição | Regra de negócio associada |
 |----------|-------------|-----------|------------------------------|
@@ -231,12 +231,12 @@ RGM - 46929720
 
 | Relacionamento | Entidade | Cardinalidade | Entidade | Cardinalidade |
 |---|---|---|---|---|
-| FORNECEDOR — FORNECE — COMPRA_FORNECEDOR | FORNECEDOR | (0,n) | COMPRA_FORNECEDOR | (1,1) |
-| COMPRA_FORNECEDOR — CONTÉM — PRODUTOS | COMPRA_FORNECEDOR | (1,n) | PRODUTOS | (0,n) |
-| CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS | CONTROLE_INSUMOS | (1,n) | PRODUTOS | (0,n) |
+| FORNECEDOR — FORNECE — COMPRA | FORNECEDOR | (0,n) | COMPRA | (1,1) |
+| COMPRA — CONTÉM — PRODUTOS | COMPRA | (1,n) | PRODUTOS | (0,n) |
+| CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS | CONTROLE_INSUMOS | (1,1) | PRODUTOS | (0,n) |
 | FUNCIONARIO — FAZ — PEDIDO | FUNCIONARIO | (0,n) | PEDIDO | (1,1) |
 | PEDIDO — INCLUI — PRODUTOS | PEDIDO | (1,1) | PRODUTOS | (0,n) |
-| PEDIDO — GERA — PAGAMENTO | PEDIDO | (1,1) | PAGAMENTO | (0,1) |
+| PEDIDO — GERA — PAGAMENTO | PEDIDO | (1,1) | PAGAMENTO | (0,n) |
 
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
