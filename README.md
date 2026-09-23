@@ -96,71 +96,81 @@ RGM - 46929720
 
 **PRODUTOS**
 
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_PRODUTO | Identificador único do produto (integer, PK) | Obrigatório |
-| TIPO_PRODUTO | Categoria do produto: bebida ou alimento | Obrigatório; usado para separar fluxo de cozinha e de bebidas |
-| QT_PRODUTO | Quantidade disponível em insumos | Obrigatório; não pode ser negativo |
-
-
-**CONTROLE_INSUMOS**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_LOCAL | Identificador do local físico de armazenamento | Obrigatório, PK |
-| QT_LOCAL | Identificador de Quantidade Produto insumos | Obrigatório |
-| TP_LOCAL | Tipo de armazenamento (freezer, insumos geral) | Obrigatório |
-| ID_PRODUTO | Referência a PRODUTOS (FK)| Obrigatório |
-
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_PRODUTO | integer | Identificador único do produto | Obrigatório, PK |
+| TIPO_PRODUTO | varchar(20) | Categoria do produto: bebida ou alimento | Obrigatório; usado para separar fluxo de cozinha e de bebidas |
+| QT_PRODUTO | integer | Quantidade do produto disponível/controlada no sistema | Obrigatório |
  
-
+*Índices: PK ID_PRODUTO; índice em TIPO_PRODUTO (separar bebida de cozinha em relatórios e telas).*
+ 
+**CONTROLE_INSUMOS**
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_LOCAL | integer | Identificador do registro de controle/armazenamento | Obrigatório, PK |
+| TP_LOCAL | varchar(20) | Local físico de armazenamento (ex.: "Freezer 1", "Estoque geral") | Obrigatório |
+| ID_PRODUTO | integer | Referência a PRODUTOS (FK) | Obrigatório |
+| QT_LOCAL | integer | Quantidade do produto naquele local (ex.: Cerveja = 50) | Obrigatório |
+ 
+*Índices: PK ID_LOCAL; índice em ID_PRODUTO (consultar onde um produto está armazenado); índice em TP_LOCAL (relatórios por local).*
+ 
 **FORNECEDOR**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_FORNECEDOR | Identificador único do fornecedor | Obrigatório, PK |
-| NOME_FORNECEDOR | Nome/razão social do fornecedor | Obrigatório |
-| CNPJ_FORNECEDOR | CNPJ do fornecedor | Obrigatório para vínculo fiscal da compra |
-
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_FORNECEDOR | integer | Identificador único do fornecedor | Obrigatório, PK |
+| NOME_FORNECEDOR | varchar(120) | Nome/razão social do fornecedor | Obrigatório |
+| CNPJ_FORNECEDOR | varchar(18) | CNPJ do fornecedor | Obrigatório e único; necessário para vínculo fiscal da compra |
+ 
+*Índices: PK ID_FORNECEDOR; índice único em CNPJ_FORNECEDOR (evita cadastro de fornecedor duplicado).*
+ 
 **COMPRA_FORNECEDOR**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_COMPRA | Identificador único da compra | Obrigatório, PK |
-| DATA_COMPRA | Data da compra | Obrigatório |
-| ID_FORNECEDOR | Referência ao fornecedor (FK) | Obrigatório |
-| NF_NOTA_FISCAL | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
-| TOTAL_COMPRA | Valor total da compra | Obrigatório, numérico positivo |
-
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_COMPRA | integer | Identificador único da compra | Obrigatório, PK |
+| DATA_COMPRA | date | Data em que a compra foi realizada | Obrigatório |
+| NF_NOTA_FISCAL | varchar(44) | Número da nota fiscal vinculada ao CNPJ do Bar do Peixe | Obrigatório; toda compra deve ter nota registrada |
+| TOTAL_COMPRA | decimal(10,2) | Valor total da compra | Obrigatório, numérico positivo |
+| ID_FORNECEDOR | integer | Referência ao fornecedor que realizou a venda (FK) | Obrigatório |
+ 
+*Índices: PK ID_COMPRA; índice em ID_FORNECEDOR (histórico de compras por fornecedor); índice em DATA_COMPRA (relatórios por período).*
+ 
 **FUNCIONARIO**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_FUNCIONARIO | Identificador único do funcionário | Obrigatório, PK |
-| NOME_FUNCIONARIO | Nome do Civil e Social | Obrigatório |
-| TP_FUNCAO | Função exercida (cozinheiro, ajudante, atendente etc.) | Obrigatório |
-| TP_TURNO | Turno de trabalho (dia/noite) | Obrigatório |
-
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_FUNCIONARIO | integer | Identificador único do funcionário | Obrigatório, PK |
+| TP_FUNCAO | varchar(30) | Função exercida (cozinheiro, ajudante, atendente etc.) | Obrigatório |
+| TP_TURNO | varchar(10) | Turno de trabalho (dia/noite) | Obrigatório |
+| NOME_FUNCIONARIO | varchar(120) | Nome do funcionário | Obrigatório |
+ 
+*Índices: PK ID_FUNCIONARIO; índice em TP_TURNO (organização de escalas por turno).*
+ 
 **PEDIDO**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_PEDIDO | Identificador único do pedido | Obrigatório, PK |
-| DT_HORA_PEDIDO | Data e hora do pedido | Obrigatório |
-| TP_SETOR | Setor de destino do pedido (bebida ou cozinha) | Obrigatório; define o fluxo de atendimento |
-| ID_FUNCIONARIO | Funcionário responsável pelo registro do pedido (FK) | Obrigatório |
-
-
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_PEDIDO | integer | Identificador único do pedido | Obrigatório, PK |
+| DT_HORA_PEDIDO | datetime | Data e hora do pedido | Obrigatório |
+| ID_FUNCIONARIO | integer | Funcionário responsável pelo registro do pedido (FK) | Obrigatório |
+| TP_SETOR | varchar(20) | Setor de destino do pedido (bebida ou cozinha) | Obrigatório; define o fluxo de atendimento |
+ 
+*Índices: PK ID_PEDIDO; índice em ID_FUNCIONARIO; índice em DT_HORA_PEDIDO (relatórios diários); índice em TP_SETOR (separar fila de bebida e de cozinha).*
+ 
 **PAGAMENTO**
-
-| Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| ID_PAGAMENTO | Identificador único do pagamento | Obrigatório, PK |
-| ID_PEDIDO | Referência ao pedido pago (FK) | Obrigatório |
-| DT_HORA_PAGAMENTO | Data e hora em que o pagamento foi registrado | Obrigatório |
-| VALOR_PAGO | Valor pago referente ao pedido | Obrigatório, numérico positivo |
-| TP_FORMA_PAGAMENTO | Forma de pagamento utilizada (dinheiro, cartão ou PIX) | Obrigatório |
-| IN_CONFIRMADO | Indica se o pagamento foi confirmado | Booleano; um pedido só é considerado fechado quando há pagamento confirmado vinculado a ele |
+ 
+| Atributo | Tipo físico | Descrição | Regra de negócio associada |
+|----------|-------------|-----------|------------------------------|
+| ID_PAGAMENTO | integer | Identificador único do pagamento | Obrigatório, PK |
+| DT_HORA_PAGAMENTO | datetime | Data e hora em que o pagamento foi registrado | Obrigatório |
+| TP_FORMA_PAGAMENTO | varchar(20) | Forma de pagamento utilizada (dinheiro, cartão ou PIX) | Obrigatório |
+| VALOR_PAGO | decimal(10,2) | Valor pago naquele pagamento | Obrigatório, numérico positivo |
+| IN_CONFIRMADO | boolean | Indica se o pagamento foi confirmado | Obrigatório; um pedido só é considerado fechado quando há pagamento confirmado vinculado a ele |
+| ID_PEDIDO | integer | Referência ao pedido pago (FK) | Obrigatório; um pedido pode ter mais de um pagamento vinculado (ex.: conta dividida) |
+ 
+*Índices: PK ID_PAGAMENTO; índice em ID_PEDIDO (localizar todos os pagamentos de um pedido).*
 
 ---
 
@@ -225,29 +235,14 @@ RGM - 46929720
 | Entidade | Relaciona-se com | Cardinalidade |
 |---|---|---|
 
-**|FORNECEDOR — FORNECE — COMPRA_FORNECEDOR|**
-**FORNECEDOR: (0,n)**
-**COMPRA: (1,1)**
-
-**|COMPRA — CONTÉM — PRODUTOS|**
-**COMPRA: (1,n)**
-**PRODUTOS: (0,n)**
-
-**|CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS|**
-**CONTROLE_INSUMOS: (1,n)**
-**PRODUTOS: (0,n)**
-
-**|FUNCIONARIO — FAZ — PEDIDO|**
-**FUNCIONARIO: (0,n)**
-**PEDIDO: (1,1)**
-
-**|PEDIDO — INCLUI — PRODUTOS|**
-**PEDIDO: (1,1)**
-**PRODUTOS: (0,n)**
-
-**|PEDIDO — GERA — PAGAMENTO|**
-**PEDIDO: (1,1)**
-**PAGAMENTO: (0,1)**
+| Relacionamento | Entidade | Cardinalidade | Entidade | Cardinalidade |
+|---|---|---|---|---|
+| FORNECEDOR — FORNECE — COMPRA_FORNECEDOR | FORNECEDOR | (0,n) | COMPRA_FORNECEDOR | (1,1) |
+| COMPRA_FORNECEDOR — CONTÉM — PRODUTOS | COMPRA_FORNECEDOR | (1,n) | PRODUTOS | (0,n) |
+| CONTROLE_INSUMOS — ARMAZENADOS — PRODUTOS | CONTROLE_INSUMOS | (1,n) | PRODUTOS | (0,n) |
+| FUNCIONARIO — FAZ — PEDIDO | FUNCIONARIO | (0,n) | PEDIDO | (1,1) |
+| PEDIDO — INCLUI — PRODUTOS | PEDIDO | (1,1) | PRODUTOS | (0,n) |
+| PEDIDO — GERA — PAGAMENTO | PEDIDO | (1,1) | PAGAMENTO | (0,1) |
 
 
 **Restrições e políticas organizacionais aplicadas ao modelo:**
