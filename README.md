@@ -11,13 +11,20 @@ Criação de um projeto universitário para desenvolvimento, análise de requisi
 
 **Delimitação:** *Será incluído um sistema rápido, dinâmico e intuitivo. Não será incluído grandes arquiteturas de sistema e quantidade massiva de informação.*
 
+---
+
 ## Desenvolvimento
 
 ### 1. Caracterização da organização
+
 - **Nome e natureza da Organização:** *Bar do Peixe, bar/restaurante*
+  
 - **Contexto e porte:** *Com fins lucrativos; operação de pequeno porte; ao todo são 10 pessoas envolvidas, contando com funcionários, gerente e dono/patrão; Atendimento, cozinhar, gerenciamento de estoque, organização das mesas, limpeza.*
+  
 - **Problemas e necessidades identificados:** *Falta de agilidade nos processos, controle de estoque, excesso de uso de papel. Falta de recursos tecnológicos.*
+  
 - **Justificativa da escolha:** *Escolhemos o Bar do peixe primeiramente por ter contato mais acessível com o dono e também pelo porte da empresa que se encaixa com as exigências do professor(nem muito pequena ou grande) e como a empresa não possui nenhum banco de dados se torna uma boa oportunidade de trabalho para nós.*
+  
 - **Evidências da Organização:** telefone:(11) 2098-3262 *Av. Celso Garcia, 5292 - Tatuapé, São Paulo - SP, 03064-000, https://www.instagram.com/bardopeixeofficial?igsh=NTg1aDUwaGE2OXNz&utm_source=qr.*
 
 ---
