@@ -198,31 +198,25 @@ RGM - 46929720
 | PRODUTOS | ID_LOCAL | Chave estrangeira |
 | PRODUTOS | QT_INSUMOS_ATUAL | Numérico |
 | PRODUTOS | QT_INSUMOS_MINIMO | Numérico |
-
 | CONTROLE_INSUMOS | ID_LOCAL | Chave primária |
 | CONTROLE_INSUMOS | NM_LOCAL | Descritivo (texto) |
 | CONTROLE_INSUMOS | TP_LOCAL | Categórico |
-
 | FORNECEDOR | ID_FORNECEDOR | Chave primária |
 | FORNECEDOR | NOME_FORNECEDOR | Descritivo (texto) |
 | FORNECEDOR | CNPJ_FORNECEDOR | Identificador externo |
-
-| COMPRA | ID_COMPRA | Chave primária |
-| COMPRA | DATA_COMPRA | Temporal (data) |
-| COMPRA | ID_FORNECEDOR | Chave estrangeira |
-| COMPRA | NF_NOTA_FISCAL | Identificador externo |
-| COMPRA | TOTAL_COMPRA | Numérico (monetário) |
-
+| COMPRA_FORNECEDOR | ID_COMPRA | Chave primária |
+| COMPRA_FORNECEDOR | DATA_COMPRA | Temporal (data) |
+| COMPRA_FORNECEDOR | ID_FORNECEDOR | Chave estrangeira |
+| COMPRA_FORNECEDOR | NF_NOTA_FISCAL | Identificador externo |
+| COMPRA_FORNECEDOR | TOTAL_COMPRA | Numérico (monetário) |
 | FUNCIONARIO | ID_FUNCIONARIO | Chave primária |
 | FUNCIONARIO | NM_FUNCIONARIO | Descritivo (texto) |
 | FUNCIONARIO | TP_FUNCAO | Categórico |
 | FUNCIONARIO | TP_TURNO | Categórico |
-
 | PEDIDO | ID_PEDIDO | Chave primária |
 | PEDIDO | DT_HORA_PEDIDO | Temporal (data/hora) |
 | PEDIDO | TP_SETOR | Categórico |
 | PEDIDO | ID_FUNCIONARIO | Chave estrangeira |
-
 | PAGAMENTO | ID_PAGAMENTO | Chave primária |
 | PAGAMENTO | ID_PEDIDO | Chave estrangeira |
 | PAGAMENTO | DT_HORA_PAGAMENTO | Temporal (data/hora) |
