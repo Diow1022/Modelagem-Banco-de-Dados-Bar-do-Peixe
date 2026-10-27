@@ -90,6 +90,7 @@ RGM - 46929720
 - Uma compra só pode ser registrada no sistema mediante nota fiscal correspondente, vinculada ao CNPJ do estabelecimento.
 - Um pedido só pode ser preparado pelo setor correspondente (bebida ou cozinha), de acordo com o tipo de item solicitado.
 - Um pedido só é considerado fechado quando há um pagamento confirmado vinculado a ele.
+- Todos pedido e registrado em uma comanda que depois e entregue a cozinha para o preparo.
 
 **Restrições organizacionais:**
 
