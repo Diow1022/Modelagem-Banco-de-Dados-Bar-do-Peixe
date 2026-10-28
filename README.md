@@ -93,6 +93,8 @@ RGM - 46929720
 - Todos pedido e registrado em uma comanda que depois e entregue a cozinha para o preparo.
 - Cancelamento de pedido não possui um jeito formal para cancelamento de pedido, apenas comunicando com outros funcionários.
 - Sobre Bebidas Alcoólicas que são totalmente restringidas para maiores de 18 anos.
+- A validade e conferida semanalmente pelo proprietário e ambiente são limpos pelos próprios funcionários.
+- O cupom fiscal e gerado apenas para as compras do fornecedor.  
 
 **Restrições organizacionais:**
 
