@@ -91,7 +91,8 @@ RGM - 46929720
 - Um pedido só pode ser preparado pelo setor correspondente (bebida ou cozinha), de acordo com o tipo de item solicitado.
 - Um pedido só é considerado fechado quando há um pagamento confirmado vinculado a ele.
 - Todos pedido e registrado em uma comanda que depois e entregue a cozinha para o preparo.
-- Cancelamento de pedido não possui um jeito formal para cancelamento de pedido, apenas comunicando com outros funcionários. 
+- Cancelamento de pedido não possui um jeito formal para cancelamento de pedido, apenas comunicando com outros funcionários.
+- Sobre Bebidas Alcoólicas que são totalmente restringidas para maiores de 18 anos.
 
 **Restrições organizacionais:**
 
