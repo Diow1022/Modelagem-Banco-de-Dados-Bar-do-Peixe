@@ -437,6 +437,8 @@ As cardinalidades e os atributos devem ser revisados em conjunto com o dicionár
 
 **Justificativa da escolha final** - Foi decidido manter a estrutura em tópicos por facilitar a leitura e prosseguir com a versão resumida, tornando o conteúdo mais objetivo e alinhado, além de adaptar e remover trechos considerados dispensáveis.
 
+**Reflexão crítica** - A IA foi útil principalmente na estruturação e na clareza da escrita. O grupo já havia definido as entidades, os atributos, os relacionamentos e as cardinalidades do DER, mas tinha dificuldade em transformar essas decisões em um texto bem organizado, e a ferramenta ajudou a dividir a justificativa em partes lógicas. O grupo optou por uma versão resumida em tópicos, por tornar o conteúdo mais fácil de ler e mais alinhado ao restante do README. Em seguida, revisou a resposta com o DER e o dicionário de dados, e ajustou os termos e trechos que não estavam coerentes com o restante do documento.
+
 
 
 ### Complemento — atualização documental
