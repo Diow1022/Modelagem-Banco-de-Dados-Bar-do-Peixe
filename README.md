@@ -105,7 +105,7 @@ As informações a seguir distinguem **práticas observadas** de **regras propos
 
 ## 5. Dicionário de dados — alinhado ao último DER
 
-O arquivo [`Dicionario_Dados_Bar_do_Peixe_Atualizado.html`](Dicionario_Dados_Bar_do_Peixe_Atualizado.html) contém o detalhamento dos atributos. A relação abaixo reproduz as **13 entidades e os atributos do último DER enviado**. Tipos SQL no HTML são sugestões, pois o diagrama não define SGBD ou tipos físicos.
+O arquivo [`Dicionario_Dados_Bar_do_Peixe.html`](Dicionario_Dados_Bar_do_Peixe.html) contém o detalhamento dos atributos. A relação abaixo reproduz as **13 entidades e os atributos do último DER enviado**. Tipos SQL no HTML são sugestões, pois o diagrama não define SGBD ou tipos físicos.
 
 **Convenções utilizadas:** `ID_` identificador; `NM_` nome; `NR_` número; `TP_` tipo; `ST_` situação; `DT_` data/hora; `QT_` quantidade; `VL_` valor; `UN_` unidade. `PK` = chave primária e `FK` = chave estrangeira. A nomenclatura reproduz a imagem, mesmo quando ainda necessita padronização.
 
