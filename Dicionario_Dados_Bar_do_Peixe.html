@@ -195,18 +195,6 @@
         </table>
     </section>
 
-    <!-- ENTIDADE CLIENTE -->
-    <section>
-        <h2>6. CLIENTE</h2>
-        <p>Representa o cliente cadastrado no modelo.</p>
-
-        <table>
-            <tr><th>Atributo</th><th>Tipo</th><th>Chave</th><th>Descrição</th></tr>
-            <tr><td>ID_Cliente</td><td>INTEGER</td><td>PK</td><td>Identificador do cliente</td></tr>
-            <tr><td>DT_Cliente</td><td>DATE</td><td>—</td><td>Data associada ao cliente (a confirmar)</td></tr>
-        </table>
-    </section>
-
     <!-- ENTIDADE MESA -->
     <section>
         <h2>7. MESA</h2>
@@ -216,7 +204,6 @@
             <tr><th>Atributo</th><th>Tipo</th><th>Chave</th><th>Descrição</th></tr>
             <tr><td>ID_Mesa</td><td>INTEGER</td><td>PK</td><td>Identificador da mesa</td></tr>
             <tr><td>NR_Mesa</td><td>INTEGER</td><td>—</td><td>Número da mesa</td></tr>
-            <tr><td>ID_Cliente</td><td>INTEGER</td><td>FK</td><td>Cliente relacionado</td></tr>
             <tr><td>TP_Situacao</td><td>VARCHAR(20)</td><td>—</td><td>Situação da mesa</td></tr>
             <tr><td>QT_Lugares</td><td>INTEGER</td><td>—</td><td>Quantidade de lugares</td></tr>
         </table>
@@ -347,7 +334,6 @@
             <tr><td>FUNCIONARIO</td><td>Realiza</td><td>PEDIDO</td><td>(1,N)</td><td>(1,1)</td></tr>
             <tr><td>PEDIDO</td><td>Possui</td><td>ITEM_PEDIDO</td><td>(1,N)</td><td>(1,1)</td></tr>
             <tr><td>ITEM_PEDIDO</td><td>Refere-se a</td><td>PRODUTO</td><td>(0,N)</td><td>(1,1)</td></tr>
-            <tr><td>CLIENTE</td><td>Pedi</td><td>MESA</td><td>(1,1)</td><td>(1,N)</td></tr>
             <tr><td>MESA</td><td>Vincula</td><td>COMANDA</td><td>(1,N)</td><td>(1,1)</td></tr>
             <tr><td>PEDIDO</td><td>Pertence a</td><td>COMANDA</td><td>(1,N)</td><td>(1,1)</td></tr>
             <tr><td>COMANDA</td><td>Possui</td><td>PAGAMENTO</td><td>(1,1)</td><td>(1,N)</td></tr>
@@ -357,44 +343,6 @@
             <tr><td>ITEM_COMPRA</td><td>Rel</td><td>INSUMOS</td><td>(0,N)</td><td>(1,1)</td></tr>
             <tr><td>INSUMOS</td><td>Movimenta</td><td>CONTROLE_INSUMOS</td><td>(1,N)</td><td>(1,1)</td></tr>
         </table>
-    </section>
-
-    <!-- PONTOS QUE PRECISAM DE VALIDAÇÃO -->
-    <section class="notice">
-        <h2>16. Pontos para Validação</h2>
-
-        <p>
-            <strong>1.</strong> Confirmar se a entidade CLIENTE
-            será utilizada, pois o README original não previa
-            cadastro de clientes.
-        </p>
-
-        <p>
-            <strong>2.</strong> Confirmar o significado do
-            atributo DT_Cliente.
-        </p>
-
-        <p>
-            <strong>3.</strong> O relacionamento entre PRODUTO
-            e INSUMOS ainda não registra a quantidade
-            de ingrediente consumida por produto.
-        </p>
-
-        <p>
-            <strong>4.</strong> Validar a cardinalidade entre
-            COMANDA e PAGAMENTO e a confirmação
-            dos pagamentos.
-        </p>
-
-        <p>
-            <strong>5.</strong> Revisar os nomes dos relacionamentos
-            "Pedi" e "Rel".
-        </p>
-
-        <p>
-            <strong>6.</strong> Conferir as cardinalidades
-            no software utilizado para construir o DER.
-        </p>
     </section>
 
 </main>
