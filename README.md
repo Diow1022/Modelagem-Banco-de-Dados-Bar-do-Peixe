@@ -427,7 +427,7 @@ As cardinalidades e os atributos devem ser revisados em conjunto com o dicionár
 
 **Motivação** - O grupo definiu as entidades, atributos, relacionamentos e cardinalidades do DER, mas teve dificuldade em estruturar por escrito a justificativa técnica de forma clara.
 
-**Prompt(s) utilizados** - "Me ajude a fazer o item 8 justificativa técnica, enviei o esqueleto para você ter referencia e o meu arquivo readme onde tem as informações necessarias para você, quero que me devolva um texto respondendo";/"Agora faça um resumo de cada coisa, mantenha o mesmo esquema que você fez".
+**Prompt(s) utilizados** - "Me ajude a fazer o item 8 justificativa técnica, te enviei o esqueleto para você ter referencia e o meu arquivo readme onde tem as informações necessarias para você, quero que me devolva um texto respondendo";/"Agora faça um resumo de cada coisa, mantenha o mesmo esquema que você fez".
 
 **Resposta recebida** - A IA gerou um texto estruturado em tópicos ("Por que essas entidades e não outras", "Por que esses atributos", "Por que esses relacionamentos e cardinalidades"), justificando cada decisão de modelagem com base nas informações fornecidas no README.
 
