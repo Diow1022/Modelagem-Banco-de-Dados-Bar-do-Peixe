@@ -178,19 +178,6 @@ O arquivo [`Dicionario_Dados_Bar_do_Peixe.html`](Dicionario_Dados_Bar_do_Peixe.h
 
 | ST_Produto | VARCHAR(20) | — | Situação do produto |
 
-
-
-### CLIENTE
-
-| Atributo | Tipo sugerido | Chave | Descrição |
-|---|---|---|---|
-
-| ID_Cliente | INTEGER | PK | Identificador do cliente |
-
-| DT_Cliente | DATE | — | Data associada ao cliente; significado a confirmar |
-
-
-
 ### MESA
 
 | Atributo | Tipo sugerido | Chave | Descrição |
@@ -199,8 +186,6 @@ O arquivo [`Dicionario_Dados_Bar_do_Peixe.html`](Dicionario_Dados_Bar_do_Peixe.h
 | ID_Mesa | INTEGER | PK | Identificador da mesa |
 
 | NR_Mesa | INTEGER | — | Número da mesa |
-
-| ID_Cliente | INTEGER | FK | Referência a CLIENTE |
 
 | TP_Situacao | VARCHAR(20) | — | Situação da mesa |
 
@@ -338,7 +323,7 @@ O arquivo [`Dicionario_Dados_Bar_do_Peixe.html`](Dicionario_Dados_Bar_do_Peixe.h
 
 ## 6. Modelagem conceitual — entidades e relacionamentos
 
-**Entidades:** `FUNCIONARIO`, `PEDIDO`, `ITEM_PEDIDO`, `PRODUTO`, `CLIENTE`, `MESA`, `COMANDA`, `PAGAMENTO`, `FORNECEDOR`, `COMPRA`, `ITEM_COMPRA`, `INSUMOS` e `CONTROLE_INSUMOS`.
+**Entidades:** `FUNCIONARIO`, `PEDIDO`, `ITEM_PEDIDO`, `PRODUTO`,  `MESA`, `COMANDA`, `PAGAMENTO`, `FORNECEDOR`, `COMPRA`, `ITEM_COMPRA`, `INSUMOS` e `CONTROLE_INSUMOS`.
 
 O quadro abaixo **transcreve as cardinalidades desenhadas**, sem afirmar que todas já foram validadas. Os valores estão na mesma ordem visual das entidades.
 
@@ -351,8 +336,6 @@ O quadro abaixo **transcreve as cardinalidades desenhadas**, sem afirmar que tod
 | PEDIDO | Possui | ITEM_PEDIDO | (1,N) | (1,1) |
 
 | ITEM_PEDIDO | Refere-se a | PRODUTO | (0,N) | (1,1) |
-
-| CLIENTE | Pedi | MESA | (1,1) | (1,N) |
 
 | MESA | Vincula | COMANDA | (1,N) | (1,1) |
 
@@ -383,7 +366,7 @@ O quadro abaixo **transcreve as cardinalidades desenhadas**, sem afirmar que tod
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
 
-O último DER foi revisado para incluir `ITEM_PEDIDO`, `ITEM_COMPRA`, `MESA`, `COMANDA`, `CLIENTE` e a movimentação de insumos. **O arquivo da imagem final precisa ser adicionado ao repositório** com o nome abaixo para que o link funcione.
+O último DER foi revisado para incluir `ITEM_PEDIDO`, `ITEM_COMPRA`, `MESA`, `COMANDA` e a movimentação de insumos. **O arquivo da imagem final precisa ser adicionado ao repositório** com o nome abaixo para que o link funcione.
 
 ![DER atualizado do Bar do Peixe](DER_Bar_do_Peixe_Atualizado.png)
 
