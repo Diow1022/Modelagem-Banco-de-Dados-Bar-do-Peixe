@@ -198,3 +198,60 @@ Os relacionamentos com (1,n) fazem todo pedido ter ao menos um item e toda compr
 #### Generalização/especialização
 
 O DER não possui generalização/especialização, portanto não houve estratégia de conversão.
+
+### 3.4 Definição de Chaves Primárias e Estrangeiras
+
+#### Chaves primárias
+
+| Tabela | Chave primária | Tipo |
+|---|---|---|
+| FUNCIONARIO | ID_Funcionario | Simples |
+| PEDIDO | ID_Pedido | Simples |
+| ITEM_PEDIDO | ID_Item_Pedido | Simples |
+| PRODUTO | ID_Produto | Simples |
+| MESA | ID_Mesa | Simples |
+| COMANDA | ID_Comanda | Simples |
+| PAGAMENTO | ID_Pagamento | Simples |
+| FORNECEDOR | ID_Fornecedor | Simples |
+| COMPRA | ID_Compra | Simples |
+| ITEM_COMPRA | ID_Item_Compra | Simples |
+| INSUMOS | ID_Insumos | Simples |
+| CONTROLE_INSUMOS | ID_Movimentacao | Simples |
+| CONSOME | (ID_Produto, ID_Insumos) | Composta |
+
+#### Chaves estrangeiras
+
+| Tabela | Chave estrangeira | Tabela referenciada | Chave referenciada |
+|---|---|---|---|
+| PEDIDO | ID_Funcionario | FUNCIONARIO | ID_Funcionario |
+| PEDIDO | ID_Comanda | COMANDA | ID_Comanda |
+| ITEM_PEDIDO | ID_Pedido | PEDIDO | ID_Pedido |
+| ITEM_PEDIDO | ID_Produto | PRODUTO | ID_Produto |
+| COMANDA | ID_Mesa | MESA | ID_Mesa |
+| PAGAMENTO | ID_Comanda | COMANDA | ID_Comanda |
+| COMPRA | ID_Fornecedor | FORNECEDOR | ID_Fornecedor |
+| ITEM_COMPRA | ID_Compra | COMPRA | ID_Compra |
+| ITEM_COMPRA | ID_Insumos | INSUMOS | ID_Insumos |
+| CONTROLE_INSUMOS | ID_Insumos | INSUMOS | ID_Insumos |
+| CONSOME | ID_Produto | PRODUTO | ID_Produto |
+| CONSOME | ID_Insumos | INSUMOS | ID_Insumos |
+
+#### Resumo por tabela
+
+| Tabela | PK | FKs |
+|---|---|---|
+| FUNCIONARIO | ID_Funcionario | — |
+| PEDIDO | ID_Pedido | ID_Funcionario, ID_Comanda |
+| ITEM_PEDIDO | ID_Item_Pedido | ID_Pedido, ID_Produto |
+| PRODUTO | ID_Produto | — |
+| MESA | ID_Mesa | — |
+| COMANDA | ID_Comanda | ID_Mesa |
+| PAGAMENTO | ID_Pagamento | ID_Comanda |
+| FORNECEDOR | ID_Fornecedor | — |
+| COMPRA | ID_Compra | ID_Fornecedor |
+| ITEM_COMPRA | ID_Item_Compra | ID_Compra, ID_Insumos |
+| INSUMOS | ID_Insumos | — |
+| CONTROLE_INSUMOS | ID_Movimentacao | ID_Insumos |
+| CONSOME | (ID_Produto, ID_Insumos) | ID_Produto, ID_Insumos |
+
+O modelo tem 13 tabelas, 13 chaves primárias (12 simples e 1 composta) e 12 chaves estrangeiras. Em `CONSOME`, as duas colunas da chave primária composta são também chaves estrangeiras (marca `PK, FK` no modelo lógico).
