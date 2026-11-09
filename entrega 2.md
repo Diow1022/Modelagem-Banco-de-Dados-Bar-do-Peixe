@@ -378,6 +378,42 @@ Nenhuma alteração. A única tabela com chave composta é a FICHA_TECNICA, e `Q
 
 | Forma normal | Por que foi necessária no Bar do Peixe |
 |---|---|
+
+### 1.5 Justificativa Técnica — Chaves Primárias e Estrangeiras
+
+**Chaves Primárias (PK)**
+
+As chaves primárias foram utilizadas para garantir a identificação única de cada registro nas entidades do banco de dados do Bar do Peixe. A utilização de identificadores como `ID_Funcionario`, `ID_Pedido`, `ID_Produto`, `ID_Comanda` e `ID_Pagamento` evita duplicidades e permite localizar informações de maneira precisa.
+
+A escolha por identificadores numéricos facilita a organização dos registros, a criação de relacionamentos e a manutenção do banco de dados, independentemente de alterações em informações como nomes, descrições ou valores.
+
+Nas entidades `ITEM_PEDIDO` e `ITEM_COMPRA`, foram utilizados identificadores próprios para individualizar os itens registrados em cada operação, permitindo que diferentes produtos ou insumos sejam associados a um mesmo pedido ou compra.
+
+**Chaves Estrangeiras (FK)**
+
+As chaves estrangeiras foram utilizadas para estabelecer os relacionamentos entre as tabelas, garantindo a integridade referencial e evitando registros associados a informações inexistentes.
+
+No modelo lógico do Bar do Peixe, esses relacionamentos permitem:
+
+- **FUNCIONARIO → PEDIDO:** identificar o funcionário responsável pelo registro de cada pedido.
+- **MESA → COMANDA:** associar cada comanda à mesa correspondente.
+- **COMANDA → PEDIDO:** organizar os pedidos pertencentes a uma determinada comanda.
+- **PEDIDO → ITEM_PEDIDO:** relacionar os itens registrados ao pedido correspondente.
+- **PRODUTO → ITEM_PEDIDO:** identificar quais produtos foram solicitados em cada item.
+- **COMANDA → PAGAMENTO:** vincular os pagamentos à comanda correspondente.
+- **FORNECEDOR → COMPRA:** identificar o fornecedor responsável por cada compra.
+- **COMPRA → ITEM_COMPRA:** relacionar os insumos adquiridos à compra realizada.
+- **INSUMOS → ITEM_COMPRA:** identificar os insumos registrados nos itens de compra.
+- **INSUMOS → CONTROLE_INSUMOS:** relacionar os registros de movimentação aos respectivos insumos.
+
+O relacionamento entre `PRODUTO` e `INSUMOS`, representado como muitos-para-muitos no modelo conceitual, necessita de uma tabela associativa no modelo lógico, utilizando chaves estrangeiras para identificar os produtos e os insumos consumidos.
+
+**Justificativa geral**
+
+A utilização de PKs e FKs proporciona maior consistência e confiabilidade ao banco de dados, permitindo integrar os processos de atendimento, pedidos, pagamentos, compras e controle de insumos.
+
+Essa estrutura reduz o risco de registros duplicados ou referências inválidas, facilita as consultas SQL e contribui para a manutenção e expansão futura do sistema de gerenciamento do Bar do Peixe.
+
 | 1FN | A baixa automática de estoque exige saber quanto de cada insumo cada prato consome. Sem a FICHA_TECNICA, isso ficaria em listas dentro de células, e sem as FKs os relacionamentos não poderiam ser implementados. |
 | 2FN | Verificada para garantir que nome e preço do produto, e os dados dos insumos, fiquem apenas nas suas tabelas, e não repetidos em cada item de pedido ou de compra. |
 | 3FN | Totais calculados guardados no banco podem divergir da soma dos itens. Removidos, o valor passa a ter uma única origem. |
