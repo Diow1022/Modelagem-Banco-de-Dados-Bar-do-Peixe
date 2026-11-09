@@ -88,6 +88,8 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 9. **Baixa de Insumos:** A media de baixa e de uma unidade por prato, (carnes, frangos, bebidas e lanches). E porções de arroz, graus e saladas.
 
+## 3. Requisitos do Sistema
+
 **Regras de negócio
 
 -**RN01**	Todo pedido deve estar associado a uma comanda e a uma mesa identificada.	RF01
@@ -109,8 +111,6 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 -**RN09**	Apenas funcionários autorizados podem realizar operações administrativas.	RF05
 
 -**RN10**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
-
-## 3. Requisitos do Sistema
 
 ### 3.1 Requisitos Funcionais
 
