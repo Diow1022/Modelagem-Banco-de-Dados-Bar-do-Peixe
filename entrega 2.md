@@ -84,7 +84,7 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 7. **Fechamento de caixa:** procedimento ainda não confirmado com o proprietário; permanece como levantamento pendente, não como funcionalidade já modelada.   
 
-8. **Contas a Pagar:** Em relação as despesas o proprietário deixa cerca de 90% da renda Bruta no estabelecimento, entre as despesas por alto pelo que nos foi informado são: Funcionários CLT, (água, Luz, Internet), gás e fornecedores (Comidas e Bebidas) "Caso Acabe acaba comprando por fora".
+8. **Contas a Pagar:** Em relação as despesas o proprietário deixa cerca de 80% da renda Bruta no estabelecimento, entre as despesas por alto pelo que nos foi informado são: Funcionários CLT, (água, Luz, Internet), gás e fornecedores (Comidas e Bebidas) "Caso Acabe acaba comprando por fora".
 
 9. **Baixa de Insumos:** A media de baixa e de uma unidade por prato, (carnes, frangos, bebidas e lanches). E porções de arroz, graus e saladas.
 
