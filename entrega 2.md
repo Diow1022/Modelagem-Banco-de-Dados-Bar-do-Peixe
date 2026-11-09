@@ -66,7 +66,7 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 - **Fechamento de caixa:** Ocorre 2 fechamentos por dia, um no período da tarde e o outro da noite, um fechamento no final da semana e outro no fim do mês. 
 - **Movimento:** cerca de 75 clientes por dia
 
-**Resumo do levantamento:** o levantamento completo está em [`levantamento/levantamento.md`](levantamento/levantamento.md).
+**Resumo do levantamento:** o levantamento completo está em `levantamento/levantamento.md`.
 
 ### 2. Processos de negócios
 
