@@ -418,3 +418,93 @@ Essa estrutura reduz o risco de registros duplicados ou referências inválidas,
 | 2FN | Verificada para garantir que nome e preço do produto, e os dados dos insumos, fiquem apenas nas suas tabelas, e não repetidos em cada item de pedido ou de compra. |
 | 3FN | Totais calculados guardados no banco podem divergir da soma dos itens. Removidos, o valor passa a ter uma única origem. |
 
+## 2. Modelo Lógico Relacional
+
+- **Software utilizado:** brModelo Web (https://app.brmodeloweb.com), notação do modelo lógico do brModelo.
+- **Diagrama:** ![Modelo Lógico do Bar do Peixe](docs/Modelo_Logico.png) [PREENCHER: caminho real do arquivo no repositório]
+- **Resumo:** 13 tabelas, 13 chaves primárias (12 simples e 1 composta) e 12 chaves estrangeiras.
+
+### Tabelas, colunas e chaves
+
+| Tabela | Coluna | Tipo | Chave |
+|---|---|---|---|
+| **FUNCIONARIO** | ID_Funcionario | INT | PK |
+| | NM_Funcionario | VARCHAR(120) | — |
+| | TP_Funcao | VARCHAR(30) | — |
+| | TP_Turno | VARCHAR(10) | — |
+| **PEDIDO** | ID_Pedido | INT | PK |
+| | DT_Hora_Pedido | DATETIME | — |
+| | ST_Pedido | VARCHAR(20) | — |
+| | TP_Setor | VARCHAR(20) | — |
+| | ID_Funcionario | INT | FK |
+| | ID_Comanda | INT | FK |
+| **ITEM_PEDIDO** | ID_Item_Pedido | INT | PK |
+| | ID_Pedido | INT | FK |
+| | ID_Produto | INT | FK |
+| | QT_Item | INT | — |
+| | VL_Unitario | DECIMAL(10,2) | — |
+| **PRODUTO** | ID_Produto | INT | PK |
+| | NM_Produto | VARCHAR(120) | — |
+| | TP_Categoria | VARCHAR(40) | — |
+| | VL_Preco | DECIMAL(10,2) | — |
+| | ST_Produto | VARCHAR(20) | — |
+| **MESA** | ID_Mesa | INT | PK |
+| | NR_Mesa | INT | — |
+| | TP_Situacao | VARCHAR(20) | — |
+| | QT_Lugares | INT | — |
+| **COMANDA** | ID_Comanda | INT | PK |
+| | ID_Mesa | INT | FK |
+| | ST_Comanda | VARCHAR(20) | — |
+| | DT_Abertura | DATETIME | — |
+| **PAGAMENTO** | ID_Pagamento | INT | PK |
+| | ID_Comanda | INT | FK |
+| | DT_Pagamento | DATETIME | — |
+| | TP_Pagamento | VARCHAR(20) | — |
+| | VL_Pagamento | DECIMAL(10,2) | — |
+| **FORNECEDOR** | ID_Fornecedor | INT | PK |
+| | NM_Fornecedor | VARCHAR(120) | — |
+| | NR_CNPJ | CHAR(14) | — |
+| | NR_Telefone | VARCHAR(20) | — |
+| | ST_Fornecedor | VARCHAR(20) | — |
+| **COMPRA** | ID_Compra | INT | PK |
+| | ID_Fornecedor | INT | FK |
+| | DT_Compra | DATETIME | — |
+| | NR_Nota_Fiscal | VARCHAR(44) | — |
+| **ITEM_COMPRA** | ID_Item_Compra | INT | PK |
+| | ID_Compra | INT | FK |
+| | ID_Insumos | INT | FK |
+| | QT_Comprada | DECIMAL(12,3) | — |
+| | VL_Unitario | DECIMAL(10,2) | — |
+| **INSUMOS** | ID_Insumos | INT | PK |
+| | NM_Insumo | VARCHAR(120) | — |
+| | UN_Medida | VARCHAR(15) | — |
+| | QT_Estoque | DECIMAL(12,3) | — |
+| | QT_Minima | DECIMAL(12,3) | — |
+| **CONTROLE_INSUMOS** | ID_Movimentacao | INT | PK |
+| | ID_Insumos | INT | FK |
+| | DT_Movimentacao | DATETIME | — |
+| | TP_Movimentacao | VARCHAR(20) | — |
+| | QT_Movimentacao | DECIMAL(12,3) | — |
+| **FICHA_TECNICA** | ID_Produto | INT | PK, FK |
+| | ID_Insumos | INT | PK, FK |
+| | QT_Consumida | DECIMAL(12,3) | — |
+
+### Ligações entre tabelas e cardinalidades
+
+| Tabela A | Tabela B | Cardinalidade próxima a A | Cardinalidade próxima a B | FK em |
+|---|---|---|---|---|
+| FUNCIONARIO | PEDIDO | (1,1) | (0,n) | PEDIDO |
+| PEDIDO | ITEM_PEDIDO | (1,1) | (1,n) | ITEM_PEDIDO |
+| ITEM_PEDIDO | PRODUTO | (0,n) | (1,1) | ITEM_PEDIDO |
+| PEDIDO | COMANDA | (1,1) | (0,n) | PEDIDO |
+| MESA | COMANDA | (1,1) | (0,n) | COMANDA |
+| COMANDA | PAGAMENTO | (1,1) | (0,n) | PAGAMENTO |
+| FORNECEDOR | COMPRA | (1,1) | (0,n) | COMPRA |
+| COMPRA | ITEM_COMPRA | (1,1) | (1,n) | ITEM_COMPRA |
+| ITEM_COMPRA | INSUMOS | (0,n) | (1,1) | ITEM_COMPRA |
+| INSUMOS | CONTROLE_INSUMOS | (1,1) | (0,n) | CONTROLE_INSUMOS |
+| PRODUTO | INSUMOS | (0,n) | (0,n) | FICHA_TECNICA (PK composta, duas FKs) |
+
+### Restrições de integridade fora do diagrama
+
+Obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`) e valores padrão (`DEFAULT`) não aparecem no diagrama do brModelo. Estão documentadas no dicionário de dados e implementadas no script SQL.
