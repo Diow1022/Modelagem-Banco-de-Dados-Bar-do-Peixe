@@ -87,3 +87,15 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 8. **Contas a Pagar:** Em relação as despesas o proprietário deixa cerca de 90% da renda Bruta no estabelecimento, entre as despesas por alto pelo que nos foi informado são: Funcionários CLT, (água, Luz, Internet), gás e fornecedores (Comidas e Bebidas) "Caso Acabe acaba comprando por fora".
 
 9. **Baixa de Insumos:** A media de baixa e de uma unidade por prato, (carnes, frangos, bebidas e lanches). E porções de arroz, graus e saladas.
+
+## 3. Requisitos do Sistema
+
+### 3.1 Requisitos Funcionais
+
+- **RF01** — O sistema deve permitir o registro de pedidos de clientes, substituindo o controle atual em caderno.
+- **RF02** — O sistema deve enviar o pedido registrado no sistema e gerar uma comanda através de uma pequena impressora que deve ser deixada na cozinha. 
+- **RF03** — O sistema deve separar visualmente e operacionalmente os pedidos de **bebidas** dos pedidos de **cozinha/alimentos**.
+- **RF04** — O sistema deve permitir o controle de insumos, com registro de entrada (compras) e saída (consumo/venda) de itens, ainda o controle de estoque vai ser validado por uma pessoa física, só deve haver registros para ajudar no que precisar ser comprado.
+- **RF05** — O sistema deve permitir o cadastro de funcionários, indicando função (cozinheiro, ajudante, atendente etc.) e turno (dia/noite).
+- **RF06** — O sistema deve alertar quando o insumos de bebidas ou de mistura (carnes, batata, arroz) estiver próximo do nível mínimo de reposição, o critério da reposição fica a cargo da entidade Insumos que possui um atributo de quantidade mínima de estoque para o envio de notificação.
+- **RF07** — O sistema deve permitir o fechamento de pedidos/contas de clientes.
