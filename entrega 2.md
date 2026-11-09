@@ -323,3 +323,62 @@ O DER não possui generalização/especialização, portanto não houve estraté
 | CONSOME | (ID_Produto, ID_Insumos) | ID_Produto, ID_Insumos |
 
 O modelo tem 13 tabelas, 13 chaves primárias (12 simples e 1 composta) e 12 chaves estrangeiras. Em `CONSOME`, as duas colunas da chave primária composta são também chaves estrangeiras (marca `PK, FK` no modelo lógico).
+
+# 1.4 Processo de Normalização (1FN, 2FN e 3FN)
+
+## 1FN: eliminação de grupos repetitivos e atributos multivalorados
+
+**Alteração 1: criada a tabela FICHA_TECNICA.** O relacionamento N:N PRODUTO–INSUMOS (com `QT_Consumida`) exigiria uma lista de insumos dentro de cada produto.
+
+Antes:
+
+| ID_Produto | NM_Produto | Insumos |
+|---|---|---|
+| 1 | Peixe frito | Tilápia (400 g), Farinha (50 g), Óleo (100 ml) |
+
+Depois, com chave composta (`ID_Produto`, `ID_Insumos`):
+
+| ID_Produto | ID_Insumos | QT_Consumida |
+|---|---|---|
+| 1 | 10 | 400 |
+| 1 | 11 | 50 |
+| 1 | 12 | 100 |
+
+**Alteração 2: chaves estrangeiras explicitadas em 8 tabelas.**
+
+| Tabela | FK incluída | Referencia |
+|---|---|---|
+| COMANDA | ID_Mesa | MESA |
+| PEDIDO | ID_Comanda | COMANDA |
+| PEDIDO | ID_Funcionario | FUNCIONARIO |
+| ITEM_PEDIDO | ID_Pedido | PEDIDO |
+| ITEM_PEDIDO | ID_Produto | PRODUTO |
+| PAGAMENTO | ID_Comanda | COMANDA |
+| COMPRA | ID_Fornecedor | FORNECEDOR |
+| ITEM_COMPRA | ID_Compra | COMPRA |
+| ITEM_COMPRA | ID_Insumos | INSUMOS |
+| CONTROLE_INSUMOS | ID_Insumos | INSUMOS |
+| FICHA_TECNICA | ID_Produto, ID_Insumos | PRODUTO, INSUMOS |
+
+**Alteração 3:** o atributo `TP_Serto` foi corrigido para `TP_Setor`.
+
+## 2FN: eliminação de dependências parciais
+
+Nenhuma alteração. A única tabela com chave composta é a FICHA_TECNICA, e `QT_Consumida` depende do par (`ID_Produto`, `ID_Insumos`) inteiro.
+
+## 3FN: eliminação de dependências transitivas
+
+| # | Atributo removido | Motivo | Como é obtido |
+|---|---|---|---|
+| 1 | ITEM_PEDIDO.VL_Total | Calculado: QT_Item × VL_Unitario | Consulta ou view |
+| 2 | ITEM_COMPRA.VL_Total | Calculado: QT_Comprada × VL_Unitario | Consulta ou view |
+| 3 | COMPRA.VL_Compra | Soma dos itens da compra | Soma de ITEM_COMPRA |
+
+## Justificativa do processo
+
+| Forma normal | Por que foi necessária no Bar do Peixe |
+|---|---|
+| 1FN | A baixa automática de estoque exige saber quanto de cada insumo cada prato consome. Sem a FICHA_TECNICA, isso ficaria em listas dentro de células, e sem as FKs os relacionamentos não poderiam ser implementados. |
+| 2FN | Verificada para garantir que nome e preço do produto, e os dados dos insumos, fiquem apenas nas suas tabelas, e não repetidos em cada item de pedido ou de compra. |
+| 3FN | Totais calculados guardados no banco podem divergir da soma dos itens. Removidos, o valor passa a ter uma única origem. |
+
