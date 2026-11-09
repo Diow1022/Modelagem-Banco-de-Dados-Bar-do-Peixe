@@ -88,6 +88,18 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 9. **Baixa de Insumos:** A media de baixa e de uma unidade por prato, (carnes, frangos, bebidas e lanches). E porções de arroz, graus e saladas.
 
+**Regras de negócio
+-**RN01**	Todo pedido deve estar associado a uma comanda e a uma mesa identificada.	RF01
+-**RN02**	Pedidos destinados à cozinha devem aparecer na fila de preparo após o registro.	RF02
+-**RN03**	Produtos devem ser classificados como alimentos ou bebidas para direcionamento ao setor responsável.	RF03
+-**RN04**	Toda movimentação de estoque deve registrar o produto, a quantidade, a data e o tipo de movimentação.	RF04
+-**RN05**	Cada funcionário deve possuir uma função e um turno de trabalho cadastrados.	RF05
+-**RN06**	Produtos com estoque igual ou inferior ao mínimo estabelecido devem gerar alertas de reposição.	RF06
+-**RN07**	Uma comanda somente pode ser encerrada após a confirmação do pagamento.	RF07
+-**RN08**	Pedidos cancelados devem permanecer registrados no histórico do sistema.	RF01, RF07
+-**RN09**	Apenas funcionários autorizados podem realizar operações administrativas.	RF05
+-**RN010**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
+
 ## 3. Requisitos do Sistema
 
 ### 3.1 Requisitos Funcionais
