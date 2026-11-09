@@ -108,7 +108,7 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 -**RN09**	Apenas funcionários autorizados podem realizar operações administrativas.	RF05
 
--**RN010**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
+-**RN10**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
 
 ## 3. Requisitos do Sistema
 
@@ -129,3 +129,72 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 - **RNF03 (Disponibilidade):** o sistema deve estar disponível todos os dias de funcionamento (segunda a sábado e feriados, das 6h00 às 21h30), sem indisponibilidade nesse intervalo.
 - **RNF04 (Segurança):** o acesso às funcionalidades deve ser diferenciado por perfil (ex.: cozinha, salão, gestão), evitando alterações indevidas em pedidos ou insumos.
 - **RNF05 (Escalabilidade):** o sistema deve suportar o uso simultâneo por múltiplos funcionários (em média 10 funcionários, contando com o dono) sem perda de desempenho.
+
+### 3.3 Conversão do Modelo Conceitual para o Modelo Lógico
+
+**Convenções utilizadas:** `ID_` identificador; `NM_` nome; `NR_` número; `TP_` tipo; `ST_` situação; `DT_` data/hora; `QT_` quantidade; `VL_` valor; `UN_` unidade. `PK` = chave primária e `FK` = chave estrangeira.
+
+#### Entidades → Tabelas
+
+As 12 entidades do DER viraram 12 tabelas. A entidade associativa `CONSOME` virou a 13ª tabela.
+
+| Entidade do DER | Tabela no modelo lógico | Observação |
+|---|---|---|
+| Funcionario | FUNCIONARIO | — |
+| Pedido | PEDIDO | — |
+| Item_Pedido | ITEM_PEDIDO | Detalha produto, quantidade e valor de cada pedido |
+| Produto | PRODUTO | — |
+| Mesa | MESA | — |
+| Comanda | COMANDA | — |
+| Pagamento | PAGAMENTO | — |
+| Fornecedor | FORNECEDOR | — |
+| Compra | COMPRA | — |
+| Item_Compra | ITEM_COMPRA | Detalha insumo, quantidade e valor de cada compra |
+| Insumos | INSUMOS | — |
+| Controle_Insumos | CONTROLE_INSUMOS | Registra as movimentações de estoque |
+| Consome (associativa) | CONSOME | Resolve o N:N entre PRODUTO e INSUMOS |
+
+#### Atributos → Colunas
+
+Cada atributo do DER virou uma coluna. Todos são simples e monovalorados, então nenhum exigiu tabela adicional.
+
+| Tipo de atributo | Tipo de dado |
+|---|---|
+| Identificadores (`ID_`) | INT |
+| Nomes, situações, tipos (`NM_`, `ST_`, `TP_`) | VARCHAR |
+| Documentos e telefones (`NR_`) | VARCHAR (CNPJ: CHAR) |
+| Datas com hora (`DT_`) | DATETIME |
+| Valores monetários (`VL_`) | DECIMAL(10,2) |
+| Quantidades (`QT_`) | DECIMAL(12,3), exceto `QT_Item` e `QT_Lugares` (INT) |
+
+#### Relacionamentos → Chaves
+
+Cada relacionamento 1:N gerou uma chave estrangeira na tabela do lado N. As cardinalidades são as desenhadas no DER, na mesma ordem visual das entidades.
+
+| Entidade A | Relacionamento | Entidade B | Próximo a A | Próximo a B | Tabela com a FK | FK |
+|---|---|---|---|---|---|---|
+| FUNCIONARIO | Realiza | PEDIDO | (1,1) | (0,n) | PEDIDO | ID_Funcionario |
+| PEDIDO | Possui | ITEM_PEDIDO | (1,1) | (1,n) | ITEM_PEDIDO | ID_Pedido |
+| ITEM_PEDIDO | Refere-se a | PRODUTO | (0,n) | (1,1) | ITEM_PEDIDO | ID_Produto |
+| PEDIDO | Pertence a | COMANDA | (1,1) | (0,n) | PEDIDO | ID_Comanda |
+| MESA | Vincula | COMANDA | (1,1) | (0,n) | COMANDA | ID_Mesa |
+| COMANDA | Possui | PAGAMENTO | (1,1) | (0,n) | PAGAMENTO | ID_Comanda |
+| FORNECEDOR | Realiza | COMPRA | (1,1) | (0,n) | COMPRA | ID_Fornecedor |
+| COMPRA | Possui | ITEM_COMPRA | (1,1) | (1,n) | ITEM_COMPRA | ID_Compra |
+| ITEM_COMPRA | Rel | INSUMOS | (0,n) | (1,1) | ITEM_COMPRA | ID_Insumos |
+| INSUMOS | Movimenta | CONTROLE_INSUMOS | (1,1) | (0,n) | CONTROLE_INSUMOS | ID_Insumos |
+| PRODUTO | Consome | INSUMOS | (0,n) | (0,n) | CONSOME | ID_Produto, ID_Insumos |
+
+#### Cardinalidades
+
+| Tipo | Relacionamentos | Como foi tratado |
+|---|---|---|
+| 1:N | 10 relacionamentos da tabela acima | FK no lado N |
+| N:N | PRODUTO e INSUMOS | Tabela associativa `CONSOME`, com PK composta (`ID_Produto`, `ID_Insumos`), formada por duas FKs, e o atributo próprio `QT_Consumida` |
+| 1:1 | Nenhum | — |
+
+Os relacionamentos com (1,n) fazem todo pedido ter ao menos um item e toda compra ter ao menos um item de compra. Os com (0,n) permitem, por exemplo, comanda sem pagamento, situação necessária para representar o problema P3.
+
+#### Generalização/especialização
+
+O DER não possui generalização/especialização, portanto não houve estratégia de conversão.
