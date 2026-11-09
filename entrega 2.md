@@ -89,6 +89,7 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 9. **Baixa de Insumos:** A media de baixa e de uma unidade por prato, (carnes, frangos, bebidas e lanches). E porções de arroz, graus e saladas.
 
 **Regras de negócio
+
 -**RN01**	Todo pedido deve estar associado a uma comanda e a uma mesa identificada.	RF01
 
 -**RN02**	Pedidos destinados à cozinha devem aparecer na fila de preparo após o registro.	RF02
