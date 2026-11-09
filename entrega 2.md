@@ -112,6 +112,74 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 -**RN10**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
 
+# 1.1 — Revisão do Modelo Conceitual
+
+Comparação objetiva das alterações do **Modelo Conceitual 1** (imagem) para o **Modelo Conceitual 2** (PDF).
+
+**Contagem:** o Modelo 1 possui **7 entidades e 6 relacionamentos**; o Modelo 2 possui **12 entidades e 11 relacionamentos**. Foram acrescentadas cinco entidades: `ITEM_PEDIDO`, `ITEM_COMPRA`, `MESA`, `COMANDA` e `INSUMOS`.
+
+## Quadro 1 — Mudanças estruturais
+
+Tabela no formato de revisão solicitado pelo esqueleto da Entrega 2:
+
+| Aspecto no Modelo 1 | O que mudou no Modelo 2 | Por quê |
+| --- | --- | --- |
+| PEDIDO ligado diretamente a PRODUTOS por “Inclui”. | Inclusão de ITEM_PEDIDO, com relações PEDIDO–ITEM_PEDIDO e ITEM_PEDIDO–PRODUTO. | Permite discriminar os itens de cada pedido. |
+| PEDIDO ligado diretamente a PAGAMENTO por “Gera”. | Inclusão de MESA e COMANDA; PEDIDO pertence à COMANDA e COMANDA possui PAGAMENTO. | Permite reunir pedidos e pagamentos vinculados à comanda de uma mesa. |
+| COMPRA ligada diretamente a PRODUTOS por “Contém”. | Inclusão de ITEM_COMPRA e INSUMOS; COMPRA–ITEM_COMPRA–INSUMOS. | Permite detalhar as quantidades e os valores dos insumos comprados. |
+| CONTROLE_INSUMOS associado a PRODUTOS, com dados de local. | INSUMOS passa a se relacionar a CONTROLE_INSUMOS por “Movimenta”; dados passam a descrever movimentações. | Separa cadastro de insumos e registro de suas movimentações. |
+| PRODUTOS e CONTROLE_INSUMOS sem relação explícita de composição de receitas. | Criado o relacionamento PRODUTO–INSUMOS “Consome”, com QT_Consumida. | Registra a quantidade de insumo consumida por produto. |
+| FUNCIONARIO “Faz” PEDIDO. | Relacionamento renomeado para “Realiza” e cardinalidades representadas em lados trocados. | Mudança nominal e da representação da participação. |
+| FORNECEDOR “Fornece” COMPRA. | Relacionamento renomeado para “Realiza” e cardinalidades representadas em lados trocados. | Mudança nominal e da representação da participação. |
+
+**Observação:** as razões da terceira coluna são justificativas técnicas decorrentes das mudanças visíveis. Não foram fornecidos os apontamentos de correção da Entrega 1; portanto, esta tabela não os atribui ao professor.
+
+## Quadro 2 — Mudanças de atributos
+
+| Entidade | Alteração observada no Modelo 2 |
+| --- | --- |
+| FUNCIONARIO | NOME_FUNCIONARIO passa a NM_Funcionario; permanecem identificador, função e turno. |
+| PEDIDO | Adicionado ST_Pedido; ID_FUNCIONARIO(FK) deixa de aparecer como atributo; TP_SETOR aparece no PDF como TP_Serto. |
+| PRODUTOS → PRODUTO | Adicionados NM_Produto, TP_Categoria, VL_Preco e ST_Produto; QT_Produto deixa de aparecer; TP_PRODUTO é substituído por TP_Categoria. |
+| PAGAMENTO | ID_PEDIDO(FK) e IN_CONFIRMADO deixam de aparecer; DT_HORA_PAGAMENTO, TP_FORMA_PAGAMENTO e VALOR_PAGO passam a DT_Pagamento, TP_Pagamento e VL_Pagamento. |
+| FORNECEDOR | Adicionados ST_Fornecedor e NR_Telefone; nome e CNPJ usam nomenclatura NM_Fornecedor e NR_CNPJ. |
+| COMPRA | ID_FORNECEDOR(FK) deixa de aparecer como atributo; DATA_COMPRA, NF_NOTA_FISCAL e TOTAL_COMPRA passam a DT_Compra, NR_Nota_Fiscal e VL_Compra. |
+| CONTROLE_INSUMOS | Deixa de apresentar ID_LOCAL, TP_LOCAL, QT_LOCAL e ID_PRODUTO(FK); passa a ID_Movimentacao, QT_Movimentacao, TP_Movimentacao e DT_Movimentacao. |
+| Novas entidades | ITEM_PEDIDO: ID_Item_Pedido, QT_Item, VL_Unitario, VL_Total. MESA: ID_Mesa, NR_Mesa, TP_Situacao, QT_Lugares. COMANDA: ID_Comanda, ST_Comanda, DT_Abertura. |
+| Novas entidades (continuação) | ITEM_COMPRA: ID_Item_Compra, QT_Comprada, VL_Unitario, VL_Total. INSUMOS: ID_Insumos, NM_Insumo, QT_Estoque, QT_Minima, UN_Medida. |
+
+## Quadro 3 — Comparação das cardinalidades já existentes no Modelo 1
+
+As cardinalidades abaixo foram transcritas **exatamente conforme aparecem ao lado de cada entidade** nos diagramas. A indicação “substituído” significa que o relacionamento direto não existe mais no Modelo 2.
+
+| Relacionamento do Modelo 1 | Cardinalidades no Modelo 1 | Como ficou no Modelo 2 | Mudança |
+| --- | --- | --- | --- |
+| FUNCIONARIO–PEDIDO | FUNCIONARIO (0,n); PEDIDO (1,1) | FUNCIONARIO (1,1); PEDIDO (0,n) | Pares invertidos; “Faz” → “Realiza”. |
+| FORNECEDOR–COMPRA | FORNECEDOR (0,n); COMPRA (1,1) | FORNECEDOR (1,1); COMPRA (0,n) | Pares invertidos; “Fornece” → “Realiza”. |
+| PEDIDO–PRODUTOS | PEDIDO (1,1); PRODUTOS (0,n) | Sem relação direta; substituída por PEDIDO–ITEM_PEDIDO–PRODUTO. | Incluída entidade ITEM_PEDIDO. |
+| COMPRA–PRODUTOS | COMPRA (1,n); PRODUTOS (0,n) | Sem relação direta; substituída por COMPRA–ITEM_COMPRA–INSUMOS. | Compra passa a registrar itens e insumos. |
+| CONTROLE_INSUMOS–PRODUTOS | CONTROLE_INSUMOS (1,1); PRODUTOS (0,n) | Sem relação direta; INSUMOS passa a ligar-se a CONTROLE_INSUMOS. | Modificada estrutura do controle de estoque. |
+| PEDIDO–PAGAMENTO | PEDIDO (1,1); PAGAMENTO (0,n) | Sem relação direta; COMANDA (1,1); PAGAMENTO (0,n). | Pagamento passa a vincular-se à COMANDA. |
+
+## Quadro 4 — Cardinalidades de todos os relacionamentos do Modelo 2
+
+| Relacionamento | Cardinalidades exibidas no Modelo 2 |
+| --- | --- |
+| FUNCIONARIO — Realiza — PEDIDO | FUNCIONARIO (1,1); PEDIDO (0,n) |
+| PEDIDO — Possui — ITEM_PEDIDO | PEDIDO (1,1); ITEM_PEDIDO (1,n) |
+| ITEM_PEDIDO — Refere-se — PRODUTO | ITEM_PEDIDO (0,n); PRODUTO (1,1) |
+| PEDIDO — Pertence a — COMANDA | PEDIDO (1,1); COMANDA (0,n) |
+| MESA — Vincula — COMANDA | MESA (1,1); COMANDA (0,n) |
+| COMANDA — Possui — PAGAMENTO | COMANDA (1,1); PAGAMENTO (0,n) |
+| FORNECEDOR — Realiza — COMPRA | FORNECEDOR (1,1); COMPRA (0,n) |
+| COMPRA — Possui — ITEM_COMPRA | COMPRA (1,1); ITEM_COMPRA (1,n) |
+| ITEM_COMPRA — Rel — INSUMOS | ITEM_COMPRA (0,n); INSUMOS (1,1) |
+| PRODUTO — Consome — INSUMOS | PRODUTO (0,n); INSUMOS (0,n) |
+| INSUMOS — Movimenta — CONTROLE_INSUMOS | INSUMOS (1,1); CONTROLE_INSUMOS (0,n) |
+
+**Fonte:** imagem `Modelo Conceitual 1 BRMW.png` e PDF `Modelo Conceitual 2 - BRMW.pdf`. Esta comparação registra as alterações exibidas, sem julgar sua correção ou sugerir novas mudanças.
+
+
 ### 3.1 Requisitos Funcionais
 
 - **RF01** — O sistema deve permitir o registro de pedidos de clientes, substituindo o controle atual em caderno.
