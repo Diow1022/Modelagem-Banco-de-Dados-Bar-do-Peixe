@@ -119,25 +119,44 @@ WHERE LOWER(TRIM(p.ST_Pedido)) <> 'cancelado'
 GROUP BY pr.ID_Produto, pr.NM_Produto, pr.TP_Categoria
 ORDER BY Unidades_Vendidas DESC, Valor_Registrado DESC, pr.NM_Produto;
 
--- G08 - Qual o ticket medio por comanda com consumo valido, a cada mes?
--- Atende: KPI10 (media do consumo de comandas com itens nao cancelados).
--- Periodo: mes de abertura da comanda. Inclui comandas abertas com consumo.
-SELECT DATE_FORMAT(c.DT_Abertura, '%Y-%m') AS Mes,
-       COUNT(*) AS Comandas_Com_Consumo,
-       ROUND(SUM(v.Total_Consumo), 2) AS Consumo_Total,
-       ROUND(AVG(v.Total_Consumo), 2) AS Ticket_Medio_Comanda
-FROM Comanda c
-JOIN (
-    SELECT p.id_Comanda,
-           SUM(ip.QT_Item * ip.VL_Unitario) AS Total_Consumo
-    FROM Pedido p
-    JOIN Item_Pedido ip ON ip.id_Pedido = p.ID_Pedido
-    WHERE LOWER(TRIM(p.ST_Pedido)) <> 'cancelado'
-    GROUP BY p.id_Comanda
-    HAVING SUM(ip.QT_Item * ip.VL_Unitario) > 0
-) v ON v.id_Comanda = c.ID_Comanda
-GROUP BY DATE_FORMAT(c.DT_Abertura, '%Y-%m')
+
+-- G08 - Ticket medio por comanda
+-- Atende: KPI10
+-- Considera pedidos nao cancelados
+
+SELECT
+    DATE_FORMAT(Comanda.DT_Abertura, '%Y-%m') AS Mes,
+    COUNT(*) AS Comandas_Com_Consumo,
+    ROUND(SUM(Consumo.Total_Consumo), 2) AS Consumo_Total,
+    ROUND(AVG(Consumo.Total_Consumo), 2) AS Ticket_Medio_Comanda
+
+FROM Comanda
+
+INNER JOIN (
+    SELECT
+        Pedido.id_Comanda,
+        SUM(
+            Item_Pedido.QT_Item * Item_Pedido.VL_Unitario
+        ) AS Total_Consumo
+
+    FROM Pedido
+
+    INNER JOIN Item_Pedido
+        ON Item_Pedido.id_Pedido = Pedido.ID_Pedido
+
+    WHERE LOWER(TRIM(Pedido.ST_Pedido)) <> 'cancelado'
+
+    GROUP BY Pedido.id_Comanda
+
+    HAVING Total_Consumo > 0
+
+) AS Consumo
+    ON Consumo.id_Comanda = Comanda.ID_Comanda
+
+GROUP BY DATE_FORMAT(Comanda.DT_Abertura, '%Y-%m')
+
 ORDER BY Mes DESC;
+
 
 -- ============================================================
 -- AUDITORIAS (A01 - A08)
