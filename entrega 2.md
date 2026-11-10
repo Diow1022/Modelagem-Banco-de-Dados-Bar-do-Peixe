@@ -508,3 +508,19 @@ Essa estrutura reduz o risco de registros duplicados ou referências inválidas,
 ### Restrições de integridade fora do diagrama
 
 Obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`) e valores padrão (`DEFAULT`) não aparecem no diagrama do brModelo. Estão documentadas no dicionário de dados e implementadas no script SQL.
+
+
+## 6. Uso de Inteligência Artificial
+
+### Etapa 1 — Seção 1.1: caracterização, relato da entrevista e levantamento
+
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | Claude (Anthropic). Etapa: redação da caracterização da organização, do relato da entrevista e do `levantamento.md` (seção 1.1). |
+| **Motivação** | Organizar as informações da Entrega 1 no formato exigido pelo esqueleto e levantar perguntas sobre pontos que o grupo ainda não tinha registrado da entrevista. |
+| **Prompt(s) utilizados** | 1) "conforme com esse esqueleto de entrega quero que me ajude a preencher ele, esse arquivo com o nome readme tem as coisa que precisa para preencher o esqueleto de entrega 2, [...] vamos fazer juntos e por partes".<br>2) "me ajude a montar esse levantamento.md, me faça perguntar pertinentes que vão agregar positivamente com bastantes detalhes do dia da entrevista".<br>Prompts seguintes: respostas do grupo às perguntas, bloco a bloco. |
+| **Resposta recebida** | Rascunho da caracterização (porte, problemas P1 a P4, escopo, evidências), estrutura do relato (observação presencial × respostas do dono × o que mudou), blocos de perguntas por tema (funcionários, mesas, pedidos, pagamento, caixa, estoque, compras etc.) e o `levantamento.md` montado com as respostas do grupo. |
+| **Fontes consultadas e verificadas** | A IA não citou fontes externas. Usou só o README da Entrega 1, o esqueleto da Entrega 2 e as respostas do grupo. |
+| **Trechos rejeitados ou corrigidos** | O grupo substituiu campos `[PREENCHER]` por dados reais. Corrigiu o cargo do entrevistado (dono) e a lista de integrantes presentes.
+| **Justificativa da escolha final** | Foram mantidos os problemas P1 a P4, por refletirem as observações e respostas do dono. |
+| **Reflexão crítica** | Mantivemos os problemas P1 a P4 porque cada um corresponde a um processo descrito pelo dono ou observado no bar. Adaptamos o texto do levantamento para separar o que foi observado. |
