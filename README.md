@@ -114,8 +114,6 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 # 1.1 — Revisão do Modelo Conceitual
 
-Comparação objetiva das alterações do **Modelo Conceitual 1** (imagem) para o **Modelo Conceitual** (png).
-
 **Contagem:** o Modelo 1 possui **7 entidades e 6 relacionamentos**; o Modelo 2 possui **12 entidades e 11 relacionamentos**. Foram acrescentadas cinco entidades: `ITEM_PEDIDO`, `ITEM_COMPRA`, `MESA`, `COMANDA` e `INSUMOS`.
 
 ## Quadro 1 — Mudanças estruturais
