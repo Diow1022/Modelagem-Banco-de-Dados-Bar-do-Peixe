@@ -648,3 +648,20 @@ Obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`)
 | **Trechos rejeitados ou corrigidos** | O grupo substituiu campos `[PREENCHER]` por dados reais. Corrigiu o cargo do entrevistado (dono) e a lista de integrantes presentes.
 | **Justificativa da escolha final** | Foram mantidos os problemas P1 a P4, por refletirem as observações e respostas do dono. |
 | **Reflexão crítica** | Mantivemos os problemas P1 a P4 porque cada um corresponde a um processo descrito pelo dono ou observado no bar. Adaptamos o texto do levantamento para separar o que foi observado. |
+
+
+## Etapa 2 — Justificativa do Uso de Inteligência Artificial na Geração da Massa de Dados
+
+**Projeto:** Bar do Peixe  
+**Registro de utilização de IA:** Geração de massa de dados fictícios para o banco de dados MySQL.
+
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | ChatGPT (OpenAI). Etapa: elaboração da massa de dados fictícios para popular as tabelas do banco de dados relacional do projeto Bar do Peixe, utilizando instruções SQL. |
+| **Motivação** | Agilizar a criação de registros fictícios para testar a estrutura do banco de dados, verificar os relacionamentos entre as entidades e disponibilizar informações para futuras consultas SQL e análises gerenciais. A utilização da IA também teve como objetivo reduzir o trabalho repetitivo de elaboração manual dos registros. |
+| **Prompt(s) utilizados** | 1) Solicitação de criação de massa de dados em SQL para o banco de dados do Bar do Peixe, respeitando as tabelas, os atributos e os relacionamentos definidos no projeto. 2) Orientação para gerar os registros em lotes de 15, mantendo o controle da quantidade acumulada de registros no arquivo SQL. 3) Solicitação para diferenciar os registros gerados e armazenados no arquivo daqueles efetivamente executados e inseridos no MySQL. 4) Orientação para produzir novos lotes somente mediante autorização explícita do grupo. *Prompts apresentados de forma resumida, sem reprodução literal integral.* |
+| **Resposta recebida** | Apoio na elaboração de instruções SQL do tipo `INSERT INTO`, organizadas em lotes de registros fictícios, considerando os atributos das tabelas e a necessidade de preservar a integridade referencial entre as chaves primárias (PK) e estrangeiras (FK). Também foi estabelecido o acompanhamento da quantidade acumulada de registros produzidos no arquivo SQL. |
+| **Fontes consultadas e verificadas** | Estrutura do banco de dados do Bar do Peixe, modelo lógico, definições das tabelas e atributos, relacionamentos PK/FK e informações do projeto fornecidas pelo grupo. Não foram utilizadas fontes externas como base para a criação dos dados fictícios. |
+| **Trechos rejeitados ou corrigidos** | Foi definida a necessidade de revisar registros que apresentassem incompatibilidades com os tipos de dados, referências inexistentes ou inconsistências entre tabelas. Também foi estabelecido que a geração de registros não deveria ser confundida com sua efetiva inserção no banco MySQL. Não há, neste registro, identificação de um lote específico efetivamente rejeitado. |
+| **Justificativa da escolha final** | Optou-se pela geração de massa de dados fictícios com auxílio da IA por permitir maior agilidade, padronização e organização dos registros. A produção em lotes de 15 facilita a revisão e o controle da quantidade de dados, enquanto a validação da estrutura SQL permite verificar sua compatibilidade com o modelo relacional desenvolvido. |
+| **Reflexão crítica** | A utilização da IA contribuiu para automatizar uma atividade repetitiva, mas não substituiu a responsabilidade do grupo pela validação dos dados. Reconhecemos que instruções SQL geradas automaticamente podem conter inconsistências, como referências inválidas, duplicidades ou valores incompatíveis. Por isso, a revisão humana e os testes de execução no MySQL são essenciais para assegurar a qualidade da massa de dados e a confiabilidade dos resultados obtidos. |
