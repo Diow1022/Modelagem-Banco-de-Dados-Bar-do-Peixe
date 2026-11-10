@@ -634,8 +634,82 @@ Dessa forma, a proposta contribui para a transformação digital do estabelecime
 
 Obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`) e valores padrão (`DEFAULT`) não aparecem no diagrama do brModelo. Estão documentadas no dicionário de dados e implementadas no script SQL.
 
+## 3. Script SQL Completo
 
-## 3. Uso de Inteligência Artificial
+O banco de dados do **Bar do Peixe** foi desenvolvido para MySQL/MariaDB, com implementação das tabelas, relacionamentos, restrições de integridade, *triggers* e *views*. As consultas gerenciais e de auditoria foram organizadas em um arquivo SQL próprio, facilitando a verificação dos problemas operacionais, dos indicadores gerenciais e das regras de negócio identificadas no levantamento.
+
+### 3.1 Arquivos SQL
+
+| Arquivo | Finalidade |
+|---|---|
+| [Script de estrutura do banco](docs/script.sql) | Criação do banco, tabelas, restrições e demais objetos SQL. |
+| [Massa de dados fictícia](docs/massa_de_dados.sql) | Registros de teste para simular as operações do estabelecimento. |
+| [Consultas gerenciais e de auditoria](docs/consultas_gerenciais_e_auditoria.sql) | Consultas G01–G08 e A01–A08, executadas após a criação e a carga dos dados. |
+
+### 3.2 Consultas gerenciais
+
+As consultas gerenciais foram estruturadas para responder aos problemas `P1` a `P4` e calcular os indicadores `KPI01` a `KPI10`, conforme a tabela de rastreabilidade da seção **1.6.5**.
+
+| Código | Objetivo | Rastreabilidade |
+|---|---|---|
+| **G01** | Quantidade e situação dos pedidos por funcionário e dia. | P1, KPI03, KPI06 |
+| **G02** | Insumos no estoque mínimo ou abaixo dele e última movimentação. | P2, KPI07 |
+| **G03** | Diferença entre consumo válido e pagamentos registrados por comanda. | P3, KPI09 |
+| **G04** | Compras e respectivos valores por fornecedor e mês. | P4, KPI08 |
+| **G05** | Pagamentos registrados por mês e forma de pagamento. | KPI01, KPI05 |
+| **G06** | Valor dos itens de pedidos não cancelados por dia. | KPI02 |
+| **G07** | Produtos mais vendidos em quantidade e valor registrado. | KPI04 |
+| **G08** | Ticket médio mensal das comandas com consumo válido. | KPI10 |
+
+### 3.3 Consultas de auditoria
+
+As consultas de auditoria auxiliam na identificação de registros inconsistentes e situações que exigem conferência operacional. Elas **não substituem** as restrições de integridade nem os controles da aplicação.
+
+| Código | Objetivo | Regra relacionada |
+|---|---|---|
+| **A01** | Localizar pedidos sem associação válida a comanda, mesa ou funcionário. | RN01 |
+| **A02** | Identificar pedidos não cancelados sem itens. | Integridade dos pedidos; RF01 e cardinalidade do modelo |
+| **A03** | Identificar movimentações de insumos inválidas. | RN04 |
+| **A04** | Identificar funcionários sem função ou turno preenchidos. | RN05 |
+| **A05** | Identificar insumos em nível de reposição. | RN06 — monitoramento, não erro de integridade |
+| **A06** | Identificar comandas encerradas com consumo sem pagamento suficiente ou sem consumo válido. | RN07 |
+| **A07** | Identificar produtos sem categoria preenchida. | RN03 — verificação parcial |
+| **A08** | Identificar pedidos com itens ausentes ou valor não positivo em comandas encerradas. | RN07 — verificação complementar |
+
+### 3.4 Evidência de execução — G08
+
+Durante os testes no **phpMyAdmin**, foi identificada uma falha de execução da consulta G08, com a mensagem `#1109 - Tabela 'c' desconhecida em 'SELECT'`. A consulta foi reescrita utilizando o nome completo da tabela `Comanda` e uma subconsulta agregada para calcular o consumo de cada comanda antes do ticket médio mensal.
+
+**A versão corrigida da G08 foi executada com sucesso**, com o seguinte resultado observado em novembro de 2026:
+
+| Indicador | Resultado |
+|---|---:|
+| Mês de referência | 2026-11 |
+| Comandas com consumo válido | 1 |
+| Consumo total | R$ 145,80 |
+| Ticket médio por comanda | R$ 145,80 |
+
+Como o resultado contém apenas uma comanda com consumo, o ticket médio corresponde ao próprio valor total. Esse teste confirma a execução da **G08 corrigida no ambiente local**, mas não comprova, por si só, a execução das demais consultas nem a carga integral da massa de dados.
+
+**Observação importante:** a consulta G08 deve estar substituída também em [`docs/consultas_gerenciais_e_auditoria.sql`](docs/consultas_gerenciais_e_auditoria.sql), na branch `main`, para que o código entregue corresponda à versão testada.
+
+### 3.5 Impacto sobre os modelos
+
+A inclusão das consultas gerenciais e de auditoria é uma etapa de **análise e validação dos dados existentes**. Como elas utilizam comandos `SELECT`, não exige, por si só, a criação de entidades, tabelas, atributos, chaves primárias ou chaves estrangeiras. Portanto, **não são necessárias alterações estruturais no modelo conceitual, no modelo lógico ou no banco apenas para acrescentar essas consultas**.
+
+Isso não elimina a necessidade de corrigir eventuais divergências de nomenclatura já presentes entre os artefatos do projeto. Algumas regras também possuem limites de verificação: por exemplo, a auditoria histórica de inserções após o encerramento de uma comanda dependeria de dados de encerramento e/ou trilha de auditoria que o modelo atual não registra.
+
+### 3.6 Procedimento de execução
+
+1. Executar `docs/script.sql` em um banco vazio para criar a estrutura.
+2. Executar `docs/massa_de_dados.sql` para carregar os registros fictícios.
+3. Executar `docs/consultas_gerenciais_e_auditoria.sql`, verificando as consultas G01–G08 e A01–A08.
+4. Registrar evidências dos resultados e eventuais ajustes feitos após os testes.
+
+> **Estado da validação:** a execução bem-sucedida da G08 corrigida foi demonstrada em captura de tela do phpMyAdmin. As demais consultas precisam de testes individuais ou execução completa documentada antes de serem declaradas validadas.
+
+
+## 4. Uso de Inteligência Artificial
 
 ### Etapa 1 — Seção 1.1: caracterização, relato da entrevista e levantamento
 
