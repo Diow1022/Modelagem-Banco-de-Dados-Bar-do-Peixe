@@ -545,7 +545,8 @@ Dessa forma, a proposta contribui para a transformação digital do estabelecime
 ## 2. Modelo Lógico Relacional
 
 - **Software utilizado:** brModelo Web (https://app.brmodeloweb.com), notação do modelo lógico do brModelo.
-- **Diagrama:** ![Modelo Lógico do Bar do Peixe](docs/Modelo_Logico.png) [PREENCHER: caminho real do arquivo no repositório]
+- **Diagrama:** ![Modelo Lógico do Bar do Peixe](docs/Modelo_Logico.png) [Modelagem-Banco-de-Dados-Bar-do-Peixe/docs
+/Dicionario_Dados_Bar_do_Peixe.html]
 - **Resumo:** 13 tabelas, 13 chaves primárias (12 simples e 1 composta) e 12 chaves estrangeiras.
 
 ### Tabelas, colunas e chaves
@@ -634,7 +635,7 @@ Dessa forma, a proposta contribui para a transformação digital do estabelecime
 Obrigatoriedade (`NOT NULL`), unicidade (`UNIQUE`), valores permitidos (`CHECK`) e valores padrão (`DEFAULT`) não aparecem no diagrama do brModelo. Estão documentadas no dicionário de dados e implementadas no script SQL.
 
 
-## 6. Uso de Inteligência Artificial
+## 3. Uso de Inteligência Artificial
 
 ### Etapa 1 — Seção 1.1: caracterização, relato da entrevista e levantamento
 
