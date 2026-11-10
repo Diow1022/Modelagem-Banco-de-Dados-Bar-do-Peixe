@@ -418,6 +418,132 @@ Essa estrutura reduz o risco de registros duplicados ou referências inválidas,
 | 2FN | Verificada para garantir que nome e preço do produto, e os dados dos insumos, fiquem apenas nas suas tabelas, e não repetidos em cada item de pedido ou de compra. |
 | 3FN | Totais calculados guardados no banco podem divergir da soma dos itens. Removidos, o valor passa a ter uma única origem. |
 
+# 1.6 Proposta de Arquitetura Analítica para BI e IA
+
+## 1.6.1 Informações estratégicas para a gestão
+
+A implementação do banco de dados relacional do **Bar do Peixe** proporciona uma base estruturada para o desenvolvimento de soluções de **Business Intelligence (BI)**, permitindo transformar registros operacionais do estabelecimento em informações relevantes para a tomada de decisões.
+
+A proposta analítica consiste na utilização do **Microsoft Power BI**, integrado aos dados armazenados no banco **MariaDB/MySQL**, para disponibilizar indicadores gerenciais por meio de dashboards e relatórios interativos.
+
+A estrutura do banco possibilita a análise dos processos de atendimento, vendas, pagamentos, controle de estoque e compras com fornecedores.
+
+Entre as principais informações estratégicas que poderão ser extraídas, destacam-se:
+
+- **Desempenho de vendas:** identificação dos produtos mais vendidos, quantidades comercializadas e valores associados aos pedidos.
+- **Controle financeiro:** acompanhamento dos pagamentos recebidos, das formas de pagamento utilizadas e das possíveis divergências entre consumo e arrecadação.
+- **Eficiência no atendimento:** monitoramento do volume de pedidos, situações de preparo e distribuição dos atendimentos entre os funcionários.
+- **Gestão de estoque:** identificação de insumos próximos ou abaixo do estoque mínimo, permitindo maior planejamento das reposições.
+- **Gestão de fornecedores:** acompanhamento das compras realizadas, valores gastos e quantidades adquiridas de cada insumo.
+
+Essas informações contribuem diretamente para solucionar os problemas identificados na caracterização da organização, especialmente a ausência de histórico digital dos pedidos (**P1**), o controle manual de estoque (**P2**), as falhas no registro dos pagamentos (**P3**) e a falta de controle estruturado de compras (**P4**).
+
+## 1.6.2 Indicadores e métricas gerenciais (KPIs)
+
+Para apoiar a análise do desempenho operacional do estabelecimento, foi proposta a construção de um dashboard gerencial no Power BI, utilizando os dados disponíveis no banco.
+
+| Código | Indicador (KPI) | Finalidade |
+|---|---|---|
+| KPI01 | Total de pagamentos registrados | Monitorar os valores recebidos pelo estabelecimento |
+| KPI02 | Valor dos pedidos válidos | Calcular o consumo registrado, desconsiderando pedidos cancelados |
+| KPI03 | Quantidade de pedidos | Acompanhar o volume de pedidos registrados |
+| KPI04 | Produtos mais vendidos | Identificar os produtos com maior quantidade comercializada |
+| KPI05 | Distribuição por forma de pagamento | Analisar a participação de Pix, dinheiro, crédito e débito |
+| KPI06 | Situação dos pedidos | Identificar pedidos pendentes, em preparo, concluídos e cancelados |
+| KPI07 | Insumos em nível mínimo | Identificar os insumos que necessitam de reposição |
+| KPI08 | Valor das compras | Monitorar os gastos com aquisição de insumos |
+| KPI09 | Divergência financeira | Comparar pagamentos registrados com os valores dos pedidos válidos |
+| KPI10 | Ticket médio por comanda | Calcular o valor médio de consumo por comanda com pedidos válidos |
+
+O dashboard foi estruturado para apresentar os indicadores por meio de cartões de resumo, gráficos de barras, gráficos de distribuição e tabelas de acompanhamento.
+
+### Exemplo de aplicação com a massa de dados fictícia
+
+No conjunto de dados utilizado para o protótipo, foram identificados:
+
+- **R$ 228,30** em pagamentos registrados.
+- **R$ 145,80** em itens associados a pedidos não cancelados.
+- **Cinco pedidos** registrados.
+- **R$ 718,00** em itens de compras de insumos.
+
+A diferença de **R$ 82,50** entre pagamentos registrados e valores dos pedidos válidos demonstra a utilidade de indicadores de auditoria, permitindo identificar situações que exigem conferência financeira.
+
+Os valores apresentados são **exclusivamente fictícios**, utilizados para testes acadêmicos, e não representam o faturamento real do Bar do Peixe.
+
+## 1.6.3 Potencial dos dados para Business Intelligence
+
+A estrutura relacional desenvolvida permite a integração das diferentes áreas do restaurante em um ambiente analítico.
+
+O processo proposto compreende quatro etapas:
+
+1. **Extração dos dados:** obtenção das informações armazenadas nas tabelas do banco MariaDB/MySQL, utilizando consultas SQL ou conexão com o Power BI.
+2. **Transformação dos dados:** tratamento das informações, criação de colunas calculadas, padronização de datas e categorias e estabelecimento dos relacionamentos necessários à análise.
+3. **Modelagem analítica:** organização de tabelas de fatos e dimensões para facilitar os cálculos e melhorar a interpretação dos indicadores.
+4. **Visualização e análise:** apresentação dos resultados em dashboards interativos, permitindo acompanhar indicadores operacionais e financeiros.
+
+Para o desenvolvimento do dashboard, foram propostas as seguintes estruturas analíticas:
+
+| Estrutura | Dados utilizados | Aplicação |
+|---|---|---|
+| `fVendas` | `PEDIDO`, `ITEM_PEDIDO`, `PRODUTO` | Análise de vendas e produtos |
+| `fPagamentos` | `PAGAMENTO`, `COMANDA` | Análise financeira e formas de pagamento |
+| `fCompras` | `COMPRA`, `ITEM_COMPRA`, `FORNECEDOR`, `INSUMOS` | Análise de compras e fornecedores |
+| `dEstoque` | `INSUMOS` | Monitoramento do estoque e reposição |
+
+A utilização dessas estruturas possibilita a construção de visualizações gerenciais sem modificar o modelo lógico transacional do banco de dados.
+
+É importante destacar que os valores totais dos pedidos e das compras são obtidos por cálculos, respeitando a normalização do modelo lógico, que removeu os atributos redundantes de totais armazenados.
+
+## 1.6.4 Aplicações analíticas e de Inteligência Artificial
+
+Além dos dashboards tradicionais, a estrutura do banco de dados apresenta potencial para futuras aplicações de análise avançada e Inteligência Artificial.
+
+- **Previsão de demanda:** utilização do histórico de pedidos para estimar a quantidade de produtos que poderão ser vendidos em determinados dias e horários, auxiliando no planejamento da produção.
+- **Previsão de reposição de insumos:** análise das movimentações de estoque, compras e quantidades utilizadas nas fichas técnicas, permitindo estimar necessidades futuras de abastecimento.
+- **Identificação de padrões de consumo:** análise das vendas para descobrir produtos com maior procura, horários de maior movimento e possíveis combinações de itens frequentemente solicitados.
+- **Detecção de inconsistências financeiras:** aplicação de métodos analíticos para identificar divergências entre os valores dos pedidos e os pagamentos associados às comandas.
+- **Apoio à tomada de decisão:** utilização de indicadores históricos para recomendar ajustes no planejamento de compras, organização de equipes e disponibilidade de produtos.
+
+Essas funcionalidades representam possibilidades futuras de evolução do sistema. Sua implementação dependerá da ampliação do histórico de dados, da validação da qualidade dos registros e do desenvolvimento de modelos analíticos adequados.
+
+A massa de dados fictícia atualmente disponível é suficiente para demonstrar a estrutura básica dos indicadores, mas ainda não possui histórico operacional suficiente para treinar e validar modelos preditivos confiáveis.
+
+## 1.6.5 Rastreabilidade entre problemas, KPIs e consultas SQL
+
+A rastreabilidade permite demonstrar como os problemas identificados na organização estão relacionados às informações armazenadas no banco e às consultas gerenciais utilizadas para gerar os indicadores.
+
+| Problema ou KPI | Tabelas envolvidas | Consulta no script |
+|---|---|---|
+| **P1 — Pedidos sem registro digital e histórico** | `PEDIDO`, `ITEM_PEDIDO`, `FUNCIONARIO`, `COMANDA` | **G01** |
+| **P2 — Controle manual de estoque e reposição** | `INSUMOS`, `CONTROLE_INSUMOS` | **G02** |
+| **P3 — Falhas no registro de consumo e cobrança** | `COMANDA`, `PEDIDO`, `ITEM_PEDIDO`, `PAGAMENTO` | **G03** |
+| **P4 — Compras sem controle estruturado** | `COMPRA`, `ITEM_COMPRA`, `FORNECEDOR`, `INSUMOS` | **G04** |
+| **KPI01 — Total de pagamentos registrados** | `PAGAMENTO` | **G05** |
+| **KPI02 — Valor dos pedidos válidos** | `PEDIDO`, `ITEM_PEDIDO` | **G06** |
+| **KPI03 — Quantidade de pedidos** | `PEDIDO` | **G01** |
+| **KPI04 — Produtos mais vendidos** | `PEDIDO`, `ITEM_PEDIDO`, `PRODUTO` | **G07** |
+| **KPI05 — Distribuição das formas de pagamento** | `PAGAMENTO` | **G05** |
+| **KPI06 — Situação dos pedidos** | `PEDIDO` | **G01** |
+| **KPI07 — Insumos em nível mínimo** | `INSUMOS` | **G02** |
+| **KPI08 — Valor das compras** | `COMPRA`, `ITEM_COMPRA` | **G04** |
+| **KPI09 — Divergência financeira** | `COMANDA`, `PEDIDO`, `ITEM_PEDIDO`, `PAGAMENTO` | **G03** |
+| **KPI10 — Ticket médio por comanda** | `COMANDA`, `PEDIDO`, `ITEM_PEDIDO` | **G08** |
+
+> **Observação sobre a rastreabilidade:** os códigos `G01` a `G08` representam uma **proposta de organização das consultas gerenciais**. Eles deverão ser implementados ou conferidos na seção de consultas SQL da Entrega 2 para garantir correspondência exata entre a documentação e o script.
+
+As consultas de auditoria, identificadas pela letra `A`, poderão complementar essa análise, especialmente na conferência de pedidos sem itens, inconsistências financeiras e integridade dos registros.
+
+## 1.6.6 Contribuições da arquitetura analítica para a organização
+
+A proposta de arquitetura analítica demonstra que o banco de dados do Bar do Peixe poderá ser utilizado não apenas para armazenar informações operacionais, mas também como instrumento de apoio à gestão.
+
+A integração com o Power BI permite centralizar indicadores, facilitar o acompanhamento financeiro e operacional e identificar situações que necessitam de atenção, como produtos com alta demanda, insumos abaixo do estoque mínimo e possíveis divergências nos pagamentos.
+
+A longo prazo, o crescimento do histórico de dados poderá permitir análises mais detalhadas e o desenvolvimento de aplicações de Inteligência Artificial destinadas à previsão de demanda, planejamento de estoque e melhoria dos processos de atendimento.
+
+Dessa forma, a proposta contribui para a transformação digital do estabelecimento, substituindo controles manuais por informações organizadas, consultáveis e úteis para a tomada de decisões.
+
+
 ## 2. Modelo Lógico Relacional
 
 - **Software utilizado:** brModelo Web (https://app.brmodeloweb.com), notação do modelo lógico do brModelo.
