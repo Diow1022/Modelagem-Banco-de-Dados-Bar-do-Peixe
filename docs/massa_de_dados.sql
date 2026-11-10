@@ -668,6 +668,20 @@ START TRANSACTION;
 -- NR_Nota_Fiscal sao identificadores internos ficticios, NAO notas reais.
 -- IDs esperados das compras: 1 e 2 (banco inicialmente vazio).
 -- --------------------------------------------------------------------------
+INSERT INTO Controle_Insumos (
+    id_Insumos,
+    DT_Movimentacao,
+    TP_Movimentacao,
+    QT_Movimentacao
+)
+VALUES (
+    3,
+    NOW(),
+    'Saida',
+    9
+);
+
+-- --------------------------------------------------------------------------
 INSERT INTO Compra (id_Fornecedor, DT_Compra, NR_Nota_Fiscal) VALUES
 (1, '2026-11-06 09:00:00', 'NF-FICT-2026-0001'),
 (2, '2026-11-08 10:30:00', 'NF-FICT-2026-0002');
