@@ -709,6 +709,44 @@ Isso não elimina a necessidade de corrigir eventuais divergências de nomenclat
 > **Estado da validação:** a execução bem-sucedida da G08 corrigida foi demonstrada em captura de tela do phpMyAdmin. As demais consultas precisam de testes individuais ou execução completa documentada antes de serem declaradas validadas.
 
 
+### 3.7 Evidências da Implementação do Modelo Físico SQL
+
+A implementação do banco de dados do projeto **Bar do Peixe** foi realizada utilizando o SGBD MySQL, por meio do ambiente XAMPP e da ferramenta phpMyAdmin.
+
+Para documentar a implementação, foram registradas evidências visuais da estrutura do banco de dados, permitindo verificar a correspondência entre a modelagem proposta e sua representação física.
+
+#### 3.8 Estrutura das Tabelas
+
+As evidências desta etapa apresentam as tabelas implementadas no MySQL, incluindo seus atributos, tipos de dados e respectivas chaves primárias e estrangeiras.
+
+**Evidência:** [Visualizar arquivos de implementação](docs/evidencias)
+
+#### 3.9 Integridade Referencial
+
+A implementação utiliza chaves primárias (PK) e estrangeiras (FK) para estabelecer relacionamentos entre as entidades e preservar a consistência dos dados.
+
+Também foram desenvolvidas restrições de integridade e triggers para validação de regras de negócio.
+
+**Evidência:** [Visualizar arquivos de integridade](docs/evidencias)
+
+#### 3.10 Inserção da Massa de Dados
+
+A massa de dados foi elaborada para simular as operações do estabelecimento, permitindo realizar consultas e testar os relacionamentos entre as tabelas.
+
+Os registros representam operações fictícias relacionadas ao funcionamento do Bar do Peixe.
+
+**Evidência:** [Visualizar arquivos da massa de dados](docs/evidencias)
+
+#### 3.11 Validação da Implementação
+
+Foram realizados testes no phpMyAdmin para avaliar o comportamento das estruturas SQL, incluindo consultas, restrições de integridade e triggers.
+
+Esses procedimentos permitem identificar inconsistências e verificar a aplicação das regras de negócio previstas no modelo.
+
+**Evidência:** [Visualizar arquivos de testes](docs/evidencias)
+
+
+
 ## 4. Uso de Inteligência Artificial
 
 ### Etapa 1 — Seção 1.1: caracterização, relato da entrevista e levantamento
