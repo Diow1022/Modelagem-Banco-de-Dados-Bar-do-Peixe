@@ -110,25 +110,25 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 #### Regras de negócio
 
--**RN01**	Todo pedido deve estar associado a uma comanda e a uma mesa identificada.	RF01
+- 1. **RN01**	Todo pedido deve estar associado a uma comanda e a uma mesa identificada.	RF01
 
--**RN02**	Pedidos destinados à cozinha devem aparecer na fila de preparo após o registro.	RF02
+- 2. **RN02**	Pedidos destinados à cozinha devem aparecer na fila de preparo após o registro.	RF02
 
--**RN03**	Produtos devem ser classificados como alimentos ou bebidas para direcionamento ao setor responsável.	RF03
+- 3. **RN03**	Produtos devem ser classificados como alimentos ou bebidas para direcionamento ao setor responsável.	RF03
 
--**RN04**	Toda movimentação de estoque deve registrar o produto, a quantidade, a data e o tipo de movimentação.	RF04
+- 4. **RN04**	Toda movimentação de estoque deve registrar o produto, a quantidade, a data e o tipo de movimentação.	RF04
 
--**RN05**	Cada funcionário deve possuir uma função e um turno de trabalho cadastrados.	RF05
+- 5. **RN05**	Cada funcionário deve possuir uma função e um turno de trabalho cadastrados.	RF05
 
--**RN06**	Produtos com estoque igual ou inferior ao mínimo estabelecido devem gerar alertas de reposição.	RF06
+- 6. **RN06**	Produtos com estoque igual ou inferior ao mínimo estabelecido devem gerar alertas de reposição.	RF06
 
--**RN07**	Uma comanda somente pode ser encerrada após a confirmação do pagamento.	RF07
+- 7. **RN07**	Uma comanda somente pode ser encerrada após a confirmação do pagamento.	RF07
 
--**RN08**	Pedidos cancelados devem permanecer registrados no histórico do sistema.	RF01, RF07
+- 8. **RN08**	Pedidos cancelados devem permanecer registrados no histórico do sistema.	RF01, RF07
 
--**RN09**	Apenas funcionários autorizados podem realizar operações administrativas.	RF05
+- 9. **RN09**	Apenas funcionários autorizados podem realizar operações administrativas.	RF05
 
--**RN10**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
+- 10. **RN10**	Uma comanda encerrada não pode receber novos pedidos.	RF01, RF07
 
 #### Comparação dos Modelos Conceituais
 
