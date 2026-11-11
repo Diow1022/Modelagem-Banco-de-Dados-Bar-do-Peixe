@@ -700,9 +700,9 @@ O banco de dados do **Bar do Peixe** foi desenvolvido para MySQL/MariaDB, com im
 
 | Arquivo | Finalidade |
 |---|---|
-| [Script de estrutura do banco](docs/script.sql) | Criação do banco, tabelas, restrições e demais objetos SQL. |
+| [Script de estrutura do banco](docs/consultas_gerenciais_e_auditoria+script.sql) | Criação do banco, tabelas, restrições e demais objetos SQL. |
 | [Massa de dados fictícia](docs/massa_de_dados.sql) | Registros de teste para simular as operações do estabelecimento. |
-| [Consultas gerenciais e de auditoria](docs/consultas_gerenciais_e_auditoria.sql) | Consultas G01–G08 e A01–A08, executadas após a criação e a carga dos dados. |
+| [Consultas gerenciais e de auditoria](docs/consultas_gerenciais_e_auditoria+script.sql) | Consultas G01–G08 e A01–A08, executadas após a criação e a carga dos dados. |
 
 ### 3.2 Consultas gerenciais
 
@@ -749,7 +749,7 @@ Durante os testes no **phpMyAdmin**, foi identificada uma falha de execução da
 
 Como o resultado contém apenas uma comanda com consumo, o ticket médio corresponde ao próprio valor total. Esse teste confirma a execução da **G08 corrigida no ambiente local**, mas não comprova, por si só, a execução das demais consultas nem a carga integral da massa de dados.
 
-**Observação importante:** a consulta G08 deve estar substituída também em [`docs/consultas_gerenciais_e_auditoria.sql`](docs/consultas_gerenciais_e_auditoria.sql), na branch `main`, para que o código entregue corresponda à versão testada.
+**Observação importante:** a consulta G08 deve estar substituída também em [`docs/consultas_gerenciais_e_auditoria.sql`](docs/consultas_gerenciais_e_auditoria+script.sql), na branch `main`, para que o código entregue corresponda à versão testada.
 
 ### 3.5 Impacto sobre os modelos
 
