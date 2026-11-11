@@ -598,9 +598,14 @@ Dessa forma, a proposta contribui para a transformação digital do estabelecime
 
 ## 2. Modelo Lógico Relacional
 
-- **Software utilizado:** brModelo Web (https://app.brmodeloweb.com), notação do modelo lógico do brModelo.
-- **Diagrama:** ![Modelo Lógico do Bar do Peixe](docs/Modelo_Lógico.png) [Modelagem-Banco-de-Dados-Bar-do-Peixe/docs
-/Dicionario_Dados_Bar_do_Peixe.html]
+- [Modelo Conceitual](docs/Modelo_Conceitual.png)
+- [Modelo Lógico](docs/Modelo_Logico.png)
+- [Dicionário de Dados](docs/Dicionario_Dados_Bar_do_Peixe_Atualizado.html)
+- [Script SQL](docs/script.sql)
+- [Massa de Dados](docs/massa_de_dados.sql)
+- [Consultas Gerenciais e Auditoria](docs/consultas_gerenciais_e_auditoria.sql)
+- [Levantamento de Requisitos](levamtamento/levantamento.md)
+
 - **Resumo:** 13 tabelas, 13 chaves primárias (12 simples e 1 composta) e 12 chaves estrangeiras.
 
 ### Tabelas, colunas e chaves
