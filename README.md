@@ -598,8 +598,8 @@ Dessa forma, a proposta contribui para a transformação digital do estabelecime
 
 ## 2. Modelo Lógico Relacional
 
-- [Modelo Conceitual](docs/Modelo Conceitual.png)
-- [Modelo Lógico](docs/Modelo lógico.png)
+- [Modelo Conceitual](docs/Modelo_Conceitual.png)
+- [Modelo Lógico](docs/Modelo_lógico.png)
 - [Dicionário de Dados](docs/Dicionario_Dados_Bar_do_peixe.html)
 - [Massa de Dados](docs/massa_de_dados.sql)
 - [Consultas Gerenciais e Auditoria](docs/consultas_gerenciais_e_auditoria+script.sql)
