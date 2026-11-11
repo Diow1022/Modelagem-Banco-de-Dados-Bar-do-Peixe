@@ -921,3 +921,18 @@ A identificação dos integrantes consta na tabela de participantes deste README
 | **Trechos rejeitados ou corrigidos** | Foi definida a necessidade de revisar registros que apresentassem incompatibilidades com os tipos de dados, referências inexistentes ou inconsistências entre tabelas. Também foi estabelecido que a geração de registros não deveria ser confundida com sua efetiva inserção no banco MySQL. Não há, neste registro, identificação de um lote específico efetivamente rejeitado. |
 | **Justificativa da escolha final** | Optou-se pela geração de massa de dados fictícios com auxílio da IA por permitir maior agilidade, padronização e organização dos registros. A produção em lotes de 15 facilita a revisão e o controle da quantidade de dados, enquanto a validação da estrutura SQL permite verificar sua compatibilidade com o modelo relacional desenvolvido. |
 | **Reflexão crítica** | A utilização da IA contribuiu para automatizar uma atividade repetitiva, mas não substituiu a responsabilidade do grupo pela validação dos dados. Reconhecemos que instruções SQL geradas automaticamente podem conter inconsistências, como referências inválidas, duplicidades ou valores incompatíveis. Por isso, a revisão humana e os testes de execução no MySQL são essenciais para assegurar a qualidade da massa de dados e a confiabilidade dos resultados obtidos. |
+
+## 7. Apresentação Corporativa Final
+
+A apresentação final do projeto Bar do Peixe contempla
+a contextualização dos problemas da organização, a solução
+proposta, o modelo lógico relacional, a implementação
+SQL, as consultas gerenciais e de auditoria e o potencial
+de aplicação dos dados em Business Intelligence (BI)
+e Inteligência Artificial (IA).
+
+A apresentação foi estruturada para um pitch de
+8 minutos, seguido pela defesa técnica do modelo
+lógico pelos integrantes do grupo.
+
+**Slides da apresentação:** [Adicionar link após publicação]
