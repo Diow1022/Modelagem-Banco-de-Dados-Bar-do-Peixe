@@ -861,6 +861,32 @@ A conferência deve observar especialmente a contagem por tabela, os produtos/in
 
 Ferramentas de inteligência artificial foram utilizadas como apoio à elaboração e organização da massa fictícia em lotes. O detalhamento de ferramenta, motivação, prompts, respostas, intervenções manuais, verificações e reflexão crítica deve permanecer documentado na **Seção 6 — Uso de Inteligência Artificial**, conforme as exigências do esqueleto da Entrega 2.
 
+## 5. Repositório GitHub
+
+O repositório do projeto **Bar do Peixe** reúne os documentos técnicos, os modelos de dados, os scripts SQL e as evidências utilizados no desenvolvimento da Entrega 2.
+
+**Repositório:** [Modelagem — Banco de Dados Bar do Peixe](https://github.com/Diow1022/Modelagem-Banco-de-Dados-Bar-do-Peixe)
+
+O relatório técnico final deve estar no arquivo `README.md`, na raiz da branch `main`, pois essa é a versão considerada na avaliação.
+
+### 5.1 Organização dos arquivos
+
+| Artefato | Descrição |
+| --- | --- |
+| `README.md` | Relatório técnico final da Entrega 2. |
+| `docs/` | Diretório destinado aos modelos conceitual e lógico, dicionário de dados, script SQL, massa de dados e consultas de gerenciamento e auditoria. |
+| Levantamento (`levantamento.md`) | Registro da entrevista, das observações presenciais e dos requisitos levantados junto à organização. |
+| `Fotos Projeto Bar do Peixe/` | Fotografias da organização e evidências da visita e da entrevista. |
+
+**Observação:** os caminhos acima descrevem a organização prevista. Antes da entrega, é necessário conferir os nomes e caminhos efetivos no repositório, especialmente o diretório do levantamento, e atualizar os links do README caso existam diferenças.
+
+### 5.2 Versionamento e colaboração
+
+O projeto utiliza o GitHub para registrar a evolução dos documentos e dos arquivos de implementação ao longo do desenvolvimento. O histórico de commits permite consultar as alterações realizadas e suas respectivas autorias.
+
+**Histórico da branch principal:** [Consultar commits da `main`](https://github.com/Diow1022/Modelagem-Banco-de-Dados-Bar-do-Peixe/commits/main/)
+
+A identificação dos integrantes consta na tabela de participantes deste README. A distribuição das contribuições entre as contas dos integrantes deve ser comprovada pelo histórico efetivo do repositório, conforme a exigência de colaboração equilibrada estabelecida no esqueleto da Entrega 2.
 
 
 
