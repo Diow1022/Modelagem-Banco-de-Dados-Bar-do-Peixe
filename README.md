@@ -138,49 +138,75 @@ Em 27 de outubro, o grupo contatou o dono e confirmou:
 
 Tabela no formato de revisão solicitado pelo esqueleto da Entrega 2:
 
-| Aspecto no Modelo 1 | O que mudou no Modelo 2 | Por quê |
-| --- | --- | --- |
-| PEDIDO ligado diretamente a PRODUTOS por “Inclui”. | Inclusão de ITEM_PEDIDO, com relações PEDIDO–ITEM_PEDIDO e ITEM_PEDIDO–PRODUTO. | Permite discriminar os itens de cada pedido. |
-| PEDIDO ligado diretamente a PAGAMENTO por “Gera”. | Inclusão de MESA e COMANDA; PEDIDO pertence à COMANDA e COMANDA possui PAGAMENTO. | Permite reunir pedidos e pagamentos vinculados à comanda de uma mesa. |
-| COMPRA ligada diretamente a PRODUTOS por “Contém”. | Inclusão de ITEM_COMPRA e INSUMOS; COMPRA–ITEM_COMPRA–INSUMOS. | Permite detalhar as quantidades e os valores dos insumos comprados. |
-| CONTROLE_INSUMOS associado a PRODUTOS, com dados de local. | INSUMOS passa a se relacionar a CONTROLE_INSUMOS por “Movimenta”; dados passam a descrever movimentações. | Separa cadastro de insumos e registro de suas movimentações. |
-| PRODUTOS e CONTROLE_INSUMOS sem relação explícita de composição de receitas. | Criado o relacionamento PRODUTO–INSUMOS “Consome”, com QT_Consumida. | Registra a quantidade de insumo consumida por produto. |
-| FUNCIONARIO “Faz” PEDIDO. | Relacionamento renomeado para “Realiza” e cardinalidades representadas em lados trocados. | Mudança nominal e da representação da participação. |
-| FORNECEDOR “Fornece” COMPRA. | Relacionamento renomeado para “Realiza” e cardinalidades representadas em lados trocados. | Mudança nominal e da representação da participação. |
+#### Comparação dos Modelos Conceituais
 
-**Observação:** as razões da terceira coluna são justificativas técnicas decorrentes das mudanças visíveis. Não foram fornecidos os apontamentos de correção da Entrega 1; portanto, esta tabela não os atribui ao professor.
+**Contagem:** o Modelo Conceitual 1 possui **7 entidades e 6 relacionamentos**; o Modelo Conceitual 2 possui **12 entidades e 11 relacionamentos**. Foram acrescentadas cinco entidades: `ITEM_PEDIDO`, `ITEM_COMPRA`, `MESA`, `COMANDA` e `INSUMOS`.
+
+O relacionamento associativo `Consome`, entre `PRODUTO` e `INSUMOS`, foi convertido na tabela `FICHA_TECNICA` durante a implementação do modelo lógico. Dessa forma, o banco de dados implementado possui **13 tabelas**, conforme o Dicionário de Dados atualizado.
+
+##### Quadro 1 — Mudanças estruturais
+
+| Aspecto no Modelo 1 | O que mudou no Modelo 2 | Por quê |
+|---|---|---|
+| PEDIDO ligado diretamente a PRODUTOS por “Inclui”. | Inclusão de `ITEM_PEDIDO`, estabelecendo os relacionamentos PEDIDO–ITEM_PEDIDO e ITEM_PEDIDO–PRODUTO. | Permite registrar individualmente os produtos solicitados, suas quantidades e os preços unitários praticados. |
+| PEDIDO ligado diretamente a PAGAMENTO por “Gera”. | Inclusão das entidades `MESA` e `COMANDA`. PEDIDO passa a pertencer a COMANDA, que se relaciona com PAGAMENTO. | Permite agrupar os pedidos de uma mesa e associar os pagamentos ao consumo registrado na comanda. |
+| COMPRA ligada diretamente a PRODUTOS por “Contém”. | Inclusão de `ITEM_COMPRA` e `INSUMOS`, estabelecendo os relacionamentos COMPRA–ITEM_COMPRA e ITEM_COMPRA–INSUMOS. | Permite registrar individualmente os insumos adquiridos, suas quantidades e os preços unitários. |
+| CONTROLE_INSUMOS associado a PRODUTOS, com dados de localização. | A entidade `INSUMOS` passa a se relacionar com `CONTROLE_INSUMOS` por “Movimenta”. | Separa o cadastro e o saldo dos insumos do histórico de movimentações de estoque. |
+| PRODUTOS e CONTROLE_INSUMOS sem relação explícita de composição dos produtos. | Criado o relacionamento associativo `Consome` entre PRODUTO e INSUMOS, com o atributo `QT_Consumida`. No modelo lógico, ele é implementado como `FICHA_TECNICA`. | Permite identificar quais insumos compõem cada produto e suas respectivas quantidades de consumo. |
+| FUNCIONARIO “Faz” PEDIDO. | Relacionamento renomeado para “Realiza”, com alteração na representação das cardinalidades. | Padroniza a identificação do relacionamento e representa a associação entre funcionários e pedidos. |
+| FORNECEDOR “Fornece” COMPRA. | Relacionamento renomeado para “Realiza”, com alteração na representação das cardinalidades. | Padroniza o relacionamento entre fornecedores e registros de compras. |
+
+**Observação:** as justificativas apresentadas descrevem tecnicamente as alterações identificadas entre os modelos. Como os apontamentos originais da correção da Entrega 1 não foram disponibilizados nesta comparação, as mudanças não são atribuídas diretamente ao professor.
 
 ##### Quadro 2 — Mudanças de atributos
 
-| Entidade | Alteração observada no Modelo 2 |
-| --- | --- |
-| FUNCIONARIO | NOME_FUNCIONARIO passa a NM_Funcionario; permanecem identificador, função e turno. |
-| PEDIDO | Adicionado ST_Pedido; ID_FUNCIONARIO(FK) deixa de aparecer como atributo; TP_SETOR aparece no PDF como TP_Serto. |
-| PRODUTOS → PRODUTO | Adicionados NM_Produto, TP_Categoria, VL_Preco e ST_Produto; QT_Produto deixa de aparecer; TP_PRODUTO é substituído por TP_Categoria. |
-| PAGAMENTO | ID_PEDIDO(FK) e IN_CONFIRMADO deixam de aparecer; DT_HORA_PAGAMENTO, TP_FORMA_PAGAMENTO e VALOR_PAGO passam a DT_Pagamento, TP_Pagamento e VL_Pagamento. |
-| FORNECEDOR | Adicionados ST_Fornecedor e NR_Telefone; nome e CNPJ usam nomenclatura NM_Fornecedor e NR_CNPJ. |
-| COMPRA | ID_FORNECEDOR(FK) deixa de aparecer como atributo; DATA_COMPRA, NF_NOTA_FISCAL e TOTAL_COMPRA passam a DT_Compra, NR_Nota_Fiscal e VL_Compra. |
-| CONTROLE_INSUMOS | Deixa de apresentar ID_LOCAL, TP_LOCAL, QT_LOCAL e ID_PRODUTO(FK); passa a ID_Movimentacao, QT_Movimentacao, TP_Movimentacao e DT_Movimentacao. |
-| Novas entidades | ITEM_PEDIDO: ID_Item_Pedido, QT_Item, VL_Unitario, VL_Total. MESA: ID_Mesa, NR_Mesa, TP_Situacao, QT_Lugares. COMANDA: ID_Comanda, ST_Comanda, DT_Abertura. |
-| Novas entidades (continuação) | ITEM_COMPRA: ID_Item_Compra, QT_Comprada, VL_Unitario, VL_Total. INSUMOS: ID_Insumos, NM_Insumo, QT_Estoque, QT_Minima, UN_Medida. |
+| Entidade | Alteração observada no Modelo 2 e adequação ao modelo lógico |
+|---|---|
+| FUNCIONARIO | `NOME_FUNCIONARIO` passa a `NM_Funcionario`. Permanecem `ID_Funcionario`, `TP_Funcao` e `TP_Turno`. |
+| PEDIDO | Adicionado `ST_Pedido`. O atributo `TP_Serto`, presente no diagrama conceitual, foi corrigido para `TP_Setor` no modelo lógico. As chaves estrangeiras `ID_Funcionario` e `ID_Comanda` aparecem no modelo lógico para implementar os relacionamentos. |
+| PRODUTOS → PRODUTO | A entidade passa a utilizar `ID_Produto`, `NM_Produto`, `TP_Categoria`, `VL_Preco` e `ST_Produto`. O atributo `QT_Produto` deixa de aparecer e `TP_PRODUTO` é substituído por `TP_Categoria`. |
+| PAGAMENTO | `ID_PEDIDO(FK)` e `IN_CONFIRMADO` deixam de aparecer. `DT_HORA_PAGAMENTO`, `TP_FORMA_PAGAMENTO` e `VALOR_PAGO` passam a `DT_Pagamento`, `TP_Pagamento` e `VL_Pagamento`. No modelo lógico, é acrescentada a FK `ID_Comanda`. |
+| FORNECEDOR | Adicionados `ST_Fornecedor` e `NR_Telefone`. Nome e CNPJ passam a utilizar as nomenclaturas `NM_Fornecedor` e `NR_CNPJ`. |
+| COMPRA | `DATA_COMPRA` e `NF_NOTA_FISCAL` passam a `DT_Compra` e `NR_Nota_Fiscal`. O atributo `VL_Compra`, representado no modelo conceitual revisado, não é armazenado no modelo lógico final: o valor da compra é calculado pela soma dos itens. A FK `ID_Fornecedor` implementa o relacionamento com FORNECEDOR. |
+| CONTROLE_INSUMOS | Deixa de apresentar `ID_LOCAL`, `TP_LOCAL`, `QT_LOCAL` e `ID_PRODUTO(FK)`. Passa a utilizar `ID_Movimentacao`, `QT_Movimentacao`, `TP_Movimentacao` e `DT_Movimentacao`, além da FK `ID_Insumos` no modelo lógico. |
+| ITEM_PEDIDO | Nova entidade com `ID_Item_Pedido`, `QT_Item` e `VL_Unitario`. No modelo lógico, são acrescentadas as FKs `ID_Pedido` e `ID_Produto`. O atributo `VL_Total` é tratado como valor calculado, não sendo armazenado. |
+| MESA | Nova entidade com `ID_Mesa`, `NR_Mesa`, `TP_Situacao` e `QT_Lugares`. |
+| COMANDA | Nova entidade com `ID_Comanda`, `ST_Comanda` e `DT_Abertura`. No modelo lógico, recebe `ID_Mesa` como chave estrangeira. |
+| ITEM_COMPRA | Nova entidade com `ID_Item_Compra`, `QT_Comprada` e `VL_Unitario`. No modelo lógico, recebe as FKs `ID_Compra` e `ID_Insumos`. O atributo `VL_Total` é tratado como valor calculado, não sendo armazenado. |
+| INSUMOS | Nova entidade com `ID_Insumos`, `NM_Insumo`, `QT_Estoque`, `QT_Minima` e `UN_Medida`. |
+| FICHA_TECNICA | Tabela associativa criada na conversão do relacionamento conceitual `Consome`, contendo `ID_Produto`, `ID_Insumos` e `QT_Consumida`. Os dois identificadores formam uma chave primária composta e também são chaves estrangeiras. |
+
+**Observação sobre os valores calculados:** os atributos `ITEM_PEDIDO.VL_Total`, `ITEM_COMPRA.VL_Total` e `COMPRA.VL_Compra` aparecem na documentação da evolução conceitual, mas foram retirados da estrutura física implementada para evitar armazenamento redundante.
+
+Os valores são obtidos por operações SQL:
+
+- **Total do item de pedido:** `QT_Item * VL_Unitario`.
+- **Total do item de compra:** `QT_Comprada * VL_Unitario`.
+- **Total da compra:** soma dos valores calculados dos respectivos itens.
+
+Essa decisão mantém a estrutura coerente com a normalização e com o Dicionário de Dados atualizado.
 
 ##### Quadro 3 — Comparação das cardinalidades já existentes no Modelo 1
 
-As cardinalidades abaixo foram transcritas **exatamente conforme aparecem ao lado de cada entidade** nos diagramas. A indicação “substituído” significa que o relacionamento direto não existe mais no Modelo 2.
+As cardinalidades desta tabela registram os valores exibidos junto aos relacionamentos nos diagramas conceituais.
+
+A indicação **“substituído”** significa que o relacionamento direto deixou de existir e passou a ser representado por novas entidades e relacionamentos.
 
 | Relacionamento do Modelo 1 | Cardinalidades no Modelo 1 | Como ficou no Modelo 2 | Mudança |
-| --- | --- | --- | --- |
-| FUNCIONARIO–PEDIDO | FUNCIONARIO (0,n); PEDIDO (1,1) | FUNCIONARIO (1,1); PEDIDO (0,n) | Pares invertidos; “Faz” → “Realiza”. |
-| FORNECEDOR–COMPRA | FORNECEDOR (0,n); COMPRA (1,1) | FORNECEDOR (1,1); COMPRA (0,n) | Pares invertidos; “Fornece” → “Realiza”. |
-| PEDIDO–PRODUTOS | PEDIDO (1,1); PRODUTOS (0,n) | Sem relação direta; substituída por PEDIDO–ITEM_PEDIDO–PRODUTO. | Incluída entidade ITEM_PEDIDO. |
-| COMPRA–PRODUTOS | COMPRA (1,n); PRODUTOS (0,n) | Sem relação direta; substituída por COMPRA–ITEM_COMPRA–INSUMOS. | Compra passa a registrar itens e insumos. |
-| CONTROLE_INSUMOS–PRODUTOS | CONTROLE_INSUMOS (1,1); PRODUTOS (0,n) | Sem relação direta; INSUMOS passa a ligar-se a CONTROLE_INSUMOS. | Modificada estrutura do controle de estoque. |
-| PEDIDO–PAGAMENTO | PEDIDO (1,1); PAGAMENTO (0,n) | Sem relação direta; COMANDA (1,1); PAGAMENTO (0,n). | Pagamento passa a vincular-se à COMANDA. |
+|---|---|---|---|
+| FUNCIONARIO–PEDIDO | FUNCIONARIO (0,n); PEDIDO (1,1) | FUNCIONARIO (1,1); PEDIDO (0,n) | Alteração da disposição dos pares de cardinalidade; “Faz” passa a “Realiza”. |
+| FORNECEDOR–COMPRA | FORNECEDOR (0,n); COMPRA (1,1) | FORNECEDOR (1,1); COMPRA (0,n) | Alteração da disposição dos pares de cardinalidade; “Fornece” passa a “Realiza”. |
+| PEDIDO–PRODUTOS | PEDIDO (1,1); PRODUTOS (0,n) | Sem relação direta; substituída por PEDIDO–ITEM_PEDIDO–PRODUTO. | Inclusão da entidade ITEM_PEDIDO. |
+| COMPRA–PRODUTOS | COMPRA (1,n); PRODUTOS (0,n) | Sem relação direta; substituída por COMPRA–ITEM_COMPRA–INSUMOS. | Compra passa a registrar itens associados aos insumos. |
+| CONTROLE_INSUMOS–PRODUTOS | CONTROLE_INSUMOS (1,1); PRODUTOS (0,n) | Sem relação direta; INSUMOS passa a relacionar-se com CONTROLE_INSUMOS. | Separação entre o cadastro de insumos e suas movimentações. |
+| PEDIDO–PAGAMENTO | PEDIDO (1,1); PAGAMENTO (0,n) | Sem relação direta; os pagamentos passam a ser vinculados à COMANDA. | Permite registrar pagamentos relacionados ao consumo acumulado de uma comanda. |
 
 ##### Quadro 4 — Cardinalidades de todos os relacionamentos do Modelo 2
 
+A tabela apresenta os relacionamentos do Modelo Conceitual 2, incluindo as duas cardinalidades mínimas revisadas e autorizadas para PEDIDO–ITEM_PEDIDO e COMPRA–ITEM_COMPRA.
+
 | Relacionamento | Cardinalidades exibidas no Modelo 2 |
-| --- | --- |
+|---|---|
 | FUNCIONARIO — Realiza — PEDIDO | FUNCIONARIO (1,1); PEDIDO (0,n) |
 | PEDIDO — Possui — ITEM_PEDIDO | PEDIDO (1,1); ITEM_PEDIDO (1,n) |
 | ITEM_PEDIDO — Refere-se — PRODUTO | ITEM_PEDIDO (0,n); PRODUTO (1,1) |
@@ -192,6 +218,34 @@ As cardinalidades abaixo foram transcritas **exatamente conforme aparecem ao lad
 | ITEM_COMPRA — Rel — INSUMOS | ITEM_COMPRA (0,n); INSUMOS (1,1) |
 | PRODUTO — Consome — INSUMOS | PRODUTO (0,n); INSUMOS (0,n) |
 | INSUMOS — Movimenta — CONTROLE_INSUMOS | INSUMOS (1,1); CONTROLE_INSUMOS (0,n) |
+
+**Correspondência com o Dicionário de Dados:**
+
+O relacionamento N:N `Consome`, representado no modelo conceitual, é implementado no modelo lógico pela tabela `FICHA_TECNICA`.
+
+A tabela associativa possui os seguintes atributos:
+
+| Atributo | Tipo de dado | Chave | Restrição |
+|---|---|---|---|
+| ID_Produto | INTEGER | PK, FK | NOT NULL; referencia PRODUTO |
+| ID_Insumos | INTEGER | PK, FK | NOT NULL; referencia INSUMOS |
+| QT_Consumida | DECIMAL(12,3) | — | NOT NULL; CHECK (QT_Consumida > 0) |
+
+A chave primária composta `(ID_Produto, ID_Insumos)` impede a duplicação de uma mesma associação entre produto e insumo.
+
+**Nota sobre a representação das cardinalidades:** os valores do Quadro 4 estão na posição em que aparecem junto às entidades nos diagramas. O Dicionário de Dados apresenta a multiplicidade dos registros relacionados a cada entidade. Por esse motivo, a leitura textual pode apresentar os pares em ordem inversa, sem necessariamente representar uma mudança na regra de negócio.
+
+As duas cardinalidades mínimas de itens foram mantidas conforme a revisão autorizada:
+
+- Um pedido válido deve possuir pelo menos um item.
+- Uma compra efetivada deve possuir pelo menos um item.
+
+A implementação física deve garantir ou validar essas condições durante a conclusão das operações.
+
+**Fonte:** Modelo Conceitual 1, Modelo Conceitual 2, Modelo Lógico Relacional atualizado, Dicionário de Dados HTML atualizado e `script.sql` do projeto Bar do Peixe.
+
+Esta comparação documenta a evolução da modelagem e sua correspondência com a implementação final, sem atribuir as alterações aos apontamentos do professor que não foram disponibilizados.
+
 
 **Fonte:** imagem `Modelo Conceitual 1 BRMW.png` e PDF `Modelo Conceitual 2 - BRMW.pdf`. Esta comparação registra as alterações exibidas, sem julgar sua correção ou sugerir novas mudanças.
 
