@@ -799,9 +799,72 @@ Esses procedimentos permitem identificar inconsistências e verificar a aplicaç
 
 **Evidência:** [Visualizar arquivos de testes](docs/evidencias)
 
+## 4. Massa de Dados
+
+### 4.1 Objetivo e origem dos dados
+
+A massa de dados do projeto **Bar do Peixe** foi preparada em SQL para simular, de maneira fictícia, os processos de cadastro, atendimento, pedidos, comandas, pagamentos, compras, fornecimento e movimentação de insumos. Não foram utilizados dados pessoais reais de funcionários, clientes ou fornecedores. Os nomes, identificadores e valores empregados nos registros de teste são fictícios.
+
+O arquivo de carga é `massa_de_dados.sql` (disponibilizado separadamente no repositório), e sua execução pressupõe a criação prévia do banco e de suas restrições, views e triggers pelo `script.sql`. Os lotes devem ser executados **uma única vez, na ordem indicada**, em uma base inicialmente vazia, pois determinados relacionamentos dependem dos identificadores gerados anteriormente.
+
+### 4.2 Relação entre o porte da organização e a massa de dados
+
+Segundo o levantamento realizado com o responsável pelo estabelecimento, o Bar do Peixe possui aproximadamente **10 funcionários, 20 mesas, 25 opções no cardápio e movimento de 65 a 75 clientes por dia**. Esses números orientaram o cadastramento das entidades de referência e a criação de uma amostra operacional para testes.
+
+Os cadastros de **10 funcionários, 20 mesas e 25 produtos** foram dimensionados para representar os quantitativos informados durante o levantamento. Já os registros de pedidos, pagamentos, compras e movimentações constituem **uma amostra reduzida de operações fictícias**; os seis pedidos previstos não equivalem a um dia completo de funcionamento e não devem ser interpretados como o volume real diário do bar.
+
+### 4.3 Distribuição planejada dos registros
+
+A massa está organizada em **oito lotes**, sendo sete lotes de 15 registros e um último lote de 10 registros. O total **planejado e declarado** é de **115 registros**, distribuídos pelas 13 tabelas:
+
+| Tabela | Registros planejados | Finalidade da amostra |
+| --- | ---: | --- |
+| `Funcionario` | 10 | Representar a equipe e seus turnos/funções. |
+| `Mesa` | 20 | Representar as mesas numeradas do estabelecimento. |
+| `Produto` | 25 | Representar as opções fictícias do cardápio. |
+| `Insumos` | 11 | Demonstrar saldos, unidades e níveis mínimos de reposição. |
+| `Fornecedor` | 2 | Permitir compras de fornecedores distintos. |
+| `Ficha_Tecnica` | 12 | Relacionar produtos e insumos com quantidades consumidas. |
+| `Comanda` | 6 | Simular contas de mesas e diferentes estados de atendimento. |
+| `Pedido` | 6 | Demonstrar pedidos associados às comandas e aos funcionários. |
+| `Item_Pedido` | 9 | Detalhar produtos, quantidades e preços históricos dos pedidos. |
+| `Pagamento` | 5 | Testar pagamentos e diferentes formas de recebimento. |
+| `Controle_Insumos` | 4 | Demonstrar entradas, saídas e atualização de saldos. |
+| `Compra` | 2 | Simular aquisições vinculadas aos fornecedores. |
+| `Item_Compra` | 3 | Discriminar insumos, quantidades e valores das compras. |
+| **Total planejado** | **115** | **Volume declarado nos comentários da massa de dados.** |
+
+**Ressalva de consistência:** foi identificada no início do **lote 7** uma instrução `INSERT INTO Controle_Insumos` adicional, com saída de **9 unidades do insumo de ID 3**, fora dos 15 registros contabilizados para aquele lote. Caso essa instrução seja mantida e aceita, o número de inserções previstas deixa de ser 115. Há também risco de rejeição por saldo insuficiente, conforme os valores documentados e a regra de movimentação de estoque. Por isso, o total de 115 **não deve ser apresentado como total efetivamente carregado** antes de corrigir ou justificar esse comando e executar uma conferência no MySQL.
+
+### 4.4 Variedade e cobertura das operações
+
+Os registros foram escolhidos para permitir a demonstração dos principais processos do projeto:
+
+- **Atendimento e pedidos:** pedidos associados a funcionários, comandas, mesas e itens, incluindo encaminhamento por setor (`Cozinha` e `Bebidas`).
+- **Cobrança e pagamentos:** pagamentos fictícios por diferentes formas, incluindo divisão de pagamento de uma comanda e exemplos de consumo sem quitação completa.
+- **Compras e fornecedores:** compras vinculadas a fornecedores e itens com quantidades e preços unitários, permitindo calcular o valor total sem armazenar um campo redundante.
+- **Estoque:** insumos com quantidades acima, iguais ou abaixo do mínimo, além de movimentações de entrada e saída destinadas a demonstrar alertas de reposição e ajustes de saldo.
+- **Análises por período:** operações fictícias em outubro e novembro de 2026, permitindo comparações mensais em consultas gerenciais.
+- **Integridade:** vínculos entre registros de tabelas relacionadas, respeitando as chaves estrangeiras previstas no modelo lógico.
+
+As situações acima estão previstas nos scripts, mas sua efetiva demonstração depende da execução da carga e das consultas. **A cobertura de pedidos cancelados e de todos os cenários de auditoria deve ser conferida na base executada**, sem presumir que todos já estejam representados.
+
+### 4.5 Consultas de verificação e evidências
+
+Após criar o banco, carregar os lotes sem erros e conferir a contagem de registros, o grupo deve executar as consultas gerenciais `G01` a `G08` e as consultas de auditoria `A01` a `A08`, disponíveis no arquivo `consultas_gerenciais_e_auditoria.sql`. Os resultados devem ser documentados com evidências no repositório.
+
+A conferência deve observar especialmente a contagem por tabela, os produtos/insumos em nível mínimo, as comandas com diferenças entre consumo e pagamento, as compras por fornecedor, os pedidos associados a itens e a integridade referencial. Consultas de auditoria sem ocorrências podem indicar ausência de inconsistências, desde que sua execução tenha sido comprovada.
+
+**Estado da validação:** o arquivo SQL contém comandos `SELECT` para conferência e comentários com totais esperados, mas a simples presença desses comandos **não comprova a execução completa nem a quantidade realmente inserida no MySQL**. Após a correção do lote 7, os números desta seção devem ser confirmados pela execução em banco vazio e pelas evidências correspondentes.
+
+### 4.6 Uso de inteligência artificial
+
+Ferramentas de inteligência artificial foram utilizadas como apoio à elaboração e organização da massa fictícia em lotes. O detalhamento de ferramenta, motivação, prompts, respostas, intervenções manuais, verificações e reflexão crítica deve permanecer documentado na **Seção 6 — Uso de Inteligência Artificial**, conforme as exigências do esqueleto da Entrega 2.
 
 
-## 4. Uso de Inteligência Artificial
+
+
+## 6. Uso de Inteligência Artificial
 
 ### Etapa 1 — Seção 1.1: caracterização, relato da entrevista e levantamento
 
